@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Name=Delta Patcher Lite
+Type=Application
+Terminal=false
+Name[it_IT]=Delta Patcher Lite
+Exec=deltapatcherlite
+Comment[it_IT]=XDelta patching Utility
+Comment=XDelta patching Utility
+GenericName[it_IT]=XDelta patching Utility
+Icon=/usr/share/deltapatcher/img/icon.png

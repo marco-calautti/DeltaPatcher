@@ -1,0 +1,301 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Delta Patcher 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-24 14:06+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Portuguese\n"
+"X-Poedit-Country: BRAZIL\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherDecodePanel.cpp:31
+#: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherEncodePanel.cpp:45
+msgid "xdelta patches (*.xdelta)|*.xdelta"
+msgstr ""
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherDecodePanel.cpp:46
+#: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherEncodePanel.cpp:60
+msgid "Fill all the textboxes first!"
+msgstr "Preencher todos os campos primeiro!"
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherDecodePanel.cpp:46
+#: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherDecodePanel.cpp:76
+#: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherEncodePanel.cpp:60
+#: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherEncodePanel.cpp:82
+msgid "Warning"
+msgstr "Aviso"
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherDecodePanel.cpp:69
+msgid "Applying patch, please wait... (don't panic!)"
+msgstr "Aplicando patch, aguarde por favor...(Sem pânico!)"
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherDecodePanel.cpp:76
+#: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherEncodePanel.cpp:82
+msgid ""
+"An error has occurred!\n"
+"See log for more information."
+msgstr ""
+"Um erro aconteceu!\n"
+"Veja o  log para maiores informações."
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherDecodePanel.cpp:82
+#: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherDecodePanel.cpp:83
+msgid "Patch successfully applied!"
+msgstr "Patch aplicado com êxito!"
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherDecodePanel.cpp:83
+#: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherEncodePanel.cpp:85
+msgid "Notice"
+msgstr "Aviso"
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherDecodePanel.cpp:94
+#: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherEncodePanel.cpp:96
+#, c-format
+msgid "Patch file \"%s\" selected."
+msgstr "Arquivo Patch \"%s\" selecionado."
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherDecodePanel.cpp:106
+#: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherEncodePanel.cpp:108
+#, c-format
+msgid "Original file \"%s\" selected."
+msgstr "Arquivo Original \"%s\" selecionado."
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherEncodePanel.cpp:75
+msgid "Creating patch, please wait... (don't panic!)"
+msgstr "Criando patch, Aguade por favor... (sem pânico!)"
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherEncodePanel.cpp:84
+#: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherEncodePanel.cpp:85
+msgid "Patch successfully created!"
+msgstr "Patch criado com êxito!"
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherEncodePanel.cpp:120
+#, c-format
+msgid "Modified file \"%s\" selected."
+msgstr "Arquivo modificado \"%s\" selecionado."
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherMainDialog.cpp:22
+msgid "Delta Patcher Lite"
+msgstr ""
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherMainDialog.cpp:24
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.h:84
+msgid "Delta Patcher"
+msgstr ""
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherMainDialog.cpp:62
+msgid "Show log >>"
+msgstr "Mostrar log >>"
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherMainDialog.cpp:67
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:48
+msgid "<< Hide log"
+msgstr "<< Esconder log"
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherMainDialog.cpp:127
+#, c-format
+msgid "[%s] An error has occurred: %s\n"
+msgstr "[%s] Um erro aconteceu: %s\n"
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:36
+msgid "Apply xdelta patch"
+msgstr "Aplicar xdelta patch"
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:36
+msgid "Create xdelta patch"
+msgstr "Criar xdelta patch"
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:38
+msgid "Operations:"
+msgstr "Operações:"
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:45
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:295
+msgid "About"
+msgstr "Sobre"
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:51
+msgid "Associate to xdelta files"
+msgstr "Associar com arquivos xdelta"
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:55
+msgid "Exit"
+msgstr "Sair"
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:62
+msgid "Log:"
+msgstr ""
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:91
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:166
+msgid "Original file:"
+msgstr "Abrir arquivo:"
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:96
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:107
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:171
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:182
+msgid "Open..."
+msgstr "Abrir..."
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:102
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:188
+msgid "XDelta patch:"
+msgstr "XDelta patch:"
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:115
+msgid "Apply patch"
+msgstr "Aplicar patch"
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:120
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:206
+msgid "Options:"
+msgstr "Opções:"
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:125
+msgid "Keep original file"
+msgstr "Manter arquivo original"
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:134
+msgid "Checksum validation"
+msgstr "Validação de Checksum"
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:177
+msgid "Modified file:"
+msgstr "Arquivo modificado:"
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:193
+msgid "Save..."
+msgstr "Salvar..."
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:201
+msgid "Create patch"
+msgstr "Criar patch"
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:211
+msgid "Compression level:"
+msgstr "Nível de Compressão:"
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:215
+msgid "0"
+msgstr ""
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:215
+msgid "1"
+msgstr ""
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:215
+msgid "2"
+msgstr ""
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:215
+msgid "3"
+msgstr ""
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:215
+msgid "4"
+msgstr ""
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:215
+msgid "5"
+msgstr ""
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:215
+msgid "6"
+msgstr ""
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:215
+msgid "7"
+msgstr ""
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:215
+msgid "8"
+msgstr ""
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:215
+msgid "9"
+msgstr ""
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:226
+msgid "Add Checksum to patch"
+msgstr "Adicionar Checksum para o patch"
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:306
+msgid "License"
+msgstr "Licença"
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:313
+msgid "OK"
+msgstr "OK"
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\src/gui/dpgui.h:211
+msgid "About Delta Patcher"
+msgstr "Sobre Delta Patcher"
+
+#: D:\Documenti\CodeLite
+#: Projects\workspace\DeltaPatcher\include/common/common.h:28
+msgid ""
+"This program is free software: you can redistribute it\n"
+"and/or modify it under the terms of the GNU General\n"
+"Public License as published by the Free Software Foundation,\n"
+"version 2.0."
+msgstr ""
+"Este programa é um software gratuíto: você pode redistribuí-lo\n"
+"e/ou modificá-lo sobre os termos geral da Licença Pública da GNU\n"
+"Públicada pela fundação gratuíta de Software,\n"
+"version 2.0."
+

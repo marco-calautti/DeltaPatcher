@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeLite_Project Name="DeltaPatcher" InternalType="GUI">
+  <Plugins>
+    <Plugin Name="qmake">
+      <![CDATA[00050001N0005Debug0000000000000001N0007Release0000000000000001N0017ReleaseDecodeOnly0000000000000001N0011ReleaseUnix0000000000000001N0021ReleaseUnixDecodeOnly000000000000]]>
+    </Plugin>
+  </Plugins>
+  <Description/>
+  <Dependencies/>
+  <VirtualDirectory Name="include">
+    <File Name="include/DPApp.h"/>
+    <VirtualDirectory Name="patcher">
+      <File Name="include/patcher/XDeltaPatch.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="gui">
+      <File Name="src/gui/DeltaPatcherDecodePanel.h"/>
+      <File Name="src/gui/DeltaPatcherEncodePanel.h"/>
+      <File Name="src/gui/DeltaPatcherMainDialog.h"/>
+      <File Name="src/gui/dpgui.h"/>
+      <File Name="src/gui/Logger.h"/>
+      <File Name="src/gui/DeltaPatcherDropHandler.h"/>
+      <File Name="src/gui/DeltaPatcherDropTarget.h"/>
+      <File Name="src/gui/DeltaPatcherAboutDialog.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="common">
+      <File Name="include/common/common.h"/>
+      <File Name="include/common/COPYING.h"/>
+    </VirtualDirectory>
+  </VirtualDirectory>
+  <VirtualDirectory Name="src">
+    <File Name="src/DPApp.cpp"/>
+    <VirtualDirectory Name="patcher">
+      <File Name="src/patcher/XDeltaPatch.cpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="gui">
+      <File Name="src/gui/dpgui.cpp"/>
+      <File Name="src/gui/DeltaPatcherDecodePanel.cpp"/>
+      <File Name="src/gui/DeltaPatcherMainDialog.cpp"/>
+      <File Name="src/gui/DeltaPatcherEncodePanel.cpp"/>
+      <File Name="src/gui/DeltaPatcherDropTarget.cpp"/>
+      <File Name="src/gui/DeltaPatcherAboutDialog.cpp"/>
+    </VirtualDirectory>
+  </VirtualDirectory>
+  <VirtualDirectory Name="resource">
+    <File Name="resource.rc"/>
+  </VirtualDirectory>
+  <Settings Type="Executable">
+    <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-g;$(shell wx-config --cxxflags --unicode=yes --debug=yes)" Required="yes" PreCompiledHeader="">
+        <IncludePath Value="./include"/>
+        <IncludePath Value="./3rdparty"/>
+        <IncludePath Value="./src"/>
+        <Preprocessor Value="__WX__"/>
+      </Compiler>
+      <Linker Options="-mwindows;$(shell wx-config --debug=yes --libs --unicode=yes)" Required="yes"/>
+      <ResourceCompiler Options="$(shell wx-config --rcflags)" Required="yes"/>
+      <General OutputFile="./workingdir/$(ProjectName)D" IntermediateDirectory="./Debug" Command="./$(ProjectName)D" CommandArguments="" WorkingDirectory="./workingdir" PauseExecWhenProcTerminates="yes"/>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+    </Configuration>
+    <Configuration Name="Release" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-O2;$(shell wx-config --cxxflags --unicode=yes --debug=no)" Required="yes" PreCompiledHeader="">
+        <IncludePath Value="./include"/>
+        <IncludePath Value="./3rdparty"/>
+        <IncludePath Value="./src"/>
+        <Preprocessor Value="__WX__"/>
+      </Compiler>
+      <Linker Options="-s;-static-libgcc;-mwindows;$(shell wx-config --debug=no --libs --unicode=yes)" Required="yes"/>
+      <ResourceCompiler Options="$(shell wx-config --rcflags)" Required="yes"/>
+      <General OutputFile="./workingdir/$(ProjectName)" IntermediateDirectory="./Release" Command="./$(ProjectName)" CommandArguments="" WorkingDirectory="./workingdir" PauseExecWhenProcTerminates="yes"/>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+    </Configuration>
+    <Configuration Name="ReleaseDecodeOnly" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-O2;$(shell wx-config --cxxflags --unicode=yes --debug=no)" Required="yes" PreCompiledHeader="">
+        <IncludePath Value="./include"/>
+        <IncludePath Value="./3rdparty"/>
+        <IncludePath Value="./src"/>
+        <Preprocessor Value="__WX__"/>
+        <Preprocessor Value="__DP_DECODE_ONLY__"/>
+      </Compiler>
+      <Linker Options="-s;-static-libgcc;-mwindows;$(shell wx-config --debug=no --libs --unicode=yes)" Required="yes"/>
+      <ResourceCompiler Options="$(shell wx-config --rcflags)" Required="yes"/>
+      <General OutputFile="./workingdir/$(ProjectName)Lite" IntermediateDirectory="./ReleaseDecode" Command="./$(ProjectName)Lite" CommandArguments="" WorkingDirectory="./workingdir" PauseExecWhenProcTerminates="yes"/>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+    </Configuration>
+    <Configuration Name="ReleaseUnix" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-O2;$(shell wx-config --cxxflags --unicode=yes --debug=no)" Required="yes" PreCompiledHeader="">
+        <IncludePath Value="./include"/>
+        <IncludePath Value="./3rdparty"/>
+        <IncludePath Value="./src"/>
+        <Preprocessor Value="__WX__"/>
+      </Compiler>
+      <Linker Options="-s;-static-libgcc;-mwindows;$(shell wx-config --debug=no --libs --unicode=yes)" Required="yes"/>
+      <ResourceCompiler Options="$(shell wx-config --rcflags)" Required="no"/>
+      <General OutputFile="./workingdir/$(ProjectName)" IntermediateDirectory="./Release" Command="./$(ProjectName)" CommandArguments="" WorkingDirectory="./workingdir" PauseExecWhenProcTerminates="yes"/>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+    </Configuration>
+    <Configuration Name="ReleaseUnixDecodeOnly" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-O2;$(shell wx-config --cxxflags --unicode=yes --debug=no)" Required="yes" PreCompiledHeader="">
+        <IncludePath Value="./include"/>
+        <IncludePath Value="./3rdparty"/>
+        <IncludePath Value="./src"/>
+        <Preprocessor Value="__WX__"/>
+        <Preprocessor Value="__DP_DECODE_ONLY__"/>
+      </Compiler>
+      <Linker Options="-s;-static-libgcc;-mwindows;$(shell wx-config --debug=no --libs --unicode=yes)" Required="yes"/>
+      <ResourceCompiler Options="$(shell wx-config --rcflags)" Required="no"/>
+      <General OutputFile="./workingdir/$(ProjectName)Decode" IntermediateDirectory="./ReleaseDecode" Command="./$(ProjectName)Decode" CommandArguments="" WorkingDirectory="./workingdir" PauseExecWhenProcTerminates="yes"/>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+    </Configuration>
+    <GlobalSettings>
+      <Compiler Options="">
+        <IncludePath Value="."/>
+      </Compiler>
+      <Linker Options="">
+        <LibraryPath Value="."/>
+      </Linker>
+      <ResourceCompiler Options=""/>
+    </GlobalSettings>
+  </Settings>
+  <Dependencies Name="Debug"/>
+  <Dependencies Name="ReleaseDecodeOnly"/>
+  <Dependencies Name="Release"/>
+</CodeLite_Project>
