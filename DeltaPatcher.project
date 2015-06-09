@@ -204,7 +204,7 @@
       </Compiler>
       <Linker Options="-s;-static-libgcc;-mwindows;$(shell wx-config --debug=no --libs --unicode=yes)" Required="yes"/>
       <ResourceCompiler Options="$(shell wx-config --rcflags)" Required="yes"/>
-      <General OutputFile="./ReleaseDecode/$(ProjectName)Lite" IntermediateDirectory="./ReleaseDecodeOnly" Command="./ReleaseDecodeOnly/$(ProjectName)Lite" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
+      <General OutputFile="./ReleaseDecodeOnly/$(ProjectName)Lite" IntermediateDirectory="./ReleaseDecodeOnly" Command="./ReleaseDecodeOnly/$(ProjectName)Lite" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
       </Environment>
@@ -287,7 +287,7 @@
       </Compiler>
       <Linker Options="-s;-static-libgcc;-mwindows;$(shell wx-config --debug=no --libs --unicode=yes)" Required="yes"/>
       <ResourceCompiler Options="$(shell wx-config --rcflags)" Required="no"/>
-      <General OutputFile="./ReleaseDecode/$(ProjectName)Lite" IntermediateDirectory="./ReleaseDecodeOnly" Command="./ReleaseDecodeOnly/$(ProjectName)Lite" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
+      <General OutputFile="./ReleaseDecodeOnly/$(ProjectName)Lite" IntermediateDirectory="./ReleaseDecodeOnly" Command="./ReleaseDecodeOnly/$(ProjectName)Lite" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
       </Environment>

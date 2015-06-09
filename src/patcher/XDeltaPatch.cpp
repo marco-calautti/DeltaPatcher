@@ -70,16 +70,16 @@ void XDeltaPatch::DecodeDescription()
 
 wxString XDeltaPatch::EncodeDescription()
 {
-	wxString tempDesc=description;
-		
-	if(tempDesc.IsEmpty())
-		tempDesc=wxT("Created with Delta Patcher.");
-		
-	wxScopedCharBuffer utf8=tempDesc.ToUTF8();
-			
-	wxString result=wxT("^*");
-	result<<base64_encode((unsigned const char*)utf8.data(),strlen(utf8.data()));
-	
+	wxString result;
+	if(description.IsEmpty())
+		result=wxT("Created with Delta Patcher.");
+	else
+	{
+		wxScopedCharBuffer utf8=description.ToUTF8();
+				
+		result=wxT("^*");
+		result<<base64_encode((unsigned const char*)utf8.data(),strlen(utf8.data()));
+	}
 	return result;
 }
 
