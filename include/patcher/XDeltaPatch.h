@@ -1,4 +1,4 @@
-//Copyright (C) 2010 Phoenix. 
+//Copyright (C) 2015 Phoenix.
 
 //This program is free software: you can redistribute it and/or modify 
 //it under the terms of the GNU General Public License as published by 
@@ -22,27 +22,41 @@
 #include <wx/wx.h>
 
 typedef struct _XDeltaConfig{
-
+	static const int MIN_COMPRESSION_LEVEL=0;
+	static const int MAX_COMPRESSION_LEVEL=9;
+	static const int DEFAULT_COMPRESSION_LEVEL=5;
+	
+	static const int SRC_WINDOW_SIZE_LENGTH=8;
+	static const int SRC_WINDOW_SIZE_AUTO=-1;
+	static const int SrcWindowSizes[SRC_WINDOW_SIZE_LENGTH];
+	
 	_XDeltaConfig(){
 		compressionLevel=5;
 		enableChecksum=true;
 		overwriteOutput=true;
+		srcWindowSize=SRC_WINDOW_SIZE_AUTO; //auto
 	}
 	
 	int compressionLevel;
 	bool enableChecksum;
 	bool overwriteOutput;
+	int srcWindowSize;
 } XDeltaConfig;
 
 class XDeltaPatch : public wxObject
 {
-public:
-	
+	public:
+	enum PatchMode
+	{
+		Read,
+		Write
+	};
 	/**
 	 * Creates a patch with default config from specified patch file
 	 * 
 	 * */
-	XDeltaPatch(const wxChar* patchName);
+
+	XDeltaPatch(const wxChar* patchName, PatchMode mode=Read);
 	
 	
 	/**
@@ -55,12 +69,16 @@ public:
 	
 	static void SetXDeltaExecutable(const wxChar* ex){ xdeltaEx=ex; }
 	
+	wxString GetDescription();
+	void SetDescription(const wxString& description);
+	
 	int Decode(const wxChar* original,const wxChar* out,wxString& message);
 	int Encode(const wxChar* original,const wxChar* modified,wxString& message);
 	
 private:
 	wxString patchName;
 	XDeltaConfig config;
+	wxString description;
 	
 	static wxString xdeltaEx;
 	

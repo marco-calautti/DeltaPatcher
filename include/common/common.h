@@ -1,4 +1,4 @@
-//Copyright (C) 2010 Phoenix. 
+//Copyright (C) 2015 Phoenix. 
 
 //This program is free software: you can redistribute it and/or modify 
 //it under the terms of the GNU General Public License as published by 
@@ -22,14 +22,14 @@
 #include <common/COPYING.h>
 
 #ifdef 	__DP_DECODE_ONLY__
-	#define __DP_VERSION__ wxT("1.0 Lite")
+	#define __DP_VERSION__ wxT("2.0 Lite")
 #else 	
-	#define __DP_VERSION__ wxT("1.0")
+	#define __DP_VERSION__ wxT("2.0")
 #endif
 
 #define __DP_DISCLAIMER__ _("This program is free software: you can redistribute it\nand/or modify it under the terms of the GNU General\nPublic License as published by the Free Software Foundation,\nversion 2.0.")
 static const wxString __DP_LICENSE__(rawLicense);
 #define __DP_NAME__ wxT("Delta Patcher")
 #define __DP_WEBSITE__ wxT("http://www.sadnescity.it")
-#define __DP_COPYRIGHT__ wxT("(C) 2010 Phoenix\n<phoenix_87_c@hotmail.com>")
+#define __DP_COPYRIGHT__ wxT("(C) 2015 Phoenix\n<phoenix_87_c@hotmail.com>")
 #endif

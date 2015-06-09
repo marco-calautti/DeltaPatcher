@@ -4,7 +4,11 @@
 #include "DeltaPatcherMainDialog.h"
 #include "DeltaPatcherAboutDialog.h"
 #include <common/common.h>
-#include "icon.xpm"
+
+#include <gui/icons/icon.xpm>
+#include <gui/icons/about_button.xpm>
+#include <gui/icons/switch.xpm>
+#include <gui/icons/log.xpm>
 
 #ifdef __WXMSW__
 #include <wx/msw/registry.h>
@@ -13,16 +17,29 @@
 
 DeltaPatcherMainDialog::DeltaPatcherMainDialog( wxWindow* parent, const wxChar* patchName )
 :
-MainDialog( parent )
+MainDialog( parent ), decodeMode(true)
 {
 	wxIcon icon(icon_xpm);
 	SetIcon(icon);
+	
+	wxBitmap aboutBitmap;
+	aboutBitmap.CopyFromIcon(wxIcon(about_button_xpm));
+	aboutButton->SetImageLabel(aboutBitmap);
+	
+	wxBitmap modeBitmap;
+	modeBitmap.CopyFromIcon(wxIcon(switch_xpm));
+	operationButton->SetImageLabel(modeBitmap);
+	
+	wxBitmap logBitmap;
+	logBitmap.CopyFromIcon(wxIcon(log_xpm));
+	showHideLog->SetImageLabel(logBitmap);
 	
 #ifdef __DP_DECODE_ONLY__
 	SetTitle(_("Delta Patcher Lite"));
 #else
 	SetTitle(_("Delta Patcher"));
 #endif
+
 	//preparing default panel
 	decodePanel=new DeltaPatcherDecodePanel(this,this);
 	if(!wxIsEmpty(patchName))
@@ -40,15 +57,9 @@ MainDialog( parent )
 	//preparing log area
 	logCtrl->SetEditable(false);
 	
-	//checking file association support
-#ifndef __WXMSW__
-	associateCheck->Enable(false);
-#endif
-
-	associateCheck->SetValue(ExistKeys());
 	//checking release type
 #ifdef __DP_DECODE_ONLY__
-	operationBox->Show(false);
+	operationButton->Show(false);
 #endif
 	
 	this->Fit();
@@ -76,21 +87,18 @@ void DeltaPatcherMainDialog::OnMainDialogClose( wxCloseEvent& event )
 	Destroy();
 }
 
-void DeltaPatcherMainDialog::OnMainDialogCloseButton( wxCommandEvent& event )
-{
-	Destroy();
-}
 
 void DeltaPatcherMainDialog::OnOperationSelected( wxCommandEvent& event )
 {
-	int selection=event.GetSelection();
 	
-	if(selection==1){ //create patch selected
+	if(decodeMode){ //create patch selected
 		decodePanel->Show(false);
 		encodePanel->Show();
+		decodeMode=false;
 	}else{ //apply patch selected
 		encodePanel->Show(false);
 		decodePanel->Show();
+		decodeMode=true;
 	}
 
 	leftSizer->Layout();
@@ -129,70 +137,6 @@ void DeltaPatcherMainDialog::Log(int type,const wxChar* msg)
 	logCtrl->AppendText(message);
 }
 
-void DeltaPatcherMainDialog::OnAssociateXDelta( wxCommandEvent& event )
-{
-	if(event.IsChecked()) //want to associate xdelta files
-		AddKeys();
-	else
-		DeleteKeys();
-
-}
-
-void DeltaPatcherMainDialog::AddKeys()
-{
-#ifdef __WXMSW__
-
-	DeleteKeys();
-	wxRegKey regExt(wxT("HKEY_CLASSES_ROOT\\.xdelta"));
-		
-	//creating registry keys
-	regExt.Create();
-	regExt.SetValue(wxEmptyString,wxT("xdeltafile"));
-	regExt.Close();
-		
-	wxRegKey regIcon(wxT("HKEY_CLASSES_ROOT\\xdeltafile\\DefaultIcon"));
-	regIcon.Create();
-	
-	wxString exePath=wxStandardPaths::Get().GetExecutablePath();
-		
-	regIcon.SetValue(wxEmptyString,exePath+wxT(",0"));
-	regIcon.Close();
-		
-	wxRegKey regShell(wxT("HKEY_CLASSES_ROOT\\xdeltafile\\shell\\open\\command"));
-	regShell.Create();
-	regShell.SetValue(wxEmptyString,exePath+wxT(" \"%1\""));
-	regShell.Close();
-#endif
-}
-
-void DeltaPatcherMainDialog::DeleteKeys()
-{
-#ifdef __WXMSW__
-	wxRegKey regExt(wxT("HKEY_CLASSES_ROOT\\.xdelta"));
-	wxRegKey regAss(wxT("HKEY_CLASSES_ROOT\\xdeltafile"));
-	
-	if(regExt.Exists()) //cleaning registry
-		regExt.DeleteSelf();
-			
-	if(regAss.Exists())
-		regAss.DeleteSelf();
-		
-	regAss.Close();
-	regExt.Close();
-#endif
-}
-
-bool DeltaPatcherMainDialog::ExistKeys()
-{
-#ifdef __WXMSW__
-	wxRegKey regAss(wxT("HKEY_CLASSES_ROOT\\xdeltafile"));
-	
-	bool ret=regAss.Exists();
-	regAss.Close();
-	
-	return ret;
-#endif
-}
 
 
 

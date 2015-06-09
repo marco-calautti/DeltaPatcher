@@ -1,5 +1,5 @@
 #include "DeltaPatcherAboutDialog.h"
-#include "about.xpm"
+#include <gui/icons/about.xpm>
 #include <common/common.h>
 
 DeltaPatcherAboutDialog::DeltaPatcherAboutDialog( wxWindow* parent )

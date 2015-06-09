@@ -1,15 +1,16 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Apr 16 2008)
+// C++ code generated with wxFormBuilder (version Feb 26 2014)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
 ///////////////////////////////////////////////////////////////////////////
 
-#ifndef __dpgui__
-#define __dpgui__
+#ifndef __DPGUI_H__
+#define __DPGUI_H__
 
+#include <wx/artprov.h>
+#include <wx/xrc/xmlres.h>
 #include <wx/intl.h>
-
 #include <wx/panel.h>
 #include <wx/gdicmn.h>
 #include <wx/font.h>
@@ -17,18 +18,16 @@
 #include <wx/settings.h>
 #include <wx/string.h>
 #include <wx/sizer.h>
-#include <wx/radiobox.h>
-#include <wx/button.h>
-#include <wx/checkbox.h>
-#include <wx/textctrl.h>
-#include <wx/statbox.h>
-#include <wx/dialog.h>
-#include <wx/stattext.h>
-#include <wx/choice.h>
 #include <wx/bitmap.h>
 #include <wx/image.h>
 #include <wx/icon.h>
+#include <wx/bmpbuttn.h>
+#include <wx/button.h>
+#include <wx/textctrl.h>
+#include <wx/statbox.h>
+#include <wx/dialog.h>
 #include <wx/statbmp.h>
+#include <wx/stattext.h>
 #include <wx/hyperlink.h>
 #include <wx/notebook.h>
 #include <wx/statline.h>
@@ -45,43 +44,38 @@ class MainDialog : public wxDialog
 		
 		// Private event handlers
 		void _wxFB_OnMainDialogClose( wxCloseEvent& event ){ OnMainDialogClose( event ); }
-		void _wxFB_OnOperationSelected( wxCommandEvent& event ){ OnOperationSelected( event ); }
 		void _wxFB_OnClickAbout( wxCommandEvent& event ){ OnClickAbout( event ); }
+		void _wxFB_OnOperationSelected( wxCommandEvent& event ){ OnOperationSelected( event ); }
 		void _wxFB_OnShowHideLog( wxCommandEvent& event ){ OnShowHideLog( event ); }
-		void _wxFB_OnAssociateXDelta( wxCommandEvent& event ){ OnAssociateXDelta( event ); }
-		void _wxFB_OnMainDialogCloseButton( wxCommandEvent& event ){ OnMainDialogCloseButton( event ); }
 		
 	
 	protected:
 		enum
 		{
-			wxID_SHOW_IDE_LOG = 1000,
-			wxID_ASSOCIATE_XDELTA,
+			wxID_OPERATION_BUTTON = 1000,
+			wxID_SHOW_IDE_LOG
 		};
 		
 		wxBoxSizer* mainSizer;
 		wxBoxSizer* leftSizer;
 		wxBoxSizer* panelSizer;
 		wxPanel* nullPanel;
-		wxRadioBox* operationBox;
-		wxButton* aboutButton;
-		wxButton* showHideLog;
-		wxCheckBox* associateCheck;
-		wxButton* exitButton;
+		wxBitmapButton* aboutButton;
+		wxBitmapButton* operationButton;
+		wxBitmapButton* showHideLog;
 		wxStaticBoxSizer* logBox;
 		wxTextCtrl* logCtrl;
 		
 		// Virtual event handlers, overide them in your derived class
-		virtual void OnMainDialogClose( wxCloseEvent& event ){ event.Skip(); }
-		virtual void OnOperationSelected( wxCommandEvent& event ){ event.Skip(); }
-		virtual void OnClickAbout( wxCommandEvent& event ){ event.Skip(); }
-		virtual void OnShowHideLog( wxCommandEvent& event ){ event.Skip(); }
-		virtual void OnAssociateXDelta( wxCommandEvent& event ){ event.Skip(); }
-		virtual void OnMainDialogCloseButton( wxCommandEvent& event ){ event.Skip(); }
+		virtual void OnMainDialogClose( wxCloseEvent& event ) { event.Skip(); }
+		virtual void OnClickAbout( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnOperationSelected( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnShowHideLog( wxCommandEvent& event ) { event.Skip(); }
 		
 	
 	public:
-		MainDialog( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Delta Patcher"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 523,321 ), long style = wxCAPTION|wxCLOSE_BOX|wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER );
+		
+		MainDialog( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Delta Patcher"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 504,321 ), long style = wxCAPTION|wxCLOSE_BOX|wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER ); 
 		~MainDialog();
 	
 };
@@ -98,6 +92,7 @@ class DecodePanel : public wxPanel
 		void _wxFB_OnOpenOriginal( wxCommandEvent& event ){ OnOpenOriginal( event ); }
 		void _wxFB_OnOpenPatch( wxCommandEvent& event ){ OnOpenPatch( event ); }
 		void _wxFB_OnApplyPatch( wxCommandEvent& event ){ OnApplyPatch( event ); }
+		void _wxFB_OnDecodeOptionsClicked( wxCommandEvent& event ){ OnDecodeOptionsClicked( event ); }
 		
 	
 	protected:
@@ -106,24 +101,26 @@ class DecodePanel : public wxPanel
 			wxID_DECODE_ORIGINAL_OPEN = 1000,
 			wxID_DECODE_PATCH_OPEN,
 			wxID_DECODE_APPLY,
+			wxID_DECODE_OPTIONS_BUTTON
 		};
 		
 		wxTextCtrl* originalField;
-		wxButton* originalButton;
+		wxBitmapButton* originalButton;
 		wxTextCtrl* patchField;
-		wxButton* patchButton;
+		wxBitmapButton* patchButton;
 		wxButton* applyButton;
-		wxCheckBox* keepOriginalCheck;
-		wxCheckBox* checksumCheck;
+		wxBitmapButton* decodeOptionsButton;
 		
 		// Virtual event handlers, overide them in your derived class
-		virtual void OnOpenOriginal( wxCommandEvent& event ){ event.Skip(); }
-		virtual void OnOpenPatch( wxCommandEvent& event ){ event.Skip(); }
-		virtual void OnApplyPatch( wxCommandEvent& event ){ event.Skip(); }
+		virtual void OnOpenOriginal( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnOpenPatch( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnApplyPatch( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnDecodeOptionsClicked( wxCommandEvent& event ) { event.Skip(); }
 		
 	
 	public:
-		DecodePanel( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 409,268 ), long style = wxTAB_TRAVERSAL );
+		
+		DecodePanel( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 320,184 ), long style = wxTAB_TRAVERSAL ); 
 		~DecodePanel();
 	
 };
@@ -141,6 +138,7 @@ class EncodePanel : public wxPanel
 		void _wxFB_OnOpenModified( wxCommandEvent& event ){ OnOpenModified( event ); }
 		void _wxFB_OnSavePatch( wxCommandEvent& event ){ OnSavePatch( event ); }
 		void _wxFB_OnCreatePatch( wxCommandEvent& event ){ OnCreatePatch( event ); }
+		void _wxFB_OnEncodeOptionsClicked( wxCommandEvent& event ){ OnEncodeOptionsClicked( event ); }
 		
 	
 	protected:
@@ -150,28 +148,30 @@ class EncodePanel : public wxPanel
 			wxID_ENCODE_MODIFIED_OPEN,
 			wxID_ENCODE_PATCH_SAVE,
 			wxID_ENCODE_CREATE,
+			wxID_ENCODE_OPTIONS_BUTTON
 		};
 		
 		wxTextCtrl* originalField;
-		wxButton* originalButton;
+		wxBitmapButton* originalButton;
 		wxTextCtrl* modifiedField;
-		wxButton* modifiedButton;
+		wxBitmapButton* modifiedButton;
 		wxTextCtrl* patchField;
-		wxButton* patchButton;
+		wxBitmapButton* patchButton;
+		wxTextCtrl* descriptionField;
 		wxButton* createButton;
-		wxStaticText* m_staticText1;
-		wxChoice* choiceCompression;
-		wxCheckBox* checksumCheck;
+		wxBitmapButton* encodeOptionsButton;
 		
 		// Virtual event handlers, overide them in your derived class
-		virtual void OnOpenOriginal( wxCommandEvent& event ){ event.Skip(); }
-		virtual void OnOpenModified( wxCommandEvent& event ){ event.Skip(); }
-		virtual void OnSavePatch( wxCommandEvent& event ){ event.Skip(); }
-		virtual void OnCreatePatch( wxCommandEvent& event ){ event.Skip(); }
+		virtual void OnOpenOriginal( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnOpenModified( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnSavePatch( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnCreatePatch( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnEncodeOptionsClicked( wxCommandEvent& event ) { event.Skip(); }
 		
 	
 	public:
-		EncodePanel( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 485,300 ), long style = wxTAB_TRAVERSAL );
+		
+		EncodePanel( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 320,405 ), long style = wxTAB_TRAVERSAL ); 
 		~EncodePanel();
 	
 };
@@ -203,14 +203,15 @@ class AboutDialog : public wxDialog
 		wxButton* okButton;
 		
 		// Virtual event handlers, overide them in your derived class
-		virtual void OnClickClose( wxCloseEvent& event ){ event.Skip(); }
-		virtual void OnClickOk( wxCommandEvent& event ){ event.Skip(); }
+		virtual void OnClickClose( wxCloseEvent& event ) { event.Skip(); }
+		virtual void OnClickOk( wxCommandEvent& event ) { event.Skip(); }
 		
 	
 	public:
-		AboutDialog( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("About Delta Patcher"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 354,308 ), long style = wxDEFAULT_DIALOG_STYLE );
+		
+		AboutDialog( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("About Delta Patcher"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 354,308 ), long style = wxDEFAULT_DIALOG_STYLE ); 
 		~AboutDialog();
 	
 };
 
-#endif //__dpgui__
+#endif //__DPGUI_H__

@@ -1,4 +1,4 @@
-//Copyright (C) 2010 Phoenix. 
+//Copyright (C) 2015 Phoenix.
 
 //This program is free software: you can redistribute it and/or modify 
 //it under the terms of the GNU General Public License as published by 
@@ -36,7 +36,7 @@ protected:
 	void OnOpenModified( wxCommandEvent& event );
 	void OnSavePatch( wxCommandEvent& event );
 	void OnCreatePatch( wxCommandEvent& event );
-	
+	void OnEncodeOptionsClicked(wxCommandEvent& event);
 public:
 	/** Constructor */
 	DeltaPatcherEncodePanel( wxWindow* parent, Logger* logger );
@@ -44,8 +44,17 @@ public:
 	void SetOriginalFile(const wxChar* filePath);
 	void SetModifiedFile(const wxChar* filePath);
 	void SetPatchFile(const wxChar* patchPath);
+	
+private:
+	int GetCompressionLevel();
+	int GetWindowSize();
 private:
 	Logger* logger;
+	
+	wxMenu* createOptionsMenu;
+	wxMenu* compressionMenu;
+	wxMenu* windowSizeMenu;
+	wxMenuItem* checksumCheck;
 };
 
 #endif // __DeltaPatcherEncodePanel__

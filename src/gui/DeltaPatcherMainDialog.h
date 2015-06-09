@@ -1,4 +1,4 @@
-//Copyright (C) 2010 Phoenix. 
+//Copyright (C) 2015 Phoenix.
 
 //This program is free software: you can redistribute it and/or modify 
 //it under the terms of the GNU General Public License as published by 
@@ -37,9 +37,7 @@ protected:
 	// Handlers for MainDialog events.
 	void OnShowHideLog( wxCommandEvent& event );
 	void OnMainDialogClose( wxCloseEvent& event );
-	void OnMainDialogCloseButton( wxCommandEvent& event );
 	void OnClickAbout( wxCommandEvent& event );
-	void OnAssociateXDelta( wxCommandEvent& event );
 	void OnOperationSelected( wxCommandEvent& event );
 public:
 	/** Constructor */
@@ -51,9 +49,7 @@ private:
 	DeltaPatcherDecodePanel* decodePanel;
 	DeltaPatcherEncodePanel* encodePanel;
 	
-	void DeleteKeys();
-	void AddKeys();
-	bool ExistKeys();
+	bool decodeMode;
 };
 
 #endif // __DeltaPatcherMainDialog__

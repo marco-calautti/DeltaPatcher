@@ -3,11 +3,60 @@
 #include <wx/filedlg.h>
 #include "DeltaPatcherEncodePanel.h"
 
+#include <gui/icons/open.xpm>
+#include <gui/icons/save.xpm>
+#include <gui/icons/config.xpm>
+
 DeltaPatcherEncodePanel::DeltaPatcherEncodePanel( wxWindow* parent, Logger* l )
 :
 EncodePanel( parent )
 {
 	logger=l;
+	
+	wxBitmap openBitmap;
+	openBitmap.CopyFromIcon(wxIcon(open_xpm));
+	originalButton->SetImageLabel(openBitmap);
+	modifiedButton->SetImageLabel(openBitmap);
+	
+	wxBitmap saveBitmap;
+	saveBitmap.CopyFromIcon(wxIcon(save_xpm));
+	patchButton->SetImageLabel(saveBitmap);
+	
+	wxBitmap configBitmap;
+	configBitmap.CopyFromIcon(wxIcon(config_xpm));
+	encodeOptionsButton->SetImageLabel(configBitmap);
+	
+	createOptionsMenu = new wxMenu();
+	compressionMenu = new wxMenu();
+	for(int level=XDeltaConfig::MIN_COMPRESSION_LEVEL;level<=XDeltaConfig::MAX_COMPRESSION_LEVEL;level++){
+		wxMenuItem* levelItem=new wxMenuItem(compressionMenu,wxID_ANY,wxString::Format("%d",level),wxEmptyString,wxITEM_RADIO);
+		compressionMenu->Append(levelItem);
+		if(level==XDeltaConfig::DEFAULT_COMPRESSION_LEVEL)
+			levelItem->Check();
+	}
+	
+	createOptionsMenu->Append( -1, _("Compression level"), compressionMenu );
+
+	windowSizeMenu = new wxMenu();
+	wxMenuItem* windowItem=new wxMenuItem(windowSizeMenu,wxID_ANY,_T("Auto"),wxEmptyString,wxITEM_RADIO);
+	windowSizeMenu->Append(windowItem);
+	windowItem->Check();
+	
+	for(int i=0;i<XDeltaConfig::SRC_WINDOW_SIZE_LENGTH;i++){
+		windowItem=new wxMenuItem(windowSizeMenu,wxID_ANY,wxString::Format("%d MB",XDeltaConfig::SrcWindowSizes[i]>>20),wxEmptyString,wxITEM_RADIO);
+		windowSizeMenu->Append(windowItem);
+	}
+	
+	createOptionsMenu->Append( -1, _("Src Window Size"), windowSizeMenu );
+	
+	checksumCheck = new wxMenuItem( createOptionsMenu, wxID_ANY, wxString( _("Add Checksum to patch") ) , wxEmptyString, wxITEM_CHECK );
+	createOptionsMenu->Append( checksumCheck );
+	checksumCheck->Check( true );
+}
+
+void DeltaPatcherEncodePanel::OnEncodeOptionsClicked(wxCommandEvent& event)
+{
+	PopupMenu(createOptionsMenu);
 }
 
 void DeltaPatcherEncodePanel::OnOpenOriginal( wxCommandEvent& event )
@@ -65,11 +114,13 @@ void DeltaPatcherEncodePanel::OnCreatePatch( wxCommandEvent& event )
 	wxString original=originalField->GetValue();
 	wxString modified=modifiedField->GetValue();
 	
-	XDeltaPatch xdp(patchName);
+	XDeltaPatch xdp(patchName,XDeltaPatch::Write);
+	xdp.SetDescription(descriptionField->GetValue());
 	
 	//preparing config
 	xdp.GetConfig().enableChecksum=checksumCheck->IsChecked();
-	xdp.GetConfig().compressionLevel=choiceCompression->GetSelection();
+	xdp.GetConfig().compressionLevel=GetCompressionLevel();
+	xdp.GetConfig().srcWindowSize=GetWindowSize();
 	//end config
 	
 	logger->Log(Logger::LOG_MESSAGE,_("Creating patch, please wait... (don't panic!)"));
@@ -120,4 +171,30 @@ void DeltaPatcherEncodePanel::SetModifiedFile(const wxChar* filePath)
 	message=wxString::Format(_("Modified file \"%s\" selected."),name.GetData());
 	
 	logger->Log(Logger::LOG_MESSAGE,message);	
+}
+
+int DeltaPatcherEncodePanel::GetCompressionLevel()
+{
+	for(size_t i=0;i<compressionMenu->GetMenuItemCount();i++){
+		wxMenuItem* item=compressionMenu->FindItemByPosition(i);
+		if(item->IsChecked())
+			return i;
+	}
+	return XDeltaConfig::DEFAULT_COMPRESSION_LEVEL;
+}
+
+int DeltaPatcherEncodePanel::GetWindowSize()
+{
+	for(size_t i=0;i<windowSizeMenu->GetMenuItemCount();i++){
+		wxMenuItem* item=windowSizeMenu->FindItemByPosition(i);
+		if(item->IsChecked())
+		{
+			if(i==0)
+				return XDeltaConfig::SRC_WINDOW_SIZE_AUTO;
+			else
+				return XDeltaConfig::SrcWindowSizes[i-1];
+		}
+			
+	}
+	return XDeltaConfig::SRC_WINDOW_SIZE_AUTO;
 }

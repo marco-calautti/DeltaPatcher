@@ -1,4 +1,6 @@
 mondrian ICON "icon.ico" //exe icon (Windows only)
+IDR_xdeltaexe exe "xdelta.exe"
+
 #include <wx/msw/wx.rc> //Enables Windows Styles
 
 VS_VERSION_INFO VERSIONINFO

@@ -4,12 +4,39 @@
 #include <wx/filedlg.h>
 #include <patcher/XDeltaPatch.h>
 
+#include <gui/icons/open.xpm>
+#include <gui/icons/save.xpm>
+#include <gui/icons/config.xpm>
+
 DeltaPatcherDecodePanel::DeltaPatcherDecodePanel( wxWindow* parent,Logger* l )
 :
 DecodePanel( parent )
 {
 	logger=l;
 	SetDropTarget(new DeltaPatcherDropTarget(this));
+	
+	wxBitmap openBitmap;
+	openBitmap.CopyFromIcon(wxIcon(open_xpm));
+	originalButton->SetImageLabel(openBitmap);
+	patchButton->SetImageLabel(openBitmap);
+	
+	wxBitmap configBitmap;
+	configBitmap.CopyFromIcon(wxIcon(config_xpm));
+	decodeOptionsButton->SetImageLabel(configBitmap);
+	
+	applyOptionsMenu = new wxMenu();
+	keepOriginalCheck = new wxMenuItem( applyOptionsMenu, wxID_ANY, wxString( _("Keep original file") ) , wxEmptyString, wxITEM_CHECK );
+	applyOptionsMenu->Append( keepOriginalCheck );
+	
+	checksumCheck = new wxMenuItem( applyOptionsMenu, wxID_ANY, wxString( _("Checksum validation") ) , wxEmptyString, wxITEM_CHECK );
+	applyOptionsMenu->Append( checksumCheck );
+	checksumCheck->Check( true );
+	
+}
+
+void DeltaPatcherDecodePanel::OnDecodeOptionsClicked(wxCommandEvent& event)
+{
+	PopupMenu(applyOptionsMenu);
 }
 
 void DeltaPatcherDecodePanel::OnOpenOriginal( wxCommandEvent& event )
@@ -91,7 +118,17 @@ void DeltaPatcherDecodePanel::SetPatchFile(const wxChar* patchPath)
 	wxFileName fn(patchPath);
 	wxString name=fn.GetFullName();
 	wxString message;
-	message=wxString::Format(_("Patch file \"%s\" selected."),name.GetData());
+	
+	XDeltaPatch xdp(patchPath);
+	
+	message=wxString::Format(_("Patch file \"%s\" selected"),name.GetData());
+	if(xdp.GetDescription().IsEmpty())
+	{
+		message<<wxT(".");
+	}else
+	{
+		message<<wxString::Format(_(", description found:\n\n%s\n"),xdp.GetDescription());
+	}
 	
 	logger->Log(Logger::LOG_MESSAGE,message);
 }

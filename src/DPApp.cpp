@@ -3,6 +3,11 @@
 #include <wx/filename.h>
 #include <DPApp.h>
 #include <gui/DeltaPatcherMainDialog.h>
+#include <common/resource.h>
+
+#ifdef __WXMSW__
+#include <windows.h>
+#endif
 
 IMPLEMENT_APP(DPApp)
 
@@ -11,7 +16,7 @@ bool DPApp::OnInit(){
 	if(!wxApp::OnInit())
 		return false;
 		
-	if(locale.Init(wxLANGUAGE_DEFAULT, wxLOCALE_CONV_ENCODING)){
+	if(locale.Init()){
 #ifdef __WXMSW__
 		wxString path;
 		wxString exePath=wxStandardPaths::Get().GetExecutablePath();
@@ -33,7 +38,29 @@ bool DPApp::OnInit(){
 	}
 	
 #ifdef __WXMSW__
-	XDeltaPatch::SetXDeltaExecutable(wxT("xdelta"));
+	
+	//Here we use the embedded xdelta executable
+	HGLOBAL     res_handle = NULL;
+	HRSRC       res;
+	char *      res_data;
+	DWORD       res_size;
+	
+	res = FindResource(GetModuleHandle(NULL),L"IDR_xdeltaexe",L"exe");
+	if (!res)
+        return false;
+	res_handle = LoadResource(NULL, res);
+	if (!res_handle)
+        return false;
+		
+	res_data = (char*)LockResource(res_handle);
+	res_size = SizeofResource(NULL, res);
+	
+	wxFile tempFile;
+	wxString strExe=wxFileName::CreateTempFileName(wxT("dp_"),&tempFile);
+	tempFile.Write(res_data,res_size);
+	tempFile.Close();
+	
+	XDeltaPatch::SetXDeltaExecutable(strExe);
 #else
 	XDeltaPatch::SetXDeltaExecutable(wxT("xdelta3"));
 #endif
