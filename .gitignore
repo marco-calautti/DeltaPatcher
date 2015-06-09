@@ -10,9 +10,7 @@
 
 [Dd]ebug/
 [Rr]elease/
-[Rr]eleaseDecode/
-[Rr]eleaseUnix/
-[Rr]eleaseUnixDecode/
+[Rr]eleaseDecodeOnly/
 x64/
 build/
 [Bb]in/

@@ -4,8 +4,8 @@ IDR_xdeltaexe exe "xdelta.exe"
 #include <wx/msw/wx.rc> //Enables Windows Styles
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,0,0
- PRODUCTVERSION 1,0,0,0
+ FILEVERSION 2,0,0,0
+ PRODUCTVERSION 2,0,0,0
  FILEFLAGSMASK 0x17L
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -21,12 +21,12 @@ BEGIN
         BLOCK "000004b0"
         BEGIN
             VALUE "FileDescription", "XDelta patching Utility"
-            VALUE "FileVersion", "1, 0, 0, 0"
+            VALUE "FileVersion", "2, 0, 0, 0"
             VALUE "InternalName", "DeltaPatcher"
-            VALUE "LegalCopyright", "Copyright (C) 2010 Phoenix"
+            VALUE "LegalCopyright", "Copyright (C) 2015 Phoenix"
             VALUE "OriginalFilename", "DeltaPatcher.exe"
             VALUE "ProductName", "Delta Patcher"
-            VALUE "ProductVersion", "1, 0, 0, 0"
+            VALUE "ProductVersion", "2, 0, 0, 0"
         END
     END
     BLOCK "VarFileInfo"
