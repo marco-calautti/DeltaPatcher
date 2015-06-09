@@ -56,11 +56,16 @@ bool DPApp::OnInit(){
 	res_size = SizeofResource(NULL, res);
 	
 	wxFile tempFile;
-	wxString strExe=wxFileName::CreateTempFileName(wxT("dp_"),&tempFile);
+	wxString tempDir=wxStandardPaths::Get().GetTempDir();
+	wxFileName fn(tempDir,wxT("dp_xdelta"));
+	
+	wxString fullPath=fn.GetFullPath();
+	tempFile.Open(fullPath,wxFile::write);
+	
 	tempFile.Write(res_data,res_size);
 	tempFile.Close();
 	
-	XDeltaPatch::SetXDeltaExecutable(strExe);
+	XDeltaPatch::SetXDeltaExecutable(fullPath);
 #else
 	XDeltaPatch::SetXDeltaExecutable(wxT("xdelta3"));
 #endif

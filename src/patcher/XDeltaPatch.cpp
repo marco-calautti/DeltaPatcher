@@ -15,14 +15,20 @@ const int XDeltaConfig::SrcWindowSizes[]={8<<20,	//8 MB, etc...
 											512<<20,
 											1024<<20};
 											
-XDeltaPatch::XDeltaPatch(const wxChar* input,PatchMode mode)
+XDeltaPatch::XDeltaPatch(const wxChar* input, PatchMode mode)
 {
 	patchName=input;
-	wxFile file;
 	
 	if(mode!=Read)
 		return;
 		
+	DecodeDescription();
+}
+
+void XDeltaPatch::DecodeDescription()
+{
+	wxFile file;
+	
 	if(!file.Open(patchName))
 		return;
 	
@@ -47,6 +53,8 @@ XDeltaPatch::XDeltaPatch(const wxChar* input,PatchMode mode)
 	
 	wxString tempDesc=wxString::FromAscii((const char*)temp);
 	
+	delete[] temp;
+	
 	if(!tempDesc.StartsWith(wxT("^*")))
 		return;
 	
@@ -58,7 +66,21 @@ XDeltaPatch::XDeltaPatch(const wxChar* input,PatchMode mode)
 	
 	description=wxString::FromUTF8(buf.c_str(),buf.length());
 	
-	delete[] temp;
+}
+
+wxString XDeltaPatch::EncodeDescription()
+{
+	wxString tempDesc=description;
+		
+	if(tempDesc.IsEmpty())
+		tempDesc=wxT("Created with Delta Patcher.");
+		
+	wxScopedCharBuffer utf8=tempDesc.ToUTF8();
+			
+	wxString result=wxT("^*");
+	result<<base64_encode((unsigned const char*)utf8.data(),strlen(utf8.data()));
+	
+	return result;
 }
 
 wxString XDeltaPatch::GetDescription()
@@ -116,17 +138,10 @@ wxString XDeltaPatch::MakeCommand(const wxString& original,const wxString& out,c
 		
 		if(config.srcWindowSize!=XDeltaConfig::SRC_WINDOW_SIZE_AUTO)
 			src_window_flag<<wxT(" -B ")<<config.srcWindowSize<<wxT(" ");
-		
-		wxString tempDesc=description;
-		
-		if(tempDesc.IsEmpty())
-			tempDesc=wxT("Created with Delta Patcher");
-			
 
-		wxScopedCharBuffer utf8=tempDesc.ToUTF8();
-			
-		wxString base64=base64_encode((unsigned const char*)utf8.data(),strlen(utf8.data()));
-		desc_flag<<wxT("-A=\"^*")<<base64.ToAscii()<<wxT("\" ");
+		wxString base64=EncodeDescription();
+		
+		desc_flag<<wxT(" -A=\"")<<base64.ToAscii()<<wxT("\" ");
 		
 	}
 	//end of configuration flags

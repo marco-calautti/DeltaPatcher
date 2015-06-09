@@ -82,6 +82,9 @@ private:
 	
 	static wxString xdeltaEx;
 	
+	void DecodeDescription();
+	wxString EncodeDescription();
+	
 	int Process(const wxString& original,const wxString& out,const wxString& patch,wxString& message,bool encode);
 	wxString MakeCommand(const wxString& original,const wxString& out,const wxString& patch,bool encode);
 	

@@ -25,7 +25,7 @@ DecodePanel( parent )
 	decodeOptionsButton->SetImageLabel(configBitmap);
 	
 	applyOptionsMenu = new wxMenu();
-	keepOriginalCheck = new wxMenuItem( applyOptionsMenu, wxID_ANY, wxString( _("Keep original file") ) , wxEmptyString, wxITEM_CHECK );
+	keepOriginalCheck = new wxMenuItem( applyOptionsMenu, wxID_ANY, wxString( _("Backup original file") ) , wxEmptyString, wxITEM_CHECK );
 	applyOptionsMenu->Append( keepOriginalCheck );
 	
 	checksumCheck = new wxMenuItem( applyOptionsMenu, wxID_ANY, wxString( _("Checksum validation") ) , wxEmptyString, wxITEM_CHECK );
@@ -91,7 +91,7 @@ void DeltaPatcherDecodePanel::OnApplyPatch( wxCommandEvent& event )
 	wxString ext=fn.GetExt();
 	wxString name=fn.GetName();
 	wxString outFilename;
-	outFilename<<path<<wxFILE_SEP_PATH<<name<<wxT("NEW")<<wxT(".")<<ext;
+	outFilename<<path<<wxFILE_SEP_PATH<<name<<wxT("PATCHED")<<wxT(".")<<ext;
 	
 	logger->Log(Logger::LOG_MESSAGE,_("Applying patch, please wait... (don't panic!)"));
 	

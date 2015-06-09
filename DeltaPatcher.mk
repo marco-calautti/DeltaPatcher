@@ -2,12 +2,12 @@
 ## Auto Generated makefile by CodeLite IDE
 ## any manual changes will be erased      
 ##
-## Release
+## ReleaseDecodeOnly
 ProjectName            :=DeltaPatcher
-ConfigurationName      :=Release
+ConfigurationName      :=ReleaseDecodeOnly
 WorkspacePath          := "C:\Users\Marco\Documents\CodeLite\workspace"
 ProjectPath            := "C:\Users\Marco\Documents\CodeLite\workspace\DeltaPatcher"
-IntermediateDirectory  :=./Release
+IntermediateDirectory  :=./ReleaseDecode
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
@@ -27,8 +27,8 @@ OutputSwitch           :=-o
 LibraryPathSwitch      :=-L
 PreprocessorSwitch     :=-D
 SourceSwitch           :=-c 
-OutputFile             :=./Release/$(ProjectName)
-Preprocessors          :=$(PreprocessorSwitch)__WX__ 
+OutputFile             :=./ReleaseDecode/$(ProjectName)Lite
+Preprocessors          :=$(PreprocessorSwitch)__WX__ $(PreprocessorSwitch)__DP_DECODE_ONLY__ 
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
 PreprocessOnlySwitch   :=-E 
@@ -86,7 +86,7 @@ $(OutputFile): $(IntermediateDirectory)/.d $(Objects)
 	$(LinkerName) $(OutputSwitch)$(OutputFile) @$(ObjectsFileList) $(LibPath) $(Libs) $(LinkOptions)
 
 $(IntermediateDirectory)/.d:
-	@$(MakeDirCommand) "./Release"
+	@$(MakeDirCommand) "./ReleaseDecode"
 
 PreBuild:
 
