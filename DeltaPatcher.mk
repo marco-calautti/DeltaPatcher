@@ -2,12 +2,12 @@
 ## Auto Generated makefile by CodeLite IDE
 ## any manual changes will be erased      
 ##
-## ReleaseDecodeOnly
+## Release
 ProjectName            :=DeltaPatcher
-ConfigurationName      :=ReleaseDecodeOnly
+ConfigurationName      :=Release
 WorkspacePath          := "C:\Users\Marco\Documents\CodeLite\workspace"
 ProjectPath            := "C:\Users\Marco\Documents\CodeLite\workspace\DeltaPatcher"
-IntermediateDirectory  :=./ReleaseDecode
+IntermediateDirectory  :=./Release
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
@@ -27,8 +27,8 @@ OutputSwitch           :=-o
 LibraryPathSwitch      :=-L
 PreprocessorSwitch     :=-D
 SourceSwitch           :=-c 
-OutputFile             :=./ReleaseDecode/$(ProjectName)Lite
-Preprocessors          :=$(PreprocessorSwitch)__WX__ $(PreprocessorSwitch)__DP_DECODE_ONLY__ 
+OutputFile             :=./Release/$(ProjectName)
+Preprocessors          :=$(PreprocessorSwitch)__WX__ 
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
 PreprocessOnlySwitch   :=-E 
@@ -66,7 +66,8 @@ WXWIN:=C:\wxWidgets-3.0.2
 PATH:=$(WXWIN)\lib\gcc_lib;$(PATH)
 WXCFG:=gcc_lib\mswu
 UNIT_TEST_PP_SRC_DIR:=C:\UnitTest++-1.3
-Objects0=$(IntermediateDirectory)/src_DPApp$(ObjectSuffix) $(IntermediateDirectory)/resource.rc$(ObjectSuffix) $(IntermediateDirectory)/patcher_XDeltaPatch$(ObjectSuffix) $(IntermediateDirectory)/gui_dpgui$(ObjectSuffix) $(IntermediateDirectory)/gui_DeltaPatcherDecodePanel$(ObjectSuffix) $(IntermediateDirectory)/gui_DeltaPatcherMainDialog$(ObjectSuffix) $(IntermediateDirectory)/gui_DeltaPatcherEncodePanel$(ObjectSuffix) $(IntermediateDirectory)/gui_DeltaPatcherDropTarget$(ObjectSuffix) $(IntermediateDirectory)/gui_DeltaPatcherAboutDialog$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/src_DPApp$(ObjectSuffix) $(IntermediateDirectory)/resource.rc$(ObjectSuffix) $(IntermediateDirectory)/patcher_XDeltaPatch$(ObjectSuffix) $(IntermediateDirectory)/gui_dpgui$(ObjectSuffix) $(IntermediateDirectory)/gui_DeltaPatcherDecodePanel$(ObjectSuffix) $(IntermediateDirectory)/gui_DeltaPatcherMainDialog$(ObjectSuffix) $(IntermediateDirectory)/gui_DeltaPatcherEncodePanel$(ObjectSuffix) $(IntermediateDirectory)/gui_DeltaPatcherDropTarget$(ObjectSuffix) $(IntermediateDirectory)/gui_DeltaPatcherAboutDialog$(ObjectSuffix) $(IntermediateDirectory)/utils_base64$(ObjectSuffix) \
+	
 
 
 
@@ -85,7 +86,7 @@ $(OutputFile): $(IntermediateDirectory)/.d $(Objects)
 	$(LinkerName) $(OutputSwitch)$(OutputFile) @$(ObjectsFileList) $(LibPath) $(Libs) $(LinkOptions)
 
 $(IntermediateDirectory)/.d:
-	@$(MakeDirCommand) "./ReleaseDecode"
+	@$(MakeDirCommand) "./Release"
 
 PreBuild:
 
@@ -159,6 +160,14 @@ $(IntermediateDirectory)/gui_DeltaPatcherAboutDialog$(DependSuffix): src/gui/Del
 $(IntermediateDirectory)/gui_DeltaPatcherAboutDialog$(PreprocessSuffix): src/gui/DeltaPatcherAboutDialog.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/gui_DeltaPatcherAboutDialog$(PreprocessSuffix) "src/gui/DeltaPatcherAboutDialog.cpp"
 
+$(IntermediateDirectory)/utils_base64$(ObjectSuffix): src/utils/base64.cpp $(IntermediateDirectory)/utils_base64$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Marco/Documents/CodeLite/workspace/DeltaPatcher/src/utils/base64.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/utils_base64$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/utils_base64$(DependSuffix): src/utils/base64.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/utils_base64$(ObjectSuffix) -MF$(IntermediateDirectory)/utils_base64$(DependSuffix) -MM "src/utils/base64.cpp"
+
+$(IntermediateDirectory)/utils_base64$(PreprocessSuffix): src/utils/base64.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/utils_base64$(PreprocessSuffix) "src/utils/base64.cpp"
+
 
 -include $(IntermediateDirectory)/*$(DependSuffix)
 ##
@@ -190,6 +199,9 @@ clean:
 	$(RM) $(IntermediateDirectory)/gui_DeltaPatcherAboutDialog$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/gui_DeltaPatcherAboutDialog$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/gui_DeltaPatcherAboutDialog$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/utils_base64$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/utils_base64$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/utils_base64$(PreprocessSuffix)
 	$(RM) $(OutputFile)
 	$(RM) $(OutputFile).exe
 	$(RM) "../.build-debug/DeltaPatcher"

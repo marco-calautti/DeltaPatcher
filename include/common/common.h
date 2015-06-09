@@ -30,6 +30,6 @@
 #define __DP_DISCLAIMER__ _("This program is free software: you can redistribute it\nand/or modify it under the terms of the GNU General\nPublic License as published by the Free Software Foundation,\nversion 2.0.")
 static const wxString __DP_LICENSE__(rawLicense);
 #define __DP_NAME__ wxT("Delta Patcher")
-#define __DP_WEBSITE__ wxT("http://www.sadnescity.it")
+#define __DP_WEBSITE__ wxT("https://github.com/marco-calautti")
 #define __DP_COPYRIGHT__ wxT("(C) 2015 Phoenix\n<phoenix_87_c@hotmail.com>")
 #endif

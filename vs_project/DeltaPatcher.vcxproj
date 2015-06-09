@@ -23,6 +23,7 @@
     <ClCompile Include="..\src\gui\DeltaPatcherMainDialog.cpp" />
     <ClCompile Include="..\src\gui\dpgui.cpp" />
     <ClCompile Include="..\src\patcher\XDeltaPatch.cpp" />
+    <ClCompile Include="..\src\utils\base64.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\common\common.h" />
@@ -30,6 +31,7 @@
     <ClInclude Include="..\include\common\resource.h" />
     <ClInclude Include="..\include\DPApp.h" />
     <ClInclude Include="..\include\patcher\XDeltaPatch.h" />
+    <ClInclude Include="..\include\utils\base64.h" />
     <ClInclude Include="..\src\gui\DeltaPatcherAboutDialog.h" />
     <ClInclude Include="..\src\gui\DeltaPatcherDecodePanel.h" />
     <ClInclude Include="..\src\gui\DeltaPatcherDropHandler.h" />

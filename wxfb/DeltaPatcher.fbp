@@ -630,7 +630,7 @@
             <property name="minimum_size"></property>
             <property name="name">DecodePanel</property>
             <property name="pos"></property>
-            <property name="size">320,184</property>
+            <property name="size">260,184</property>
             <property name="subclass"></property>
             <property name="tooltip"></property>
             <property name="window_extra_style"></property>

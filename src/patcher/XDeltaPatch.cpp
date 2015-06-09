@@ -3,7 +3,7 @@
 #include <wx/arrstr.h>
 #include <wx/file.h>
 
-#include <wx/base64.h>
+#include <utils/base64.h>
 
 wxString XDeltaPatch::xdeltaEx=wxT("xdelta");
 const int XDeltaConfig::SrcWindowSizes[]={8<<20,	//8 MB, etc...
@@ -41,7 +41,7 @@ XDeltaPatch::XDeltaPatch(const wxChar* input,PatchMode mode)
 		return;
 		
 	char* temp=new char[length+1];
-	
+
 	file.Read((void*)temp,length);
 	temp[length]=0;
 	
@@ -52,14 +52,13 @@ XDeltaPatch::XDeltaPatch(const wxChar* input,PatchMode mode)
 	
 	wxString part=tempDesc.Mid(2);
 	
-	size_t decodedSize=wxBase64DecodedSize(part.Length());
-	char* buf=new char[decodedSize];
+	std::string strPart=std::string(part.mb_str());
 	
-	wxBase64Decode(buf,decodedSize,part);
-	description=wxString::FromUTF8(buf,decodedSize);
+	std::string buf=base64_decode(strPart);
+	
+	description=wxString::FromUTF8(buf.c_str(),buf.length());
 	
 	delete[] temp;
-	delete[] buf;
 }
 
 wxString XDeltaPatch::GetDescription()
@@ -126,7 +125,7 @@ wxString XDeltaPatch::MakeCommand(const wxString& original,const wxString& out,c
 
 		wxScopedCharBuffer utf8=tempDesc.ToUTF8();
 			
-		wxString base64=wxBase64Encode(utf8.data(),strlen(utf8.data()));
+		wxString base64=base64_encode((unsigned const char*)utf8.data(),strlen(utf8.data()));
 		desc_flag<<wxT("-A=\"^*")<<base64.ToAscii()<<wxT("\" ");
 		
 	}

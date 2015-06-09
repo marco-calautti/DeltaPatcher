@@ -120,7 +120,7 @@ class DecodePanel : public wxPanel
 	
 	public:
 		
-		DecodePanel( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 320,184 ), long style = wxTAB_TRAVERSAL ); 
+		DecodePanel( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 260,184 ), long style = wxTAB_TRAVERSAL ); 
 		~DecodePanel();
 	
 };

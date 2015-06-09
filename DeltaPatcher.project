@@ -75,6 +75,9 @@
       <File Name="include/common/COPYING.h"/>
       <File Name="include/common/resource.h"/>
     </VirtualDirectory>
+    <VirtualDirectory Name="utils">
+      <File Name="include/utils/base64.h"/>
+    </VirtualDirectory>
   </VirtualDirectory>
   <VirtualDirectory Name="src">
     <File Name="src/DPApp.cpp"/>
@@ -88,6 +91,9 @@
       <File Name="src/gui/DeltaPatcherEncodePanel.cpp"/>
       <File Name="src/gui/DeltaPatcherDropTarget.cpp"/>
       <File Name="src/gui/DeltaPatcherAboutDialog.cpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="utils">
+      <File Name="src/utils/base64.cpp"/>
     </VirtualDirectory>
   </VirtualDirectory>
   <VirtualDirectory Name="resource">
@@ -115,7 +121,7 @@
       </Compiler>
       <Linker Options="-s;-static-libgcc;-mwindows;$(shell wx-config --debug=yes --libs --unicode=yes)" Required="yes"/>
       <ResourceCompiler Options="$(shell wx-config --rcflags)" Required="yes"/>
-      <General OutputFile="./Debug/dpD.exe" IntermediateDirectory="./Debug" Command="./dpD.exe" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
+      <General OutputFile="./Debug/dpD.exe" IntermediateDirectory="./Debug" Command="./Debug/dpD.exe" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
       </Environment>
@@ -156,7 +162,7 @@
       </Compiler>
       <Linker Options="-s;-static-libgcc;-mwindows;$(shell wx-config --debug=no --libs --unicode=yes)" Required="yes"/>
       <ResourceCompiler Options="$(shell wx-config --rcflags)" Required="yes"/>
-      <General OutputFile="./Release/$(ProjectName)" IntermediateDirectory="./Release" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
+      <General OutputFile="./Release/$(ProjectName)" IntermediateDirectory="./Release" Command="./Release/$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
       </Environment>
@@ -198,7 +204,7 @@
       </Compiler>
       <Linker Options="-s;-static-libgcc;-mwindows;$(shell wx-config --debug=no --libs --unicode=yes)" Required="yes"/>
       <ResourceCompiler Options="$(shell wx-config --rcflags)" Required="yes"/>
-      <General OutputFile="./ReleaseDecode/$(ProjectName)Lite" IntermediateDirectory="./ReleaseDecode" Command="./$(ProjectName)Lite" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
+      <General OutputFile="./ReleaseDecode/$(ProjectName)Lite" IntermediateDirectory="./ReleaseDecode" Command="./ReleaseDecode/$(ProjectName)Lite" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
       </Environment>
@@ -239,7 +245,7 @@
       </Compiler>
       <Linker Options="-s;-static-libgcc;-mwindows;$(shell wx-config --debug=no --libs --unicode=yes)" Required="yes"/>
       <ResourceCompiler Options="$(shell wx-config --rcflags)" Required="no"/>
-      <General OutputFile="./Release/$(ProjectName)" IntermediateDirectory="./Release" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
+      <General OutputFile="./Release/$(ProjectName)" IntermediateDirectory="./Release" Command="./Release/$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
       </Environment>
@@ -281,7 +287,7 @@
       </Compiler>
       <Linker Options="-s;-static-libgcc;-mwindows;$(shell wx-config --debug=no --libs --unicode=yes)" Required="yes"/>
       <ResourceCompiler Options="$(shell wx-config --rcflags)" Required="no"/>
-      <General OutputFile="./ReleaseDecode/$(ProjectName)Lite" IntermediateDirectory="./ReleaseDecode" Command="./$(ProjectName)Lite" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
+      <General OutputFile="./ReleaseDecode/$(ProjectName)Lite" IntermediateDirectory="./ReleaseDecode" Command="./ReleaseDecode/$(ProjectName)Lite" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
       </Environment>
