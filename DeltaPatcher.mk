@@ -2,12 +2,12 @@
 ## Auto Generated makefile by CodeLite IDE
 ## any manual changes will be erased      
 ##
-## Debug
+## ReleaseDecodeOnly
 ProjectName            :=DeltaPatcher
-ConfigurationName      :=Debug
+ConfigurationName      :=ReleaseDecodeOnly
 WorkspacePath          := "C:\Users\Marco\Documents\CodeLite\workspace"
 ProjectPath            := "C:\Users\Marco\Documents\CodeLite\workspace\DeltaPatcher"
-IntermediateDirectory  :=./Debug
+IntermediateDirectory  :=./ReleaseDecode
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
@@ -15,45 +15,45 @@ CurrentFileFullPath    :=
 User                   :=Marco
 Date                   :=06/09/15
 CodeLitePath           :="C:\Program Files (x86)\CodeLite"
-LinkerName             :=link.exe  /nologo
-SharedObjectLinkerName :=link.exe /DLL  /nologo
-ObjectSuffix           :=.obj
-DependSuffix           :=
-PreprocessSuffix       :=
-DebugSwitch            :=/Zi 
-IncludeSwitch          :=/I
-LibrarySwitch          := 
-OutputSwitch           :=/OUT:
-LibraryPathSwitch      :=/LIBPATH:
-PreprocessorSwitch     :=/D
-SourceSwitch           :=
-OutputFile             :=./workingdir/dpD.exe
-Preprocessors          :=$(PreprocessorSwitch)__WX__ 
-ObjectSwitch           :=/Fo
-ArchiveOutputSwitch    :=/OUT:
-PreprocessOnlySwitch   :=
+LinkerName             :=g++
+SharedObjectLinkerName :=g++ -shared -fPIC
+ObjectSuffix           :=.o
+DependSuffix           :=.o.d
+PreprocessSuffix       :=.o.i
+DebugSwitch            :=-gstab
+IncludeSwitch          :=-I
+LibrarySwitch          :=-l
+OutputSwitch           :=-o 
+LibraryPathSwitch      :=-L
+PreprocessorSwitch     :=-D
+SourceSwitch           :=-c 
+OutputFile             :=./ReleaseDecode/$(ProjectName)Lite
+Preprocessors          :=$(PreprocessorSwitch)__WX__ $(PreprocessorSwitch)__DP_DECODE_ONLY__ 
+ObjectSwitch           :=-o 
+ArchiveOutputSwitch    := 
+PreprocessOnlySwitch   :=-E 
 ObjectsFileList        :="DeltaPatcher.txt"
 PCHCompileFlags        :=
 MakeDirCommand         :=makedir
 RcCmpOptions           := $(shell wx-config --rcflags)
 RcCompilerName         :=windres
-LinkOptions            :=  -mwindows $(shell wx-config --debug=yes --libs --unicode=yes)
-IncludePath            := $(IncludeSwitch)""C:/Program Files/Microsoft Visual Studio 8/VC/include"" $(IncludeSwitch).  $(IncludeSwitch). $(IncludeSwitch)./include $(IncludeSwitch)./3rdparty $(IncludeSwitch)./src 
+LinkOptions            :=  -s -static-libgcc -mwindows $(shell wx-config --debug=no --libs --unicode=yes)
+IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch)./include $(IncludeSwitch)./3rdparty $(IncludeSwitch)./src 
 IncludePCH             := 
 RcIncludePath          := 
 Libs                   := 
 ArLibs                 :=  
-LibPath                :=$(LibraryPathSwitch)""C:/Program Files/Microsoft Visual Studio 8/VC/lib""  $(LibraryPathSwitch). 
+LibPath                := $(LibraryPathSwitch). 
 
 ##
 ## Common variables
 ## AR, CXX, CC, AS, CXXFLAGS and CFLAGS can be overriden using an environment variables
 ##
-AR       := lib.exe  /nologo
-CXX      := cl.exe /nologo /c
-CC       := cl.exe /nologo /c
-CXXFLAGS :=  -g $(shell wx-config --cxxflags --unicode=yes --debug=yes) $(Preprocessors)
-CFLAGS   :=  -g $(shell wx-config --cxxflags --unicode=yes --debug=yes) $(Preprocessors)
+AR       := ar rcus
+CXX      := g++
+CC       := gcc
+CXXFLAGS :=  -O2 $(shell wx-config --cxxflags --unicode=yes --debug=no) $(Preprocessors)
+CFLAGS   :=  -O2 $(shell wx-config --cxxflags --unicode=yes --debug=no) $(Preprocessors)
 ASFLAGS  := 
 AS       := as
 
@@ -85,7 +85,7 @@ $(OutputFile): $(IntermediateDirectory)/.d $(Objects)
 	$(LinkerName) $(OutputSwitch)$(OutputFile) @$(ObjectsFileList) $(LibPath) $(Libs) $(LinkOptions)
 
 $(IntermediateDirectory)/.d:
-	@$(MakeDirCommand) "./Debug"
+	@$(MakeDirCommand) "./ReleaseDecode"
 
 PreBuild:
 
@@ -93,24 +93,74 @@ PreBuild:
 ##
 ## Objects
 ##
-$(IntermediateDirectory)/src_DPApp$(ObjectSuffix): src/DPApp.cpp 
+$(IntermediateDirectory)/src_DPApp$(ObjectSuffix): src/DPApp.cpp $(IntermediateDirectory)/src_DPApp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Marco/Documents/CodeLite/workspace/DeltaPatcher/src/DPApp.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_DPApp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/src_DPApp$(DependSuffix): src/DPApp.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_DPApp$(ObjectSuffix) -MF$(IntermediateDirectory)/src_DPApp$(DependSuffix) -MM "src/DPApp.cpp"
+
+$(IntermediateDirectory)/src_DPApp$(PreprocessSuffix): src/DPApp.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_DPApp$(PreprocessSuffix) "src/DPApp.cpp"
+
 $(IntermediateDirectory)/resource.rc$(ObjectSuffix): resource.rc
 	$(RcCompilerName) -i "C:/Users/Marco/Documents/CodeLite/workspace/DeltaPatcher/resource.rc" $(RcCmpOptions)   $(ObjectSwitch)$(IntermediateDirectory)/resource.rc$(ObjectSuffix) $(RcIncludePath)
-$(IntermediateDirectory)/patcher_XDeltaPatch$(ObjectSuffix): src/patcher/XDeltaPatch.cpp 
+$(IntermediateDirectory)/patcher_XDeltaPatch$(ObjectSuffix): src/patcher/XDeltaPatch.cpp $(IntermediateDirectory)/patcher_XDeltaPatch$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Marco/Documents/CodeLite/workspace/DeltaPatcher/src/patcher/XDeltaPatch.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/patcher_XDeltaPatch$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/gui_dpgui$(ObjectSuffix): src/gui/dpgui.cpp 
+$(IntermediateDirectory)/patcher_XDeltaPatch$(DependSuffix): src/patcher/XDeltaPatch.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/patcher_XDeltaPatch$(ObjectSuffix) -MF$(IntermediateDirectory)/patcher_XDeltaPatch$(DependSuffix) -MM "src/patcher/XDeltaPatch.cpp"
+
+$(IntermediateDirectory)/patcher_XDeltaPatch$(PreprocessSuffix): src/patcher/XDeltaPatch.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/patcher_XDeltaPatch$(PreprocessSuffix) "src/patcher/XDeltaPatch.cpp"
+
+$(IntermediateDirectory)/gui_dpgui$(ObjectSuffix): src/gui/dpgui.cpp $(IntermediateDirectory)/gui_dpgui$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Marco/Documents/CodeLite/workspace/DeltaPatcher/src/gui/dpgui.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/gui_dpgui$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/gui_DeltaPatcherDecodePanel$(ObjectSuffix): src/gui/DeltaPatcherDecodePanel.cpp 
+$(IntermediateDirectory)/gui_dpgui$(DependSuffix): src/gui/dpgui.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/gui_dpgui$(ObjectSuffix) -MF$(IntermediateDirectory)/gui_dpgui$(DependSuffix) -MM "src/gui/dpgui.cpp"
+
+$(IntermediateDirectory)/gui_dpgui$(PreprocessSuffix): src/gui/dpgui.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/gui_dpgui$(PreprocessSuffix) "src/gui/dpgui.cpp"
+
+$(IntermediateDirectory)/gui_DeltaPatcherDecodePanel$(ObjectSuffix): src/gui/DeltaPatcherDecodePanel.cpp $(IntermediateDirectory)/gui_DeltaPatcherDecodePanel$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Marco/Documents/CodeLite/workspace/DeltaPatcher/src/gui/DeltaPatcherDecodePanel.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/gui_DeltaPatcherDecodePanel$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/gui_DeltaPatcherMainDialog$(ObjectSuffix): src/gui/DeltaPatcherMainDialog.cpp 
+$(IntermediateDirectory)/gui_DeltaPatcherDecodePanel$(DependSuffix): src/gui/DeltaPatcherDecodePanel.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/gui_DeltaPatcherDecodePanel$(ObjectSuffix) -MF$(IntermediateDirectory)/gui_DeltaPatcherDecodePanel$(DependSuffix) -MM "src/gui/DeltaPatcherDecodePanel.cpp"
+
+$(IntermediateDirectory)/gui_DeltaPatcherDecodePanel$(PreprocessSuffix): src/gui/DeltaPatcherDecodePanel.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/gui_DeltaPatcherDecodePanel$(PreprocessSuffix) "src/gui/DeltaPatcherDecodePanel.cpp"
+
+$(IntermediateDirectory)/gui_DeltaPatcherMainDialog$(ObjectSuffix): src/gui/DeltaPatcherMainDialog.cpp $(IntermediateDirectory)/gui_DeltaPatcherMainDialog$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Marco/Documents/CodeLite/workspace/DeltaPatcher/src/gui/DeltaPatcherMainDialog.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/gui_DeltaPatcherMainDialog$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/gui_DeltaPatcherEncodePanel$(ObjectSuffix): src/gui/DeltaPatcherEncodePanel.cpp 
+$(IntermediateDirectory)/gui_DeltaPatcherMainDialog$(DependSuffix): src/gui/DeltaPatcherMainDialog.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/gui_DeltaPatcherMainDialog$(ObjectSuffix) -MF$(IntermediateDirectory)/gui_DeltaPatcherMainDialog$(DependSuffix) -MM "src/gui/DeltaPatcherMainDialog.cpp"
+
+$(IntermediateDirectory)/gui_DeltaPatcherMainDialog$(PreprocessSuffix): src/gui/DeltaPatcherMainDialog.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/gui_DeltaPatcherMainDialog$(PreprocessSuffix) "src/gui/DeltaPatcherMainDialog.cpp"
+
+$(IntermediateDirectory)/gui_DeltaPatcherEncodePanel$(ObjectSuffix): src/gui/DeltaPatcherEncodePanel.cpp $(IntermediateDirectory)/gui_DeltaPatcherEncodePanel$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Marco/Documents/CodeLite/workspace/DeltaPatcher/src/gui/DeltaPatcherEncodePanel.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/gui_DeltaPatcherEncodePanel$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/gui_DeltaPatcherDropTarget$(ObjectSuffix): src/gui/DeltaPatcherDropTarget.cpp 
+$(IntermediateDirectory)/gui_DeltaPatcherEncodePanel$(DependSuffix): src/gui/DeltaPatcherEncodePanel.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/gui_DeltaPatcherEncodePanel$(ObjectSuffix) -MF$(IntermediateDirectory)/gui_DeltaPatcherEncodePanel$(DependSuffix) -MM "src/gui/DeltaPatcherEncodePanel.cpp"
+
+$(IntermediateDirectory)/gui_DeltaPatcherEncodePanel$(PreprocessSuffix): src/gui/DeltaPatcherEncodePanel.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/gui_DeltaPatcherEncodePanel$(PreprocessSuffix) "src/gui/DeltaPatcherEncodePanel.cpp"
+
+$(IntermediateDirectory)/gui_DeltaPatcherDropTarget$(ObjectSuffix): src/gui/DeltaPatcherDropTarget.cpp $(IntermediateDirectory)/gui_DeltaPatcherDropTarget$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Marco/Documents/CodeLite/workspace/DeltaPatcher/src/gui/DeltaPatcherDropTarget.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/gui_DeltaPatcherDropTarget$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/gui_DeltaPatcherAboutDialog$(ObjectSuffix): src/gui/DeltaPatcherAboutDialog.cpp 
+$(IntermediateDirectory)/gui_DeltaPatcherDropTarget$(DependSuffix): src/gui/DeltaPatcherDropTarget.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/gui_DeltaPatcherDropTarget$(ObjectSuffix) -MF$(IntermediateDirectory)/gui_DeltaPatcherDropTarget$(DependSuffix) -MM "src/gui/DeltaPatcherDropTarget.cpp"
+
+$(IntermediateDirectory)/gui_DeltaPatcherDropTarget$(PreprocessSuffix): src/gui/DeltaPatcherDropTarget.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/gui_DeltaPatcherDropTarget$(PreprocessSuffix) "src/gui/DeltaPatcherDropTarget.cpp"
+
+$(IntermediateDirectory)/gui_DeltaPatcherAboutDialog$(ObjectSuffix): src/gui/DeltaPatcherAboutDialog.cpp $(IntermediateDirectory)/gui_DeltaPatcherAboutDialog$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Marco/Documents/CodeLite/workspace/DeltaPatcher/src/gui/DeltaPatcherAboutDialog.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/gui_DeltaPatcherAboutDialog$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/gui_DeltaPatcherAboutDialog$(DependSuffix): src/gui/DeltaPatcherAboutDialog.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/gui_DeltaPatcherAboutDialog$(ObjectSuffix) -MF$(IntermediateDirectory)/gui_DeltaPatcherAboutDialog$(DependSuffix) -MM "src/gui/DeltaPatcherAboutDialog.cpp"
+
+$(IntermediateDirectory)/gui_DeltaPatcherAboutDialog$(PreprocessSuffix): src/gui/DeltaPatcherAboutDialog.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/gui_DeltaPatcherAboutDialog$(PreprocessSuffix) "src/gui/DeltaPatcherAboutDialog.cpp"
+
+
+-include $(IntermediateDirectory)/*$(DependSuffix)
 ##
 ## Clean
 ##
