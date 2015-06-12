@@ -13,7 +13,7 @@
 //If not, see http://www.gnu.org/licenses/ 
 
 //Source code and contact information can be found at 
-//http://www.sadnescity.it
+//https://github.com/marco-calautti
 
 
 #ifndef __DP_COMMON__
