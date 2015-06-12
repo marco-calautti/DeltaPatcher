@@ -73,8 +73,9 @@ bool DPApp::OnInit(){
 	DeltaPatcherMainDialog* dialog=new DeltaPatcherMainDialog(NULL,patchName);
 	
 	SetTopWindow(dialog);
+	
 	dialog->Show();
-
+	
 	return true;
 }
 

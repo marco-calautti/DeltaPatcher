@@ -40,19 +40,22 @@ MainDialog( parent ), decodeMode(true)
 	SetTitle(_("Delta Patcher"));
 #endif
 
-	//preparing default panel
+	
+	nullPanel->Show(false);
+	
+		//preparing default panel
 	decodePanel=new DeltaPatcherDecodePanel(this,this);
 	if(!wxIsEmpty(patchName))
 		decodePanel->SetPatchFile(patchName);
 		
-	nullPanel->Show(false);
-	panelSizer->Add( decodePanel, 1, wxEXPAND | wxALL, 5 );
 	decodePanel->Show();
+	panelSizer->Add( decodePanel, 1, wxEXPAND | wxALL, 5 );
+	decodePanel->GetSizer()->Fit(decodePanel);
 	
 	//preparing encode panel
 	encodePanel=new DeltaPatcherEncodePanel(this,this);
-	panelSizer->Add( encodePanel, 1, wxEXPAND | wxALL, 5 );
 	encodePanel->Show(false);
+	panelSizer->Add( encodePanel, 1, wxEXPAND | wxALL, 5 );
 	
 	//preparing log area
 	logCtrl->SetEditable(false);
@@ -61,11 +64,18 @@ MainDialog( parent ), decodeMode(true)
 #ifdef __DP_DECODE_ONLY__
 	operationButton->Show(false);
 #endif
-	
+
+	this->Update();
 	this->Fit();
+
 }
 
 void DeltaPatcherMainDialog::OnShowHideLog( wxCommandEvent& event )
+{
+	ShowHideLog();
+}
+
+void DeltaPatcherMainDialog::ShowHideLog()
 {
 	if(mainSizer->Detach(logBox)){ //hide log
 		logBox->GetStaticBox()->Show(false);
@@ -81,7 +91,6 @@ void DeltaPatcherMainDialog::OnShowHideLog( wxCommandEvent& event )
 	Update();
 	Fit();
 }
-
 void DeltaPatcherMainDialog::OnMainDialogClose( wxCloseEvent& event )
 {
 	Destroy();

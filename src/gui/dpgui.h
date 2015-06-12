@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Feb 26 2014)
+// C++ code generated with wxFormBuilder (version Jun 12 2015)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
@@ -43,6 +43,7 @@ class MainDialog : public wxDialog
 	private:
 		
 		// Private event handlers
+		void _wxFB_OnActivate( wxActivateEvent& event ){ OnActivate( event ); }
 		void _wxFB_OnMainDialogClose( wxCloseEvent& event ){ OnMainDialogClose( event ); }
 		void _wxFB_OnClickAbout( wxCommandEvent& event ){ OnClickAbout( event ); }
 		void _wxFB_OnOperationSelected( wxCommandEvent& event ){ OnOperationSelected( event ); }
@@ -67,6 +68,7 @@ class MainDialog : public wxDialog
 		wxTextCtrl* logCtrl;
 		
 		// Virtual event handlers, overide them in your derived class
+		virtual void OnActivate( wxActivateEvent& event ) { event.Skip(); }
 		virtual void OnMainDialogClose( wxCloseEvent& event ) { event.Skip(); }
 		virtual void OnClickAbout( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnOperationSelected( wxCommandEvent& event ) { event.Skip(); }
@@ -75,7 +77,7 @@ class MainDialog : public wxDialog
 	
 	public:
 		
-		MainDialog( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Delta Patcher"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 504,321 ), long style = wxCAPTION|wxCLOSE_BOX|wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER ); 
+		MainDialog( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Delta Patcher"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 504,-1 ), long style = wxCAPTION|wxCLOSE_BOX|wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER ); 
 		~MainDialog();
 	
 };
@@ -119,6 +121,7 @@ class DecodePanel : public wxPanel
 		
 	
 	public:
+		wxBoxSizer* decodeMainSizer;
 		
 		DecodePanel( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 260,184 ), long style = wxTAB_TRAVERSAL ); 
 		~DecodePanel();
@@ -171,7 +174,7 @@ class EncodePanel : public wxPanel
 	
 	public:
 		
-		EncodePanel( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 320,405 ), long style = wxTAB_TRAVERSAL ); 
+		EncodePanel( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 320,407 ), long style = wxTAB_TRAVERSAL ); 
 		~EncodePanel();
 	
 };

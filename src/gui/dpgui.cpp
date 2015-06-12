@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Feb 26 2014)
+// C++ code generated with wxFormBuilder (version Jun 12 2015)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
@@ -10,6 +10,7 @@
 ///////////////////////////////////////////////////////////////////////////
 
 BEGIN_EVENT_TABLE( MainDialog, wxDialog )
+	EVT_ACTIVATE( MainDialog::_wxFB_OnActivate )
 	EVT_CLOSE( MainDialog::_wxFB_OnMainDialogClose )
 	EVT_BUTTON( wxID_ABOUT, MainDialog::_wxFB_OnClickAbout )
 	EVT_BUTTON( wxID_OPERATION_BUTTON, MainDialog::_wxFB_OnOperationSelected )
@@ -26,7 +27,7 @@ MainDialog::MainDialog( wxWindow* parent, wxWindowID id, const wxString& title, 
 	
 	panelSizer = new wxBoxSizer( wxVERTICAL );
 	
-	nullPanel = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxSize( -1,-1 ), wxTAB_TRAVERSAL );
+	nullPanel = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxSize( 260,184 ), wxTAB_TRAVERSAL );
 	panelSizer->Add( nullPanel, 1, wxEXPAND | wxALL, 5 );
 	
 	
@@ -71,8 +72,7 @@ MainDialog::MainDialog( wxWindow* parent, wxWindowID id, const wxString& title, 
 	logBox = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Log:") ), wxVERTICAL );
 	
 	logCtrl = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 350,-1 ), wxHSCROLL|wxTE_MULTILINE|wxTE_WORDWRAP );
-	logCtrl->SetMaxLength( 0 ); 
-	logBox->Add( logCtrl, 1, wxALL|wxEXPAND, 2 );
+	logBox->Add( logCtrl, 1, wxALL|wxEXPAND, 5 );
 	
 	
 	mainSizer->Add( logBox, 1, wxALL|wxEXPAND, 5 );
@@ -97,8 +97,7 @@ END_EVENT_TABLE()
 
 DecodePanel::DecodePanel( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style ) : wxPanel( parent, id, pos, size, style )
 {
-	wxBoxSizer* bSizer1;
-	bSizer1 = new wxBoxSizer( wxVERTICAL );
+	decodeMainSizer = new wxBoxSizer( wxVERTICAL );
 	
 	wxStaticBoxSizer* sbSizer1;
 	sbSizer1 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Original file:") ), wxHORIZONTAL );
@@ -113,7 +112,7 @@ DecodePanel::DecodePanel( wxWindow* parent, wxWindowID id, const wxPoint& pos, c
 	sbSizer1->Add( originalButton, 0, wxALL, 5 );
 	
 	
-	bSizer1->Add( sbSizer1, 0, wxBOTTOM|wxEXPAND, 2 );
+	decodeMainSizer->Add( sbSizer1, 0, wxBOTTOM|wxEXPAND, 2 );
 	
 	wxStaticBoxSizer* sbSizer3;
 	sbSizer3 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("XDelta patch:") ), wxHORIZONTAL );
@@ -128,27 +127,27 @@ DecodePanel::DecodePanel( wxWindow* parent, wxWindowID id, const wxPoint& pos, c
 	sbSizer3->Add( patchButton, 0, wxALL, 5 );
 	
 	
-	bSizer1->Add( sbSizer3, 0, wxBOTTOM|wxEXPAND|wxTOP, 2 );
+	decodeMainSizer->Add( sbSizer3, 0, wxBOTTOM|wxEXPAND|wxTOP, 2 );
 	
-	wxBoxSizer* bSizer4;
-	bSizer4 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* decodeBottomSizer;
+	decodeBottomSizer = new wxBoxSizer( wxHORIZONTAL );
 	
 	applyButton = new wxButton( this, wxID_DECODE_APPLY, _("Apply patch"), wxDefaultPosition, wxDefaultSize, 0 );
 	applyButton->SetDefault(); 
 	applyButton->SetToolTip( _("Applies the selected patch to the given file.") );
 	
-	bSizer4->Add( applyButton, 1, wxALIGN_CENTER|wxALL|wxEXPAND, 6 );
+	decodeBottomSizer->Add( applyButton, 1, wxALIGN_CENTER|wxALL|wxEXPAND, 6 );
 	
 	decodeOptionsButton = new wxBitmapButton( this, wxID_DECODE_OPTIONS_BUTTON, wxNullBitmap, wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW );
 	decodeOptionsButton->SetToolTip( _("Changes settings for patch application.") );
 	
-	bSizer4->Add( decodeOptionsButton, 0, wxALIGN_CENTER_VERTICAL|wxBOTTOM|wxRIGHT|wxTOP, 5 );
+	decodeBottomSizer->Add( decodeOptionsButton, 0, wxALIGN_CENTER_VERTICAL|wxBOTTOM|wxRIGHT|wxTOP, 5 );
 	
 	
-	bSizer1->Add( bSizer4, 0, wxEXPAND|wxTOP, 2 );
+	decodeMainSizer->Add( decodeBottomSizer, 0, wxEXPAND|wxTOP, 2 );
 	
 	
-	this->SetSizer( bSizer1 );
+	this->SetSizer( decodeMainSizer );
 	this->Layout();
 }
 
@@ -275,20 +274,32 @@ AboutDialog::AboutDialog( wxWindow* parent, wxWindowID id, const wxString& title
 	wxBoxSizer* bSizer17;
 	bSizer17 = new wxBoxSizer( wxVERTICAL );
 	
+	wxBoxSizer* bSizer19;
+	bSizer19 = new wxBoxSizer( wxHORIZONTAL );
+	
 	nameAndVerText = new wxStaticText( aboutPage, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE );
 	nameAndVerText->Wrap( -1 );
 	nameAndVerText->SetFont( wxFont( wxNORMAL_FONT->GetPointSize(), 70, 90, 92, false, wxEmptyString ) );
 	
-	bSizer17->Add( nameAndVerText, 0, wxALIGN_CENTER|wxEXPAND|wxTOP, 5 );
+	bSizer19->Add( nameAndVerText, 0, wxALIGN_CENTER|wxEXPAND|wxTOP, 5 );
+	
+	
+	bSizer17->Add( bSizer19, 0, wxALIGN_CENTER, 5 );
+	
+	wxBoxSizer* bSizer181;
+	bSizer181 = new wxBoxSizer( wxHORIZONTAL );
 	
 	copyrightText = new wxStaticText( aboutPage, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE );
 	copyrightText->Wrap( -1 );
-	bSizer17->Add( copyrightText, 0, wxALL|wxEXPAND, 5 );
+	bSizer181->Add( copyrightText, 0, wxALL|wxEXPAND, 5 );
+	
+	
+	bSizer17->Add( bSizer181, 0, wxALIGN_CENTER, 5 );
 	
 	wxBoxSizer* bSizer171;
 	bSizer171 = new wxBoxSizer( wxHORIZONTAL );
 	
-	siteText = new wxHyperlinkCtrl( aboutPage, wxID_ANY, wxEmptyString, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxHL_ALIGN_CENTRE );
+	siteText = new wxHyperlinkCtrl( aboutPage, wxID_ANY, _("http://github.com/marco-calautti"), wxEmptyString, wxDefaultPosition, wxDefaultSize, wxHL_ALIGN_CENTRE );
 	bSizer171->Add( siteText, 0, wxALIGN_CENTER|wxALL|wxEXPAND, 2 );
 	
 	
@@ -314,7 +325,6 @@ AboutDialog::AboutDialog( wxWindow* parent, wxWindowID id, const wxString& title
 	bSizer18 = new wxBoxSizer( wxVERTICAL );
 	
 	licenseText = new wxTextCtrl( licensePage, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_CENTRE|wxTE_MULTILINE );
-	licenseText->SetMaxLength( 0 ); 
 	bSizer18->Add( licenseText, 1, wxALL|wxEXPAND, 5 );
 	
 	
