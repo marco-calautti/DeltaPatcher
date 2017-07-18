@@ -1,4 +1,4 @@
-DeltaPatcher
+DeltaPatcher [![Codacy Badge](https://api.codacy.com/project/badge/Grade/524960d735d24d49931e906444cf9267)](https://www.codacy.com/app/marco-calautti/DeltaPatcher?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=marco-calautti/DeltaPatcher&amp;utm_campaign=Badge_Grade)
 ============
 
 Delta Patcher is yet another frontend to the
