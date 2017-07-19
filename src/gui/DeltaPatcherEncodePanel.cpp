@@ -2,10 +2,37 @@
 #include <wx/filename.h>
 #include <wx/filedlg.h>
 #include "DeltaPatcherEncodePanel.h"
+#include "DeltaPatcherDropHandler.h"
+#include "DeltaPatcherDropTarget.h"
 
 #include <gui/icons/open.xpm>
 #include <gui/icons/save.xpm>
 #include <gui/icons/config.xpm>
+
+class EncodePanelDropHandler : public DeltaPatcherDropHandler
+{
+private:
+	DeltaPatcherEncodePanel* panel;
+	bool original;
+public:
+	EncodePanelDropHandler(DeltaPatcherEncodePanel* encodePanel, bool dropOnOriginal) :
+		panel(encodePanel), original(dropOnOriginal)
+	{
+	}
+
+	virtual bool HandleFileDrop(const wxArrayString& filenames)
+	{
+		if (filenames.GetCount()>1) return false;
+		wxString file = filenames[0];
+
+		if (original)
+			panel->SetOriginalFile(file);
+		else
+			panel->SetModifiedFile(file);
+
+		return true;
+	}
+};
 
 DeltaPatcherEncodePanel::DeltaPatcherEncodePanel( wxWindow* parent, Logger* l )
 :
@@ -13,6 +40,11 @@ EncodePanel( parent )
 {
 	logger=l;
 	
+	EncodePanelDropHandler* originalDropHandler = new EncodePanelDropHandler(this, true);
+	EncodePanelDropHandler* modifiedDropHandler = new EncodePanelDropHandler(this, false);
+	originalField->SetDropTarget(new DeltaPatcherDropTarget(originalDropHandler));
+	modifiedField->SetDropTarget(new DeltaPatcherDropTarget(modifiedDropHandler));
+
 	wxBitmap openBitmap;
 	openBitmap.CopyFromIcon(wxIcon(open_xpm));
 	originalButton->SetImageLabel(openBitmap);

@@ -1,1 +1,0 @@
-./Release/src_DPApp.o ./Release/resource.rc.o ./Release/patcher_XDeltaPatch.o ./Release/gui_dpgui.o ./Release/gui_DeltaPatcherDecodePanel.o ./Release/gui_DeltaPatcherMainDialog.o ./Release/gui_DeltaPatcherEncodePanel.o ./Release/gui_DeltaPatcherDropTarget.o ./Release/gui_DeltaPatcherAboutDialog.o ./Release/utils_base64.o

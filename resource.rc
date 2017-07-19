@@ -23,7 +23,7 @@ BEGIN
             VALUE "FileDescription", "XDelta patching Utility"
             VALUE "FileVersion", "2, 0, 0, 0"
             VALUE "InternalName", "DeltaPatcher"
-            VALUE "LegalCopyright", "Copyright (C) 2015 Phoenix"
+            VALUE "LegalCopyright", "Copyright (C) 2017 Phoenix"
             VALUE "OriginalFilename", "DeltaPatcher.exe"
             VALUE "ProductName", "Delta Patcher"
             VALUE "ProductVersion", "2, 0, 0, 0"

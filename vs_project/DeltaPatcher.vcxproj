@@ -88,7 +88,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDecodeOnly|Win32'">
     <GenerateManifest>true</GenerateManifest>
-    <TargetName>$(ProjectName)</TargetName>
+    <TargetName>$(ProjectName)Lite</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -124,6 +124,9 @@
     <ProjectReference>
       <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
     </ProjectReference>
+    <PostBuildEvent>
+      <Command>"$(SolutionDir)stuff\utils\mpress.exe" -s "$(SolutionDir)Release\DeltaPatcher.exe"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDecodeOnly|Win32'">
     <ClCompile>
@@ -152,6 +155,9 @@
     <ProjectReference>
       <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
     </ProjectReference>
+    <PostBuildEvent>
+      <Command>"$(SolutionDir)stuff\utils\mpress.exe" -s "$(SolutionDir)ReleaseDecodeOnly\DeltaPatcherLite.exe"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
