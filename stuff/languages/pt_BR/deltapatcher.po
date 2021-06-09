@@ -17,13 +17,13 @@ msgstr ""
 #: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherDecodePanel.cpp:31
 #: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherEncodePanel.cpp:45
 msgid "xdelta patches (*.xdelta)|*.xdelta"
-msgstr ""
+msgstr "patches do xdelta (*.xdelta)|*.xdelta"
 
 #: D:\Documenti\CodeLite
 #: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherDecodePanel.cpp:46
 #: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherEncodePanel.cpp:60
 msgid "Fill all the textboxes first!"
-msgstr "Preencher todos os campos primeiro!"
+msgstr "Preencher todas as caixas de texto primeiro!"
 
 #: D:\Documenti\CodeLite
 #: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherDecodePanel.cpp:46
@@ -36,7 +36,7 @@ msgstr "Aviso"
 #: D:\Documenti\CodeLite
 #: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherDecodePanel.cpp:69
 msgid "Applying patch, please wait... (don't panic!)"
-msgstr "Aplicando patch, aguarde por favor...(Sem pânico!)"
+msgstr "Aplicando o patch, por favor aguarde...(não entre em pânico!)"
 
 #: D:\Documenti\CodeLite
 #: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherDecodePanel.cpp:76
@@ -45,14 +45,14 @@ msgid ""
 "An error has occurred!\n"
 "See log for more information."
 msgstr ""
-"Um erro aconteceu!\n"
-"Veja o  log para maiores informações."
+"Um erro ocorreu!\n"
+"Veja o log pra maiores informações."
 
 #: D:\Documenti\CodeLite
 #: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherDecodePanel.cpp:82
 #: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherDecodePanel.cpp:83
 msgid "Patch successfully applied!"
-msgstr "Patch aplicado com êxito!"
+msgstr "Patch aplicado com sucesso!"
 
 #: D:\Documenti\CodeLite
 #: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherDecodePanel.cpp:83
@@ -65,25 +65,25 @@ msgstr "Aviso"
 #: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherEncodePanel.cpp:96
 #, c-format
 msgid "Patch file \"%s\" selected."
-msgstr "Arquivo Patch \"%s\" selecionado."
+msgstr "Arquivo do patch \"%s\" selecionado."
 
 #: D:\Documenti\CodeLite
 #: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherDecodePanel.cpp:106
 #: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherEncodePanel.cpp:108
 #, c-format
 msgid "Original file \"%s\" selected."
-msgstr "Arquivo Original \"%s\" selecionado."
+msgstr "Arquivo original \"%s\" selecionado."
 
 #: D:\Documenti\CodeLite
 #: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherEncodePanel.cpp:75
 msgid "Creating patch, please wait... (don't panic!)"
-msgstr "Criando patch, Aguade por favor... (sem pânico!)"
+msgstr "Criando o patch, por favor aguarde... (não entre em pânico!)"
 
 #: D:\Documenti\CodeLite
 #: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherEncodePanel.cpp:84
 #: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherEncodePanel.cpp:85
 msgid "Patch successfully created!"
-msgstr "Patch criado com êxito!"
+msgstr "Patch criado com sucesso!"
 
 #: D:\Documenti\CodeLite
 #: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherEncodePanel.cpp:120
@@ -117,17 +117,17 @@ msgstr "<< Esconder log"
 #: Projects\workspace\DeltaPatcher\src/gui/DeltaPatcherMainDialog.cpp:127
 #, c-format
 msgid "[%s] An error has occurred: %s\n"
-msgstr "[%s] Um erro aconteceu: %s\n"
+msgstr "[%s] Um erro ocorreu: %s\n"
 
 #: D:\Documenti\CodeLite
 #: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:36
 msgid "Apply xdelta patch"
-msgstr "Aplicar xdelta patch"
+msgstr "Aplicar patch do xdelta"
 
 #: D:\Documenti\CodeLite
 #: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:36
 msgid "Create xdelta patch"
-msgstr "Criar xdelta patch"
+msgstr "Criar patch do xdelta"
 
 #: D:\Documenti\CodeLite
 #: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:38
@@ -143,7 +143,7 @@ msgstr "Sobre"
 #: D:\Documenti\CodeLite
 #: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:51
 msgid "Associate to xdelta files"
-msgstr "Associar com arquivos xdelta"
+msgstr "Associar com os arquivos xdelta"
 
 #: D:\Documenti\CodeLite
 #: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:55
@@ -159,7 +159,7 @@ msgstr ""
 #: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:91
 #: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:166
 msgid "Original file:"
-msgstr "Abrir arquivo:"
+msgstr "Arquivo original:"
 
 #: D:\Documenti\CodeLite
 #: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:96
@@ -173,7 +173,7 @@ msgstr "Abrir..."
 #: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:102
 #: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:188
 msgid "XDelta patch:"
-msgstr "XDelta patch:"
+msgstr "Patch do xdelta:"
 
 #: D:\Documenti\CodeLite
 #: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:115
@@ -194,7 +194,7 @@ msgstr "Manter arquivo original"
 #: D:\Documenti\CodeLite
 #: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:134
 msgid "Checksum validation"
-msgstr "Validação de Checksum"
+msgstr "Validação do checksum"
 
 #: D:\Documenti\CodeLite
 #: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:177
@@ -214,7 +214,7 @@ msgstr "Criar patch"
 #: D:\Documenti\CodeLite
 #: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:211
 msgid "Compression level:"
-msgstr "Nível de Compressão:"
+msgstr "Nível da compressão:"
 
 #: D:\Documenti\CodeLite
 #: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:215
@@ -269,7 +269,7 @@ msgstr ""
 #: D:\Documenti\CodeLite
 #: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:226
 msgid "Add Checksum to patch"
-msgstr "Adicionar Checksum para o patch"
+msgstr "Adicionar o checksum ao patch"
 
 #: D:\Documenti\CodeLite
 #: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:306
@@ -279,12 +279,12 @@ msgstr "Licença"
 #: D:\Documenti\CodeLite
 #: Projects\workspace\DeltaPatcher\src/gui/dpgui.cpp:313
 msgid "OK"
-msgstr "OK"
+msgstr "Ok"
 
 #: D:\Documenti\CodeLite
 #: Projects\workspace\DeltaPatcher\src/gui/dpgui.h:211
 msgid "About Delta Patcher"
-msgstr "Sobre Delta Patcher"
+msgstr "Sobre o Delta Patcher"
 
 #: D:\Documenti\CodeLite
 #: Projects\workspace\DeltaPatcher\include/common/common.h:28
@@ -294,8 +294,8 @@ msgid ""
 "Public License as published by the Free Software Foundation,\n"
 "version 2.0."
 msgstr ""
-"Este programa é um software gratuíto: você pode redistribuí-lo\n"
-"e/ou modificá-lo sobre os termos geral da Licença Pública da GNU\n"
-"Públicada pela fundação gratuíta de Software,\n"
-"version 2.0."
+"Este programa é um software gratuito: você pode redistribuí-lo\n"
+"e/ou modificá-lo sob os termos da Licença Pública Geral\n"
+"do GNU conforme publicado pela Fundação do Software Livre,\n"
+"versão 2.0."
 
