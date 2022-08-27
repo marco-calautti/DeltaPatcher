@@ -29,6 +29,13 @@ const int XDeltaConfig::SrcWindowSizes[]={8<<20,	//8 MB, etc...
 											512<<20,
 											1024<<20};
 											
+const char* XDeltaConfig::SecondaryCompressions[] = {
+														"lzma",
+														"djw",
+														"fgk",
+														"none"
+};
+
 XDeltaPatch::XDeltaPatch(const wxChar* input, PatchMode mode)
 {
 	patchName=input;
@@ -174,31 +181,34 @@ wxString XDeltaPatch::MakeCommand(const wxString& original,const wxString& out,c
 	wxString command;
 	
 	//preparing configuration flags
-	wxString checksum_flag=config.enableChecksum? wxT(" ") : wxT(" -n ");
-	wxString overwrite_flag=config.overwriteOutput? wxT(" -f ") : wxT(" ");
+	wxString checksum_flag=config.enableChecksum? wxT(" ") : wxT("-n ");
+	wxString overwrite_flag=config.overwriteOutput? wxT("-f ") : wxT(" ");
 	wxString compression_flag;
+	wxString secondary_compression_flag;
 	wxString src_window_flag;
 	wxString desc_flag;
 	
 	if(encode){
 		wxString strLvl=wxString::Format(wxT("%i"),config.compressionLevel);
-		compression_flag<<wxT(" -")<<strLvl<<wxT(" ");
+		compression_flag<<wxT("-")<<strLvl<<wxT(" ");
+		
+		secondary_compression_flag << wxT("-S ") << XDeltaConfig::SecondaryCompressions[config.secondaryCompression] << wxT(" ");
 		
 		if(config.srcWindowSize!=XDeltaConfig::SRC_WINDOW_SIZE_AUTO)
-			src_window_flag<<wxT(" -B ")<<config.srcWindowSize<<wxT(" ");
+			src_window_flag<<wxT("-B ")<<config.srcWindowSize<<wxT(" ");
 
 		wxString base64=EncodeDescription();
 		
-		desc_flag<<wxT(" -A=\"")<<base64.ToAscii()<<wxT("\" ");
+		desc_flag<<wxT("-A=\"")<<base64.ToAscii()<<wxT("\" ");
 		
 	}
 	//end of configuration flags
 	
 	//MAKING COMMAND
 	if(encode)
-		command<<xdeltaEx<<wxT(" -e")<<compression_flag<<src_window_flag<<desc_flag<<overwrite_flag<<checksum_flag<<wxT("-s ")<<wxT(" \"")<<original<<wxT("\" \"")<<out<<wxT("\" \"")<<patch<<wxT("\"");
+		command<<xdeltaEx<<wxT(" -e ")<<compression_flag<<secondary_compression_flag<<desc_flag<<overwrite_flag<<checksum_flag<<wxT("-s ")<<wxT(" \"")<<original<<wxT("\" \"")<<out<<wxT("\" \"")<<patch<<wxT("\"");
 	else
-		command<<xdeltaEx<<wxT(" -d")<<overwrite_flag<<checksum_flag<<wxT("-s ")<<wxT(" \"")<<original<<wxT("\" \"")<<patch<<wxT("\" \"")<<out<<wxT("\"");
+		command<<xdeltaEx<<wxT(" -d ")<<overwrite_flag<<checksum_flag<<wxT("-s ")<<wxT(" \"")<<original<<wxT("\" \"")<<patch<<wxT("\" \"")<<out<<wxT("\"");
 	
 	return command;
 }

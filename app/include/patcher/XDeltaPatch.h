@@ -22,22 +22,30 @@
 #include <wx/wx.h>
 
 typedef struct _XDeltaConfig{
+
+
 	static const int MIN_COMPRESSION_LEVEL=0;
 	static const int MAX_COMPRESSION_LEVEL=9;
 	static const int DEFAULT_COMPRESSION_LEVEL=5;
-	
+	static const int DEFAULT_SECONDARY_COMPRESSION=0;
+
 	static const int SRC_WINDOW_SIZE_LENGTH=8;
 	static const int SRC_WINDOW_SIZE_AUTO=-1;
 	static const int SrcWindowSizes[SRC_WINDOW_SIZE_LENGTH];
+
+	static const int SECONDARY_COMP_LENGTH = 4;
+	static const char* SecondaryCompressions[SECONDARY_COMP_LENGTH];
 	
 	_XDeltaConfig(){
-		compressionLevel=5;
+		compressionLevel= DEFAULT_COMPRESSION_LEVEL;
+		secondaryCompression = DEFAULT_SECONDARY_COMPRESSION;
 		enableChecksum=true;
 		overwriteOutput=true;
 		srcWindowSize=SRC_WINDOW_SIZE_AUTO; //auto
 	}
 	
 	int compressionLevel;
+	int secondaryCompression;
 	bool enableChecksum;
 	bool overwriteOutput;
 	int srcWindowSize;

@@ -67,7 +67,17 @@ EncodePanel( parent )
 			levelItem->Check();
 	}
 	
-	createOptionsMenu->Append( -1, _("Compression level"), compressionMenu );
+	createOptionsMenu->Append( -1, _("Main compression level"), compressionMenu );
+
+	secondaryCompressionMenu = new wxMenu();
+	for (int i = 0; i < XDeltaConfig::SECONDARY_COMP_LENGTH;i++) {
+		wxMenuItem* levelItem = new wxMenuItem(secondaryCompressionMenu, wxID_ANY, XDeltaConfig::SecondaryCompressions[i], wxEmptyString, wxITEM_RADIO);
+		secondaryCompressionMenu->Append(levelItem);
+		if (i == XDeltaConfig::DEFAULT_SECONDARY_COMPRESSION)
+			levelItem->Check();
+	}
+
+	createOptionsMenu->Append(-1, _("Secondary compression"), secondaryCompressionMenu);
 
 	windowSizeMenu = new wxMenu();
 	wxMenuItem* windowItem=new wxMenuItem(windowSizeMenu,wxID_ANY,_T("Auto"),wxEmptyString,wxITEM_RADIO);
@@ -152,6 +162,7 @@ void DeltaPatcherEncodePanel::OnCreatePatch( wxCommandEvent& event )
 	//preparing config
 	xdp.GetConfig().enableChecksum=checksumCheck->IsChecked();
 	xdp.GetConfig().compressionLevel=GetCompressionLevel();
+	xdp.GetConfig().secondaryCompression = GetSecondaryCompression();
 	xdp.GetConfig().srcWindowSize=GetWindowSize();
 	//end config
 	
@@ -213,6 +224,16 @@ int DeltaPatcherEncodePanel::GetCompressionLevel()
 			return i;
 	}
 	return XDeltaConfig::DEFAULT_COMPRESSION_LEVEL;
+}
+
+int DeltaPatcherEncodePanel::GetSecondaryCompression()
+{
+	for (size_t i = 0; i < secondaryCompressionMenu->GetMenuItemCount(); i++) {
+		wxMenuItem* item = secondaryCompressionMenu->FindItemByPosition(i);
+		if (item->IsChecked())
+			return i;
+	}
+	return XDeltaConfig::DEFAULT_SECONDARY_COMPRESSION;
 }
 
 int DeltaPatcherEncodePanel::GetWindowSize()

@@ -47,12 +47,14 @@ public:
 	
 private:
 	int GetCompressionLevel();
+	int GetSecondaryCompression();
 	int GetWindowSize();
 private:
 	Logger* logger;
 	
 	wxMenu* createOptionsMenu;
 	wxMenu* compressionMenu;
+	wxMenu* secondaryCompressionMenu;
 	wxMenu* windowSizeMenu;
 	wxMenuItem* checksumCheck;
 };
