@@ -46,7 +46,7 @@ Executable should be found in build/app/Release/
 - git clone --recurse-submodules https://github.com/marco-calautti/DeltaPatcher.git
 - mkdir build && cd build
 - cmake -DwxBUILD_SHARED=OFF -DCMAKE_BUILD_TYPE=Release ..
-- make (use -j<number of processors> to speed up compilation)
+- make (use -j flag to speed up compilation)
 
 The final binary should be found in build/app/
 
