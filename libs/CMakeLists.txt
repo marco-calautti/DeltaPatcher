@@ -1,3 +1,1 @@
-if (WIN32)
-	add_subdirectory(wxWidgets)
-endif()
+add_subdirectory(wxWidgets)
