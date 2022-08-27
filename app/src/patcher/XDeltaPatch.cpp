@@ -5,6 +5,20 @@
 
 #include <utils/base64.h>
 
+static size_t DecodeVarLength(wxFile& file)
+{
+	size_t length = 0;
+	wxUint8 byte = 0;
+	do
+	{
+		length <<= 7;
+		file.Read((void*)&byte, 1);
+		length |= byte & 0x7F;
+	} while (byte & 0x80);
+
+	return length;
+}
+
 wxString XDeltaPatch::xdeltaEx=wxT("xdelta");
 const int XDeltaConfig::SrcWindowSizes[]={8<<20,	//8 MB, etc...
 											16<<20,
@@ -32,18 +46,52 @@ void XDeltaPatch::DecodeDescription()
 	if(!file.Open(patchName))
 		return;
 	
-	wxUint8 byte;
-	size_t length=0;
-	
-	file.Seek(5);
-	do
+	wxUint8 magic[3];
+
+	file.Read(magic, 3);
+
+	if (magic[0] != 0xD6 || magic[1] != 0xC3 || magic[2] != 0xC4) 
 	{
-		length<<=7;
-		file.Read((void*)&byte,1);
-		length|=byte&0x7F;
-	}while(byte&0x80);
+		return;
+	}
+
+	wxUint8 version = 0;
+	file.Read((void*)&version, 1);
+
+	if (version != 0)
+		return;
+
+	//read flags
+	wxUint8 flags = 0;
+	file.Read((void*)&flags, 1);
+
+	//No app data present at all
+	if (!(flags & 0x04))
+	{
+		return;
+	}
+
+	// Secondary compression enabled
+	if (flags & 0x01)
+	{
+		//Skip compression type byte
+		file.Seek(1, wxFromCurrent);
+	}
+
+	//Code table data present (xdelta should never write this data in patches)
+	if (flags & 0x02)
+	{
+		//Get length of code table
+		size_t length = DecodeVarLength(file);
 		
-	if(length==0)
+		//Skip code table
+		file.Seek(length, wxFromCurrent);
+	}
+	
+	//We read the length of the app data
+	size_t length = DecodeVarLength(file);
+		
+	if(length<2)
 		return;
 		
 	char* temp=new char[length+1];
@@ -51,12 +99,12 @@ void XDeltaPatch::DecodeDescription()
 	file.Read((void*)temp,length);
 	temp[length]=0;
 	
-	wxString tempDesc=wxString::FromAscii((const char*)temp);
+	if (temp[0] != '^' || temp[1] != '*')
+		return;
+
+	wxString tempDesc=wxString::FromUTF8((const char*)temp);
 	
 	delete[] temp;
-	
-	if(!tempDesc.StartsWith(wxT("^*")))
-		return;
 	
 	wxString part=tempDesc.Mid(2);
 	
