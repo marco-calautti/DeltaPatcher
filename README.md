@@ -22,16 +22,31 @@ GPL2'd and cross-platform: it runs fine on
 Windows and Linux and should compile on MacOS
 too.
 
--------------------------
-Full and Lite versions
--------------------------
+# How to build
 
-This package comes with two versions of the
-frontend. The Lite version is simply the
-patching GUI, this is intended to be shipped
-along with your patch. This way, the final
-user doesn't need to mess with other options
-like patch creation (simplicity comes first!).
-The Full version is mainly for romhackers,
-it supports both creation and application
-of xdelta patches.
+## Windows
+
+- Install CMake and Visual Studio Community 2022 with the Desktop C++ Development tools (including the WindowsSDK package).
+- git clone --recurse-submodules https://github.com/marco-calautti/DeltaPatcher.git
+- mkdir build
+- cd build
+- cmake -G "Visual Studio 17 2022" -DwxBUILD_SHARED=OFF -DwxBUILD_USE_STATIC_RUNTIME=ON -DCMAKE_BUILD_TYPE=Release ..
+
+- Open the solution file created in the build directory.
+- Select Release as the build configuration and press F6.
+
+Executable should be found in build/app/Release/
+
+## Linux
+
+- First install dependencies:
+    - Ubuntu: sudo apt install build-essential cmake git libgtk-3-dev xdelta3
+    - Fedora: sudo dnf install g++ make cmake git gtk3-devel xdelta3
+
+- git clone --recurse-submodules https://github.com/marco-calautti/DeltaPatcher.git
+- mkdir build && cd build
+- cmake -DwxBUILD_SHARED=OFF -DCMAKE_BUILD_TYPE=Release ..
+- make (use -j<number of processors> to speed up compilation)
+
+The final binary should be found in build/app/
+
