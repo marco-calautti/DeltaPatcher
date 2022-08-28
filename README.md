@@ -1,5 +1,4 @@
-DeltaPatcher [![Codacy Badge](https://app.codacy.com/project/badge/Grade/bdfed52f118c4199ad0d828520f29b61)](https://www.codacy.com/gh/marco-calautti/DeltaPatcher/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=marco-calautti/DeltaPatcher&amp;utm_campaign=Badge_Grade)
-============
+# DeltaPatcher [![Codacy Badge](https://app.codacy.com/project/badge/Grade/bdfed52f118c4199ad0d828520f29b61)](https://www.codacy.com/gh/marco-calautti/DeltaPatcher/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=marco-calautti/DeltaPatcher&amp;utm_campaign=Badge_Grade)
 
 Delta Patcher is yet another frontend to the
 xdelta3 decoder/encoder created by Joshua
@@ -22,31 +21,30 @@ GPL2'd and cross-platform: it runs fine on
 Windows and Linux and should compile on MacOS
 too.
 
-# How to build
+## How to build
+Delta Patcher has been successfully built on Windows, Ubuntu 22.04 and Fedora 36.
 
-## Windows
+### Windows
 
-- Install CMake and Visual Studio Community 2022 with the Desktop C++ Development tools (including the WindowsSDK package).
-- git clone --recurse-submodules https://github.com/marco-calautti/DeltaPatcher.git
-- mkdir build
-- cd build
-- cmake -G "Visual Studio 17 2022" -DwxBUILD_SHARED=OFF -DwxBUILD_USE_STATIC_RUNTIME=ON -DCMAKE_BUILD_TYPE=Release ..
-
-- Open the solution file created in the build directory.
-- Select Release as the build configuration and press F6.
+-   Install CMake and Visual Studio Community 2022 with the Desktop C++ Development tools (including the WindowsSDK package).
+-   git clone --recurse-submodules https://github.com/marco-calautti/DeltaPatcher.git
+-   mkdir build
+-   cd build
+-   cmake -G "Visual Studio 17 2022" -DwxBUILD_SHARED=OFF -DwxBUILD_USE_STATIC_RUNTIME=ON -DCMAKE_BUILD_TYPE=Release ..
+-   Open the solution file created in the build directory.
+-   Select Release as the build configuration and press F6.
 
 Executable should be found in build/app/Release/
 
-## Linux
+### Linux
 
-- First install dependencies:
-    - Ubuntu: sudo apt install build-essential cmake git libgtk-3-dev xdelta3
-    - Fedora: sudo dnf install g++ make cmake git gtk3-devel xdelta3
+-   First install dependencies:
+    -   Ubuntu: sudo apt install build-essential cmake git libgtk-3-dev xdelta3
+    -   Fedora: sudo dnf install g++ make cmake git gtk3-devel xdelta3
 
-- git clone --recurse-submodules https://github.com/marco-calautti/DeltaPatcher.git
-- mkdir build && cd build
-- cmake -DwxBUILD_SHARED=OFF -DCMAKE_BUILD_TYPE=Release ..
-- make (use -j flag to speed up compilation)
+-   git clone --recurse-submodules https://github.com/marco-calautti/DeltaPatcher.git
+-   mkdir build && cd build
+-   cmake -DwxBUILD_SHARED=OFF -DCMAKE_BUILD_TYPE=Release ..
+-   make (use -j flag to speed up compilation)
 
 The final binary should be found in build/app/
-
