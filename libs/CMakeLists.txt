@@ -1,1 +1,10 @@
+set(wxUSE_REGEX OFF)
+set(wxUSE_ZLIB builtin)
+set(wxUSE_EXPAT OFF)
+set(wxUSE_LIBJPEG OFF)
+set(wxUSE_LIBPNG builtin)
+set(wxUSE_LIBTIFF OFF)
+set(wxUSE_NANOSVG OFF)
+set(wxBUILD_STRIPPED_RELEASE ON)
+
 add_subdirectory(wxWidgets)

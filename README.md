@@ -14,11 +14,12 @@ Delta Patcher has been successfully built on Windows, Ubuntu 22.04 and Fedora 36
 -   git clone --recurse-submodules https://github.com/marco-calautti/DeltaPatcher.git
 -   mkdir build
 -   cd build
--   cmake -G "Visual Studio 17 2022" -DwxBUILD_SHARED=OFF -DwxBUILD_USE_STATIC_RUNTIME=ON -DCMAKE_BUILD_TYPE=Release ..
+-   cmake -G "Visual Studio 17 2022" -DwxBUILD_SHARED=OFF -DwxBUILD_USE_STATIC_RUNTIME=ON -DwxBUILD_STRIPPED_RELEASE=ON -DCMAKE_BUILD_TYPE=Release ..
 -   Open the solution file created in the build directory.
--   Select Release as the build configuration and press F6.
+-   Select Release as the build configuration (or MinSizeRel if you prefer a smaller executable rather than a fast one).
+-   Right click on the Delta Patcher project and click build.
 
-Executable should be found in build/app/Release/
+Executable should be found in build/app/Release/ or build/app/MinSizeRel, depending on your choice.
 
 ### Linux
 
