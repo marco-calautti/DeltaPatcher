@@ -2,7 +2,7 @@
 
 Delta Patcher is a hybrid frontend to the xdelta3 decoder/encoder. Delta patcher is able to make and apply xdelta patches. But... why making another frontend? All the frontends I've seen don't support some options of the encoder/decoder at all, like compression level for encoding and checksum
 checking for decoding/encoding. Also, they are all written in .NET (0_0). So, this tool was designed to be selfcontained (as of now, only
-for Windows). It's written in C++ using wxWidgets for the GUI components and all the needed libraries are static linked to the EXE, including the xdelta3 decoder/encoder itself
+for Windows). It's written in C++ using wxWidgets for the GUI components and all the needed libraries are statically linked to the EXE, including the xdelta3 decoder/encoder itself.
 Last, but not the least, Delta Patcher is GPL2'd and cross-platform: it runs fine on Windows and Linux and should compile on MacOS too.
 
 ## How to build
