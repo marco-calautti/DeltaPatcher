@@ -6,7 +6,7 @@ for Windows). It's written in C++ using wxWidgets for the GUI components and all
 Last, but not the least, Delta Patcher is GPL2'd and cross-platform: it runs fine on Windows and Linux and should compile on MacOS too.
 
 ## How to build
-Delta Patcher has been successfully built on Windows, Ubuntu 22.04 and Fedora 36.
+Delta Patcher has been successfully built on Windows 10, Ubuntu 22.04 and Fedora 36.
 
 ### Windows
 
