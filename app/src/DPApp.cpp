@@ -36,39 +36,6 @@ bool DPApp::OnInit(){
 
 		locale.AddCatalog(wxT("deltapatcher"));
 	}
-	
-#ifdef __WXMSW__
-	
-	//Here we use the embedded xdelta executable
-	HGLOBAL     res_handle = NULL;
-	HRSRC       res;
-	char *      res_data;
-	DWORD       res_size;
-	
-	res = FindResource(GetModuleHandle(NULL),L"IDR_xdeltaexe",L"exe");
-	if (!res)
-        return false;
-	res_handle = LoadResource(NULL, res);
-	if (!res_handle)
-        return false;
-		
-	res_data = (char*)LockResource(res_handle);
-	res_size = SizeofResource(NULL, res);
-	
-	wxFile tempFile;
-	wxString tempDir=wxStandardPaths::Get().GetTempDir();
-	wxFileName fn(tempDir,wxT("dp_xdelta"));
-	
-	wxString fullPath=fn.GetFullPath();
-	tempFile.Open(fullPath,wxFile::write);
-	
-	tempFile.Write(res_data,res_size);
-	tempFile.Close();
-	
-	XDeltaPatch::SetXDeltaExecutable(fullPath);
-#else
-	XDeltaPatch::SetXDeltaExecutable(wxT("xdelta3"));
-#endif
 
 	DeltaPatcherMainDialog* dialog=new DeltaPatcherMainDialog(NULL,patchName);
 	
@@ -96,5 +63,3 @@ void DPApp::OnInitCmdLine(wxCmdLineParser& parser)
 	parser.SetDesc(cmdLineDesc);
 	
 }
-
-

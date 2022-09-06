@@ -3,7 +3,12 @@
 #include <wx/arrstr.h>
 #include <wx/file.h>
 
+#include <vector>
+#include <sstream>
+#include <iostream>
+
 #include <utils/base64.h>
+#include <xdelta3_wrapper.h>
 
 static size_t DecodeVarLength(wxFile& file)
 {
@@ -19,7 +24,19 @@ static size_t DecodeVarLength(wxFile& file)
 	return length;
 }
 
-wxString XDeltaPatch::xdeltaEx=wxT("xdelta");
+static std::vector<std::string> SplitMessageByLine(const std::string& str)
+{
+    std::vector<std::string> tokens;
+ 
+    std::stringstream ss(str);
+    std::string token;
+    while (std::getline(ss, token, '\n')) {
+        tokens.push_back(token);
+    }
+ 
+    return tokens;
+}
+
 const int XDeltaConfig::SrcWindowSizes[]={8<<20,	//8 MB, etc...
 											16<<20,
 											32<<20,
@@ -150,18 +167,18 @@ void XDeltaPatch::SetDescription(const wxString& description)
 
 int XDeltaPatch::Process(const wxString& original,const wxString& out,const wxString& patch,wxString& message,bool encode)
 {
-	wxString command;
-	wxArrayString outArray,errorArray;
-	command=MakeCommand(original,out,patch,encode);
+	
+	std::vector<std::string> params=MakeCommand(original,out,patch,encode);
 
 	//running xdelta with parameters
-	long exitcode=wxExecute(command, outArray,errorArray);
-	if(errorArray.Count()>0) //got an error
-		message=errorArray[0];
-	else if(outArray.Count()>0) //got some message
+	int ret = xd3_main_exec(params);
+	std::string messages = xd3_messages();
+	std::vector<std::string> outArray = SplitMessageByLine(messages);
+
+	if(outArray.size()>0) //got some message
 		message=outArray[0];
 		
-	return exitcode;
+	return ret;
 }
 
 int XDeltaPatch::Decode(const wxChar* original,const wxChar*out, wxString& message)
@@ -176,41 +193,57 @@ int XDeltaPatch::Encode(const wxChar* original,const wxChar* modified,wxString& 
 	return Process(original,modified,patchName,message,true);
 }
 
-wxString XDeltaPatch::MakeCommand(const wxString& original,const wxString& out,const wxString& patch,bool encode)
+std::vector<std::string> XDeltaPatch::MakeCommand(const wxString& original,const wxString& out,const wxString& patch,bool encode)
 {
-	wxString command;
-	
-	//preparing configuration flags
-	wxString checksum_flag=config.enableChecksum? wxT(" ") : wxT("-n ");
-	wxString overwrite_flag=config.overwriteOutput? wxT("-f ") : wxT(" ");
-	wxString compression_flag;
-	wxString secondary_compression_flag;
-	wxString src_window_flag;
-	wxString desc_flag;
+	std::vector<std::string> params;
 	
 	if(encode){
-		wxString strLvl=wxString::Format(wxT("%i"),config.compressionLevel);
-		compression_flag<<wxT("-")<<strLvl<<wxT(" ");
+		params.push_back("-e");
+	}else{
+		params.push_back("-d");
+	}
+
+	//preparing configuration flags
+	if(config.enableChecksum)
+		params.push_back("-n");
+	
+	if(config.overwriteOutput)
+		params.push_back("-f");
+
+	if(encode){
+		std::string compression_flag = "-";
+		compression_flag+=std::to_string(config.compressionLevel);
+		params.push_back(compression_flag);
 		
-		secondary_compression_flag << wxT("-S ") << XDeltaConfig::SecondaryCompressions[config.secondaryCompression] << wxT(" ");
+		params.push_back("-S");
+		params.push_back(XDeltaConfig::SecondaryCompressions[config.secondaryCompression]);
 		
-		if(config.srcWindowSize!=XDeltaConfig::SRC_WINDOW_SIZE_AUTO)
-			src_window_flag<<wxT("-B ")<<config.srcWindowSize<<wxT(" ");
+		if(config.srcWindowSize!=XDeltaConfig::SRC_WINDOW_SIZE_AUTO){
+			params.push_back("-B");
+			params.push_back(std::to_string(config.srcWindowSize));
+		}
 
 		wxString base64=EncodeDescription();
 		
-		desc_flag<<wxT("-A=\"")<<base64.ToAscii()<<wxT("\" ");
-		
+		std::string desc_str = "-A=\"";
+		desc_str+=base64.ToAscii();
+		desc_str+="\"";
+		params.push_back(desc_str);
 	}
 	//end of configuration flags
+
+	params.push_back("-s");
+	params.push_back(original.ToStdString());
 	
-	//MAKING COMMAND
-	if(encode)
-		command<<xdeltaEx<<wxT(" -e ")<<compression_flag<<secondary_compression_flag<<desc_flag<<overwrite_flag<<checksum_flag<<wxT("-s ")<<wxT(" \"")<<original<<wxT("\" \"")<<out<<wxT("\" \"")<<patch<<wxT("\"");
-	else
-		command<<xdeltaEx<<wxT(" -d ")<<overwrite_flag<<checksum_flag<<wxT("-s ")<<wxT(" \"")<<original<<wxT("\" \"")<<patch<<wxT("\" \"")<<out<<wxT("\"");
-	
-	return command;
+	if(encode){
+		params.push_back(out.ToStdString());
+		params.push_back(patch.ToStdString());
+	}else{
+		params.push_back(patch.ToStdString());
+		params.push_back(out.ToStdString());
+	}
+
+	return params;
 }
 
 void XDeltaPatch::SetConfig(const XDeltaConfig& config)

@@ -21,19 +21,21 @@
 
 #include <wx/wx.h>
 
+#include <string>
+#include <vector>
+
 typedef struct _XDeltaConfig{
 
+	static const int SECONDARY_COMP_LENGTH = 4;
+	static const int SRC_WINDOW_SIZE_LENGTH=8;
 
 	static const int MIN_COMPRESSION_LEVEL=0;
 	static const int MAX_COMPRESSION_LEVEL=9;
 	static const int DEFAULT_COMPRESSION_LEVEL=5;
-	static const int DEFAULT_SECONDARY_COMPRESSION=0;
-
-	static const int SRC_WINDOW_SIZE_LENGTH=8;
+	static const int DEFAULT_SECONDARY_COMPRESSION=SECONDARY_COMP_LENGTH-1;
 	static const int SRC_WINDOW_SIZE_AUTO=-1;
-	static const int SrcWindowSizes[SRC_WINDOW_SIZE_LENGTH];
 
-	static const int SECONDARY_COMP_LENGTH = 4;
+	static const int SrcWindowSizes[SRC_WINDOW_SIZE_LENGTH];
 	static const char* SecondaryCompressions[SECONDARY_COMP_LENGTH];
 	
 	_XDeltaConfig(){
@@ -74,9 +76,7 @@ class XDeltaPatch : public wxObject
 	
 	void SetConfig(const XDeltaConfig& config);
 	XDeltaConfig&  GetConfig();
-	
-	static void SetXDeltaExecutable(const wxChar* ex){ xdeltaEx=ex; }
-	
+		
 	wxString GetDescription();
 	void SetDescription(const wxString& description);
 	
@@ -87,14 +87,12 @@ private:
 	wxString patchName;
 	XDeltaConfig config;
 	wxString description;
-	
-	static wxString xdeltaEx;
-	
+		
 	void DecodeDescription();
 	wxString EncodeDescription();
 	
 	int Process(const wxString& original,const wxString& out,const wxString& patch,wxString& message,bool encode);
-	wxString MakeCommand(const wxString& original,const wxString& out,const wxString& patch,bool encode);
+	std::vector<std::string> MakeCommand(const wxString& original,const wxString& out,const wxString& patch,bool encode);
 	
 };
 #endif
