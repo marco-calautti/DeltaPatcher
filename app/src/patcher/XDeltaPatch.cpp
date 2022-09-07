@@ -81,7 +81,7 @@ void XDeltaPatch::DecodeDescription()
 	{
 		return;
 	}
-
+	
 	wxUint8 version = 0;
 	file.Read((void*)&version, 1);
 
@@ -117,10 +117,10 @@ void XDeltaPatch::DecodeDescription()
 	
 	//We read the length of the app data
 	size_t length = DecodeVarLength(file);
-		
+	
 	if(length<2)
 		return;
-		
+	
 	char* temp=new char[length+1];
 
 	file.Read((void*)temp,length);
@@ -228,9 +228,8 @@ std::vector<std::string> XDeltaPatch::MakeCommand(const wxString& original,const
 
 		wxString base64=EncodeDescription();
 		
-		std::string desc_str = "-A=\"";
+		std::string desc_str = "-A=";
 		desc_str+=base64.ToAscii();
-		desc_str+="\"";
 		params.push_back(desc_str);
 	}
 	//end of configuration flags
