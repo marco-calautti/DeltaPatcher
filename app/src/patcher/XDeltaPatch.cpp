@@ -207,7 +207,7 @@ std::vector<std::string> XDeltaPatch::MakeCommand(const wxString& original,const
 	}
 
 	//preparing configuration flags
-	if(config.enableChecksum)
+	if(!config.enableChecksum)
 		params.push_back("-n");
 	
 	if(config.overwriteOutput)

@@ -13,6 +13,7 @@ add_subdirectory(wxWidgets)
 
 # liblzma
 add_subdirectory(xz)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/xz/src/liblzma/api)
 
 #libxdelta3
 set(XD3_BUILD_AS_EXE OFF CACHE BOOL "" FORCE)
