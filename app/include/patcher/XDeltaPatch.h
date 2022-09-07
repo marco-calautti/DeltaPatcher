@@ -67,7 +67,7 @@ class XDeltaPatch : public wxObject
 	 * */
 
 	XDeltaPatch(const wxChar* patchName, PatchMode mode=Read);
-	
+	XDeltaPatch() : XDeltaPatch(nullptr, PatchMode::Read) {}
 	
 	/**
 	 * Default destructor

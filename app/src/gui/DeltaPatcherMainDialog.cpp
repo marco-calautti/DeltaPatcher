@@ -117,18 +117,6 @@ void DeltaPatcherMainDialog::OnOperationSelected( wxCommandEvent& event )
 
 void DeltaPatcherMainDialog::OnClickAbout( wxCommandEvent& event )
 {
-	/*
-	wxAboutDialogInfo info;
-	
-	info.AddDeveloper(wxT("Phoenix (SadNES cITy Translations)"));
-	info.SetLicense(__DP_LICENSE__);
-	info.SetName(__DP_NAME__);
-	info.SetVersion(__DP_VERSION__);
-	info.SetWebSite(__DP_WEBSITE__);
-	info.SetCopyright(__DP_COPYRIGHT__);
-	
-	wxAboutBox(info);*/
-	
 	DeltaPatcherAboutDialog* about=new DeltaPatcherAboutDialog(this);
 	about->ShowModal();
 }

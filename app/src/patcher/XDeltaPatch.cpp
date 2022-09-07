@@ -55,6 +55,9 @@ const char* XDeltaConfig::SecondaryCompressions[] = {
 
 XDeltaPatch::XDeltaPatch(const wxChar* input, PatchMode mode)
 {
+	if(!input)
+		return;
+		
 	patchName=input;
 	
 	if(mode!=Read)
