@@ -3,7 +3,6 @@
 #include <wx/filename.h>
 #include <DPApp.h>
 #include <gui/DeltaPatcherMainDialog.h>
-#include <common/resource.h>
 
 #ifdef __WXMSW__
 #include <windows.h>
