@@ -2,7 +2,6 @@
 #include <wx/filename.h>
 #include <gui/DeltaPatcherDecodePanel.h>
 #include <wx/filedlg.h>
-#include <patcher/XDeltaPatch.h>
 
 #include <gui/icons/open.xpm>
 #include <gui/icons/save.xpm>
@@ -10,9 +9,10 @@
 
 DeltaPatcherDecodePanel::DeltaPatcherDecodePanel( wxWindow* parent,Logger* l )
 :
-DecodePanel( parent )
+DecodePanel( parent ), logger( l )
 {
-	logger=l;
+	Bind(wxEVT_THREAD, &DeltaPatcherDecodePanel::OnThreadUpdate, this);
+
 	SetDropTarget(new DeltaPatcherDropTarget(this));
 	
 	wxBitmap openBitmap;
@@ -95,20 +95,12 @@ void DeltaPatcherDecodePanel::OnApplyPatch( wxCommandEvent& event )
 	
 	logger->Log(Logger::LOG_MESSAGE,_("Applying patch, please wait... (don't panic!)"));
 	
-	wxString message;
-	int code=xdp.Decode(original,outFilename,message);
-	
-	if(code!=0){
-		logger->Log(Logger::LOG_ERROR,message);
-		wxMessageBox(_("An error has occurred!\nSee log for more information."),_("Warning"),wxICON_EXCLAMATION,this);
-	}else{
-		if(!keepOriginalCheck->IsChecked()){ //we must not keep the original file
-			wxRemoveFile(original);
-			wxRenameFile(outFilename,original);
-		}
-		logger->Log(Logger::LOG_MESSAGE,_("Patch successfully applied!"));
-		wxMessageBox(_("Patch successfully applied!"),_("Notice"),wxICON_INFORMATION,this);
-	}
+	threadOriginal = original;
+	threadModified = outFilename;
+	threadXDP = xdp;
+
+	GetParent()->Disable();
+	StartApplyPatch();
 }
 
 void DeltaPatcherDecodePanel::SetPatchFile(const wxChar* patchPath)
@@ -160,4 +152,55 @@ bool DeltaPatcherDecodePanel::HandleFileDrop(const wxArrayString& filenames)
 	return true;
 }
 
+void DeltaPatcherDecodePanel::StartApplyPatch()
+{
+    if (CreateThread(wxTHREAD_JOINABLE) != wxTHREAD_NO_ERROR)
+    {
+		logger->Log(Logger::LOG_ERROR,_("Could not create the worker thread!"));
+        return;
+    }
+ 
+    // go!
+    if (GetThread()->Run() != wxTHREAD_NO_ERROR)
+    {
+		logger->Log(Logger::LOG_ERROR,_("Could not RUN the worker thread!"));
+        return;
+    }
+}
 
+void DeltaPatcherDecodePanel::OnThreadUpdate(wxThreadEvent& evt)
+{
+	GetParent()->Enable();
+	
+	int code = evt.GetInt();
+	wxString message = evt.GetString();
+
+	if(code!=0){
+		logger->Log(Logger::LOG_ERROR,message);
+		wxMessageBox(_("An error has occurred!\nSee log for more information."),_("Warning"),wxICON_EXCLAMATION,this);
+	}else{
+		if(!keepOriginalCheck->IsChecked()){ //we must not keep the original file
+			wxRemoveFile(threadOriginal);
+			wxRenameFile(threadModified,threadOriginal);
+		}
+		logger->Log(Logger::LOG_MESSAGE,_("Patch successfully applied!"));
+		wxMessageBox(_("Patch successfully applied!"),_("Notice"),wxICON_INFORMATION,this);
+	}
+}
+
+wxThread::ExitCode DeltaPatcherDecodePanel::Entry()
+{
+	
+	wxString message;
+	int code=threadXDP.Decode(threadOriginal,threadModified,message);
+	
+	wxThreadEvent* evt = new wxThreadEvent();
+	evt->SetString(message);
+	evt->SetInt(code);
+	wxQueueEvent(GetEventHandler(), evt);
+
+	return (wxThread::ExitCode)0;
+}
+
+	
+	

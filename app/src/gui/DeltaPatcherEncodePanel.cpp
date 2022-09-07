@@ -1,4 +1,3 @@
-#include <patcher/XDeltaPatch.h>
 #include <wx/filename.h>
 #include <wx/filedlg.h>
 #include <gui/DeltaPatcherEncodePanel.h>
@@ -36,10 +35,10 @@ public:
 
 DeltaPatcherEncodePanel::DeltaPatcherEncodePanel( wxWindow* parent, Logger* l )
 :
-EncodePanel( parent )
+EncodePanel( parent ), logger( l )
 {
-	logger=l;
-	
+	Bind(wxEVT_THREAD, &DeltaPatcherEncodePanel::OnThreadUpdate, this);
+
 	EncodePanelDropHandler* originalDropHandler = new EncodePanelDropHandler(this, true);
 	EncodePanelDropHandler* modifiedDropHandler = new EncodePanelDropHandler(this, false);
 	originalField->SetDropTarget(new DeltaPatcherDropTarget(originalDropHandler));
@@ -168,16 +167,13 @@ void DeltaPatcherEncodePanel::OnCreatePatch( wxCommandEvent& event )
 	
 	logger->Log(Logger::LOG_MESSAGE,_("Creating patch, please wait... (don't panic!)"));
 	
-	wxString message;
-	int code=xdp.Encode(original,modified,message);
+	threadOriginal = original;
+	threadModified = modified;
+	threadXDP = xdp;
+
+	GetParent()->Disable();
+	StartCreatePatch();
 	
-	if(code!=0){
-		logger->Log(Logger::LOG_ERROR,message);
-		wxMessageBox(_("An error has occurred!\nSee log for more information."),_("Warning"),wxICON_EXCLAMATION,this);
-	}else{
-		logger->Log(Logger::LOG_MESSAGE,_("Patch successfully created!"));
-		wxMessageBox(_("Patch successfully created!"),_("Notice"),wxICON_INFORMATION,this);
-	}
 }
 
 void DeltaPatcherEncodePanel::SetPatchFile(const wxChar* patchPath)
@@ -250,4 +246,50 @@ int DeltaPatcherEncodePanel::GetWindowSize()
 			
 	}
 	return XDeltaConfig::SRC_WINDOW_SIZE_AUTO;
+}
+
+void DeltaPatcherEncodePanel::StartCreatePatch()
+{
+    if (CreateThread(wxTHREAD_JOINABLE) != wxTHREAD_NO_ERROR)
+    {
+		logger->Log(Logger::LOG_ERROR,_("Could not create the worker thread!"));
+        return;
+    }
+ 
+    // go!
+    if (GetThread()->Run() != wxTHREAD_NO_ERROR)
+    {
+		logger->Log(Logger::LOG_ERROR,_("Could not RUN the worker thread!"));
+        return;
+    }
+}
+
+void DeltaPatcherEncodePanel::OnThreadUpdate(wxThreadEvent& evt)
+{
+	GetParent()->Enable();
+
+	int code = evt.GetInt();
+	wxString message = evt.GetString();
+
+	if(code!=0){
+		logger->Log(Logger::LOG_ERROR,message);
+		wxMessageBox(_("An error has occurred!\nSee log for more information."),_("Warning"),wxICON_EXCLAMATION,this);
+	}else{
+		logger->Log(Logger::LOG_MESSAGE,_("Patch successfully created!"));
+		wxMessageBox(_("Patch successfully created!"),_("Notice"),wxICON_INFORMATION,this);
+	}
+}
+
+wxThread::ExitCode DeltaPatcherEncodePanel::Entry()
+{
+	wxString message;
+
+	int code=threadXDP.Encode(threadOriginal,threadModified,message);
+	
+	wxThreadEvent* evt = new wxThreadEvent();
+	evt->SetString(message);
+	evt->SetInt(code);
+	wxQueueEvent(GetEventHandler(), evt);
+
+	return (wxThread::ExitCode)0;
 }

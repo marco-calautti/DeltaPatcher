@@ -24,12 +24,12 @@ Executable should be found in build/app/Release/ or build/app/MinSizeRel, depend
 ### Linux
 
 -   First install dependencies:
-    -   Ubuntu: sudo apt install build-essential cmake git libgtk-3-dev xdelta3
-    -   Fedora: sudo dnf install g++ make cmake git gtk3-devel xdelta3
+    -   Ubuntu: sudo apt install build-essential cmake git libgtk-3-dev
+    -   Fedora: sudo dnf install g++ make cmake git gtk3-devel
 
 -   git clone --recurse-submodules https://github.com/marco-calautti/DeltaPatcher.git
 -   mkdir build && cd build
 -   cmake -DwxBUILD_SHARED=OFF -DCMAKE_BUILD_TYPE=Release ..
--   make (use -j flag to speed up compilation)
+-   make (use -j$(nproc) flag to speed up compilation)
 
 The final binary should be found in build/app/
