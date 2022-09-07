@@ -5,3 +5,6 @@
 	path = libs/xdelta
 	url = https://github.com/marco-calautti/xdelta.git
 	branch = release3_0_apl
+[submodule "libs/xz"]
+	path = libs/xz
+	url = https://github.com/xz-mirror/xz.git
