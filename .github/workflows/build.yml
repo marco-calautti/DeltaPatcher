@@ -32,7 +32,7 @@ jobs:
       
     - uses: actions/upload-artifact@v3
       with:
-        name: binary
+        name: windows_bin_x86_64
         path: ${{github.workspace}}/build/app/Release/DeltaPatcher.exe
         
   build-ubuntu:
@@ -56,5 +56,5 @@ jobs:
       
     - uses: actions/upload-artifact@v3
       with:
-        name: binary
+        name: ubuntu_bin_x86_64
         path: ${{github.workspace}}/build/app/DeltaPatcher
