@@ -3,7 +3,7 @@ cmake_minimum_required (VERSION 3.8)
 project ("deltapatcher")
 
 if(MINGW)
-  set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++ -static")
+  set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++ -static -s")
 endif()
 
 # Subprojects
