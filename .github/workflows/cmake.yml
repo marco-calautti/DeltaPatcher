@@ -34,5 +34,11 @@ jobs:
 
     - name: Build
       # Build your program with the given configuration
-      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --parallel $(nproc)
+      
+      
+    - uses: actions/upload-artifact@v3
+      with:
+        name: binary
+        path: ${{github.workspace}}/build/app/DeltaPatcher
       
