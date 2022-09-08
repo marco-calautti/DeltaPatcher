@@ -12,7 +12,29 @@ env:
   wxBUILD_SHARED: OFF
   wxBUILD_USE_STATIC_RUNTIME: ON 
 
-jobs:
+jobs: 
+  build-win:
+    
+    runs-on: windows-2022
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+
+    - name: Configure CMake
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DwxBUILD_SHARED=${{env.wxBUILD_SHARED}}       -DwxBUILD_USE_STATIC_RUNTIME=${{env.wxBUILD_USE_STATIC_RUNTIME}} 
+
+
+    - name: Build
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --parallel $(nproc)
+      
+      
+    - uses: actions/upload-artifact@v3
+      with:
+        name: binary
+        path: ${{github.workspace}}/build/app/Release/DeltaPatcher.exe
+        
   build-ubuntu:
     
     runs-on: ubuntu-latest
@@ -36,25 +58,3 @@ jobs:
       with:
         name: binary
         path: ${{github.workspace}}/build/app/DeltaPatcher
-      
-  build-win:
-    
-    runs-on: windows-2022
-
-    steps:
-    - uses: actions/checkout@v3
-      with:
-        submodules: recursive
-
-    - name: Configure CMake
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DwxBUILD_SHARED=${{env.wxBUILD_SHARED}}       -DwxBUILD_USE_STATIC_RUNTIME=${{env.wxBUILD_USE_STATIC_RUNTIME}} 
-
-
-    - name: Build
-      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --parallel $(nproc)
-      
-      
-    - uses: actions/upload-artifact@v3
-      with:
-        name: binary
-        path: ${{github.workspace}}/build/app/Release/DeltaPatcher.exe      
