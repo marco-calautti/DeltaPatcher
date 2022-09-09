@@ -1,0 +1,57 @@
+name: Build DeltaPatcher
+
+on:
+  push:
+    branches: [ "ghactions" ]
+  pull_request:
+    branches: [ "ghactions" ]
+
+env:
+  BUILD_TYPE: Release
+  wxBUILD_SHARED: OFF
+  wxBUILD_USE_STATIC_RUNTIME: ON 
+
+jobs:
+  build-win32-msvc2019:
+    
+    runs-on: windows-2019
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+  
+    - name: Configure CMake
+      run: cmake -B ${{github.workspace}}/build -G "Visual Studio 16 2019" -A Win32 -T v141_xp -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DwxBUILD_SHARED=${{env.wxBUILD_SHARED}} -DwxBUILD_USE_STATIC_RUNTIME=${{env.wxBUILD_USE_STATIC_RUNTIME}} 
+
+    - name: Build
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --parallel $(nproc)
+      
+    - uses: actions/upload-artifact@v3
+      with:
+        name: windows_bin_x86
+        path: ${{github.workspace}}/build/app/Release/DeltaPatcher.exe
+      
+  build-linux:
+    
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+        
+    - name: Pull dependencies
+      run: sudo apt install -y build-essential cmake git libgtk-3-dev
+
+    - name: Configure CMake
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DwxBUILD_SHARED=${{env.wxBUILD_SHARED}}
+
+    - name: Build
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --parallel $(nproc)
+      
+      
+    - uses: actions/upload-artifact@v3
+      with:
+        name: linux_bin_gtk3_x86_64
+        path: ${{github.workspace}}/build/app/DeltaPatcher
