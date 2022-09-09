@@ -1,4 +1,4 @@
-# DeltaPatcher [![Codacy Badge](https://app.codacy.com/project/badge/Grade/bdfed52f118c4199ad0d828520f29b61)](https://www.codacy.com/gh/marco-calautti/DeltaPatcher/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=marco-calautti/DeltaPatcher&amp;utm_campaign=Badge_Grade)
+# DeltaPatcher [![Build](https://github.com/marco-calautti/DeltaPatcher/actions/workflows/build.yml/badge.svg)](https://github.com/marco-calautti/DeltaPatcher/actions/workflows/build.yml) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/bdfed52f118c4199ad0d828520f29b61)](https://www.codacy.com/gh/marco-calautti/DeltaPatcher/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=marco-calautti/DeltaPatcher&amp;utm_campaign=Badge_Grade)
 
 Delta Patcher is a GUI software that is able to create and apply xdelta patches as the ones supported by the xdelta tool developed by Joshua McDonald. 
 
