@@ -126,8 +126,10 @@ void XDeltaPatch::DecodeDescription()
 	file.Read((void*)temp,length);
 	temp[length]=0;
 	
-	if (temp[0] != '^' || temp[1] != '*')
+	if (temp[0] != '^' || temp[1] != '*') {
+                delete[] temp;
 		return;
+	}
 
 	wxString tempDesc=wxString::FromUTF8((const char*)temp);
 	
