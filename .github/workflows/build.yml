@@ -1,4 +1,4 @@
-name: Build DeltaPatcher
+name: Build
 
 on:
   push:
