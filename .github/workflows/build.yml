@@ -2,9 +2,9 @@ name: Build DeltaPatcher
 
 on:
   push:
-    branches: [ "ghactions" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "ghactions" ]
+    branches: [ "master" ]
 
 env:
   BUILD_TYPE: Release
