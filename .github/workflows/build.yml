@@ -1,4 +1,4 @@
-name: CMake
+name: Build DeltaPatcher
 
 on:
   push:
@@ -7,7 +7,6 @@ on:
     branches: [ "ghactions" ]
 
 env:
-  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Release
   wxBUILD_SHARED: OFF
   wxBUILD_USE_STATIC_RUNTIME: ON 
@@ -54,5 +53,5 @@ jobs:
       
     - uses: actions/upload-artifact@v3
       with:
-        name: linux_bin_x86_64
+        name: linux_bin_gtk3_x86_64
         path: ${{github.workspace}}/build/app/DeltaPatcher
