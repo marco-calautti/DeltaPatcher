@@ -22,8 +22,8 @@ jobs:
       with:
         submodules: recursive
 
-    - name: Install build tools
-      run: choco install visualstudio2019buildtools --package-parameters "--add Microsoft.VisualStudio.Component.WinXP Microsoft.VisualStudio.ComponentGroup.NativeDesktop.WinXP" --version=16.7.7.0
+    #- name: Install build tools
+    #  run: choco install visualstudio2019buildtools --package-parameters "--add Microsoft.VisualStudio.Component.WinXP Microsoft.VisualStudio.ComponentGroup.NativeDesktop.WinXP" --version=16.7.7.0
       
     - name: Configure CMake
       run: cmake -B ${{github.workspace}}/build -G "Visual Studio 16 2019" -A Win32 -T v141_xp -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DwxBUILD_SHARED=${{env.wxBUILD_SHARED}} -DwxBUILD_USE_STATIC_RUNTIME=${{env.wxBUILD_USE_STATIC_RUNTIME}} 
