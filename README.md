@@ -13,6 +13,7 @@ Delta Patcher has been successfully built on Windows 10, Ubuntu 22.04 and Fedora
 
 -   Install CMake and Visual Studio with the Desktop C++ Development tools (including the WindowsSDK package).
 -   git clone --recurse-submodules https://github.com/marco-calautti/DeltaPatcher.git
+-   cd DeltaPatcher
 -   mkdir build
 -   cd build
 -   cmake -DwxBUILD_SHARED=OFF -DwxBUILD_USE_STATIC_RUNTIME=ON -DCMAKE_BUILD_TYPE=Release ..
@@ -32,6 +33,7 @@ The executable should be found in build/app/Release/
     -   Fedora: sudo dnf install g++ make cmake git gtk3-devel
 
 -   git clone --recurse-submodules https://github.com/marco-calautti/DeltaPatcher.git
+-   cd DeltaPatcher
 -   mkdir build && cd build
 -   cmake -DwxBUILD_SHARED=OFF -DCMAKE_BUILD_TYPE=Release ..
 -   make -j$(nproc)
