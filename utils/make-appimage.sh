@@ -43,8 +43,6 @@ APPDIRNAME=DeltaPatcher.AppDir
 STRIP=strip
 
 declare -a SYSLIBS=(
-"libpthread.so.0"
-"libdl.so.2"
 "libgtk-3.so.0"
 "libgdk-3.so.0"
 "libpangocairo-1.0.so.0"
