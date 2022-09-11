@@ -42,7 +42,7 @@ BINARY=DeltaPatcher
 APPDIRNAME=DeltaPatcher.AppDir
 STRIP=strip
 
-SYSLIBS=($(ldd "$BUILDDIR/app/$BINARY" | grep -w "=>" | sed 's/^\t//' | sed 's/\s=>.*//'))
+SYSLIBS=(ld-linux-x86-64.so.2 $(ldd "$BUILDDIR/app/$BINARY" | grep -w "=>" | sed 's/^\t//' | sed 's/\s=>.*//'))
 
 set -e
 
@@ -62,12 +62,6 @@ echo "Copying binary and resources..."
 cp -a "$BUILDDIR/app/$BINARY" "$OUTDIR/usr/bin"
 
 
-# Patch RPATH so the binary goes hunting for shared libraries in the AppDir instead of system.
-echo "Patching RPATH in ${BINARY}..."
-patchelf --set-rpath '$ORIGIN/../lib' "$OUTDIR/usr/bin/$BINARY"
-
-# Currently we leave the main binary unstripped, uncomment if this is not desired.
-$STRIP "$OUTDIR/usr/bin/$BINARY"
 
 # Libraries we pull in from the system.
 echo "Copying system libraries..."
@@ -97,6 +91,18 @@ for so in $(find "$OUTDIR/usr/lib" -maxdepth 1); do
 		patchelf --set-rpath '$ORIGIN' "$so"
 	fi
 done
+
+# Patch RPATH so the binary goes hunting for shared libraries in the AppDir instead of system.
+echo "Patching RPATH in ${BINARY}..."
+patchelf --set-rpath '$ORIGIN/../lib' "$OUTDIR/usr/bin/$BINARY"
+patchelf --set-interpreter '$ORIGIN/../lib/ld-linux.so.2' "$OUTDIR/usr/bin/$BINARY"
+
+# Patching hardcoded paths in loader
+sed -i -e 's|/lib|/xib|g' '$ORIGIN/../lib/ld-linux.so.2'
+sed -i -e 's|/etc|/xtc|g' '$ORIGIN/../lib/ld-linux.so.2'
+
+# Currently we leave the main binary unstripped, uncomment if this is not desired.
+$STRIP "$OUTDIR/usr/bin/$BINARY"
 
 echo "Creating desktop..."
 cat > "$OUTDIR/deltapatcher.desktop" << EOF
