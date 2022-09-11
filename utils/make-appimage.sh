@@ -42,7 +42,7 @@ BINARY=DeltaPatcher
 APPDIRNAME=DeltaPatcher.AppDir
 STRIP=strip
 
-SYSLIBS=($(ldd "$BUILDDIR/app/$BINARY" | grep -w "=>" | sed 's/^\t/"/' | sed 's/\s=>.*/"/'))
+SYSLIBS=($(ldd "$BUILDDIR/app/$BINARY" | grep -w "=>" | sed 's/^\t//' | sed 's/\s=>.*//'))
 
 set -e
 
