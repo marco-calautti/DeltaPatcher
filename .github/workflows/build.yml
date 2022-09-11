@@ -50,10 +50,10 @@ jobs:
     - name: Build
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --parallel $(nproc)
       
-    - name: Package AppImage
-      run: ${{github.workspace}}/utils/make-appimage.sh ${{github.workspace}}/build ${{github.workspace}} DeltaPatcher
+#    - name: Package AppImage
+#      run: ${{github.workspace}}/utils/make-appimage.sh ${{github.workspace}}/build ${{github.workspace}} DeltaPatcher
       
     - uses: actions/upload-artifact@v3
       with:
-        name: linux_AppImage_x86_64
-        path: ${{github.workspace}}/DeltaPatcher.AppImage
+        name: linux_bin_gtk3_x86_64
+        path: ${{github.workspace}}/DeltaPatcher
