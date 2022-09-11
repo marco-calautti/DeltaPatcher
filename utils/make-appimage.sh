@@ -98,8 +98,8 @@ patchelf --set-rpath '$ORIGIN/../lib' "$OUTDIR/usr/bin/$BINARY"
 patchelf --set-interpreter '$ORIGIN/../lib/ld-linux.so.2' "$OUTDIR/usr/bin/$BINARY"
 
 # Patching hardcoded paths in loader
-sed -i -e 's|/lib|/xib|g' '$ORIGIN/../lib/ld-linux.so.2'
-sed -i -e 's|/etc|/xtc|g' '$ORIGIN/../lib/ld-linux.so.2'
+sed -i -e 's|/lib|/xib|g' "$OUTDIR/usr/lib/ld-linux.so.2"
+sed -i -e 's|/etc|/xtc|g' "$OUTDIR/usr/lib/ld-linux.so.2"
 
 # Currently we leave the main binary unstripped, uncomment if this is not desired.
 $STRIP "$OUTDIR/usr/bin/$BINARY"
