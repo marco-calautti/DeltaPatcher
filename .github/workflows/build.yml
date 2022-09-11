@@ -51,9 +51,7 @@ jobs:
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --parallel $(nproc)
       
     - name: Package AppImage
-      run: |
-        ldd ${{github.workspace}}/build/app/DeltaPatcher
-        ${{github.workspace}}/utils/make-appimage.sh ${{github.workspace}}/build ${{github.workspace}} DeltaPatcher
+      run: ${{github.workspace}}/utils/make-appimage.sh ${{github.workspace}}/build ${{github.workspace}} DeltaPatcher
       
     - uses: actions/upload-artifact@v3
       with:
