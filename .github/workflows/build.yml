@@ -56,4 +56,4 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         name: linux_bin_gtk3_x86_64
-        path: ${{github.workspace}}/DeltaPatcher
+        path: ${{github.workspace}}/build/app/DeltaPatcher
