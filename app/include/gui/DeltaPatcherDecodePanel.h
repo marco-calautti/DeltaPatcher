@@ -48,6 +48,7 @@ public:
 	/** Constructor */
 	DeltaPatcherDecodePanel( wxWindow* parent,Logger* logger );
 	
+	void SwitchTo();
 	void SetPatchFile(const wxChar* patchPath);
 	void SetOriginalFile(const wxChar* filePath);
 	virtual bool HandleFileDrop(const wxArrayString& filenames);

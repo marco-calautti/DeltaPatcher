@@ -176,6 +176,12 @@ void DeltaPatcherEncodePanel::OnCreatePatch( wxCommandEvent& event )
 	
 }
 
+void DeltaPatcherEncodePanel::SwitchTo()
+{
+	createButton->SetDefault();
+	Show();
+}
+
 void DeltaPatcherEncodePanel::SetPatchFile(const wxChar* patchPath)
 {
 	patchField->SetValue(patchPath);

@@ -7,5 +7,5 @@ if (WIN32)
     set(SOURCES win_stuff/resource.rc ${SOURCES})
 endif()
 
-add_executable(DeltaPatcher WIN32 ${SOURCES})
+add_executable(DeltaPatcher WIN32 MACOSX_BUNDLE ${SOURCES})
 target_link_libraries(DeltaPatcher wx::core wx::base xdelta3)

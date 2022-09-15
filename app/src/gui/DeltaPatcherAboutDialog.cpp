@@ -26,10 +26,10 @@ AboutDialog( parent )
 
 void DeltaPatcherAboutDialog::OnClickClose( wxCloseEvent& event )
 {
-	Destroy();
+	EndModal(0);
 }
 
 void DeltaPatcherAboutDialog::OnClickOk( wxCommandEvent& event )
 {
-	Destroy();
+	EndModal(0);
 }
