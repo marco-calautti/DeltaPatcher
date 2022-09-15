@@ -2,7 +2,7 @@ name: Build
 
 on:
   push:
-    branches: [ "macosfix" ]
+    branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
 
