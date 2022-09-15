@@ -48,6 +48,7 @@ public:
 	/** Constructor */
 	DeltaPatcherEncodePanel( wxWindow* parent, Logger* logger );
 	
+	void SwitchTo();
 	void SetOriginalFile(const wxChar* filePath);
 	void SetModifiedFile(const wxChar* filePath);
 	void SetPatchFile(const wxChar* patchPath);

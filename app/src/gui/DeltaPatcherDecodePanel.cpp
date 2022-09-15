@@ -31,7 +31,6 @@ DecodePanel( parent ), logger( l )
 	checksumCheck = new wxMenuItem( applyOptionsMenu, wxID_ANY, wxString( _("Checksum validation") ) , wxEmptyString, wxITEM_CHECK );
 	applyOptionsMenu->Append( checksumCheck );
 	checksumCheck->Check( true );
-	
 }
 
 void DeltaPatcherDecodePanel::OnDecodeOptionsClicked(wxCommandEvent& event)
@@ -101,6 +100,12 @@ void DeltaPatcherDecodePanel::OnApplyPatch( wxCommandEvent& event )
 
 	GetParent()->Disable();
 	StartApplyPatch();
+}
+
+void DeltaPatcherDecodePanel::SwitchTo()
+{
+	applyButton->SetDefault();
+	Show();
 }
 
 void DeltaPatcherDecodePanel::SetPatchFile(const wxChar* patchPath)

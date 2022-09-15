@@ -14,7 +14,8 @@ bool DPApp::OnInit(){
 
 	if(!wxApp::OnInit())
 		return false;
-		
+
+/*		
 	if(locale.Init()){
 #ifdef __WXMSW__
 		wxString path;
@@ -35,7 +36,7 @@ bool DPApp::OnInit(){
 
 		locale.AddCatalog(wxT("deltapatcher"));
 	}
-
+*/
 	DeltaPatcherMainDialog* dialog=new DeltaPatcherMainDialog(NULL,patchName);
 	
 	SetTopWindow(dialog);

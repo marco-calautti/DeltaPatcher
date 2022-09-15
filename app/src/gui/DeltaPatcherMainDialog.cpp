@@ -43,12 +43,11 @@ MainDialog( parent ), decodeMode(true)
 	
 	nullPanel->Show(false);
 	
-		//preparing default panel
+	//preparing default panel
 	decodePanel=new DeltaPatcherDecodePanel(this,this);
 	if(!wxIsEmpty(patchName))
 		decodePanel->SetPatchFile(patchName);
 		
-	decodePanel->Show();
 	panelSizer->Add( decodePanel, 1, wxEXPAND | wxALL, 5 );
 	decodePanel->GetSizer()->Fit(decodePanel);
 	
@@ -65,6 +64,7 @@ MainDialog( parent ), decodeMode(true)
 	operationButton->Show(false);
 #endif
 
+	decodePanel->SwitchTo();
 	this->Update();
 	this->Fit();
 
@@ -102,11 +102,11 @@ void DeltaPatcherMainDialog::OnOperationSelected( wxCommandEvent& event )
 	
 	if(decodeMode){ //create patch selected
 		decodePanel->Show(false);
-		encodePanel->Show();
+		encodePanel->SwitchTo();
 		decodeMode=false;
 	}else{ //apply patch selected
 		encodePanel->Show(false);
-		decodePanel->Show();
+		decodePanel->SwitchTo();
 		decodeMode=true;
 	}
 
@@ -119,6 +119,7 @@ void DeltaPatcherMainDialog::OnClickAbout( wxCommandEvent& event )
 {
 	DeltaPatcherAboutDialog* about=new DeltaPatcherAboutDialog(this);
 	about->ShowModal();
+	about->Destroy();
 }
 
 void DeltaPatcherMainDialog::Log(int type,const wxChar* msg)
