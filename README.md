@@ -7,7 +7,7 @@ Delta patcher is fully self-contained and does not depend on the xdelta3 tool at
 So, this tool was designed to be self-contained (for Windows, MacOS and GTK-based Linux systems). It's written in C++ using wxWidgets for the GUI components and all the needed libraries are statically linked to the executable (except for GTK for linux builds). Last, but not the least, Delta Patcher is GPL2'd and cross-platform: it runs fine on Windows, Linux and MacOS.
 
 ## How to build
-Delta Patcher has been successfully built on Windows 10, Ubuntu 22.04 and Fedora 36.
+Delta Patcher has been successfully built on Windows 10, Ubuntu 22.04, Fedora 36 and MacOS 10.14+.
 
 ### Windows
 
