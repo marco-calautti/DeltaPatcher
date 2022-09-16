@@ -9,22 +9,19 @@ So, this tool was designed to be self-contained (for Windows, MacOS and GTK-base
 ## How to build
 Delta Patcher has been successfully built on Windows 10, Ubuntu 22.04, Fedora 36 and MacOS 10.14+.
 
-### Windows
+### Windows and MacOS
 
--   Install CMake and Visual Studio with the Desktop C++ Development tools (including the WindowsSDK package).
+-   On Windows, install CMake, git and Visual Studio with the Desktop C++ Development tools (including the WindowsSDK package).
+-   On MacOS install the Xcode command line tools (or Xcode itself), CMake and git.
 -   git clone --recurse-submodules https://github.com/marco-calautti/DeltaPatcher.git
 -   cd DeltaPatcher
--   mkdir build
--   cd build
--   cmake -DwxBUILD_SHARED=OFF -DwxBUILD_USE_STATIC_RUNTIME=ON -DCMAKE_BUILD_TYPE=Release ..
--   Open the solution file created in the build directory with Visual Studio.
--   Select Release as the build configuration.
--   Press F6 to build.
+-   cmake -B build -DCMAKE_BUILD_TYPE=Release -DwxBUILD_SHARED=OFF -DwxBUILD_USE_STATIC_RUNTIME=ON
+-   cmake --build build --config Release --parallel
 
-For an x86 (32bit) build supporting also Windows XP, then you need Visual Studio 2019 and the v141_xp tool set. Then do:
-- cmake -G "Visual Studio 16 2019" -A Win32 -T v141_xp -DwxBUILD_SHARED=OFF -DwxBUILD_USE_STATIC_RUNTIME=ON -DCMAKE_BUILD_TYPE=Release ..
+For an x86 (32bit) build on Windows supporting also Windows XP, then you need Visual Studio 2019 and the v141_xp tool set. Then do:
+- cmake -B build -G "Visual Studio 16 2019" -A Win32 -T v141_xp -DCMAKE_BUILD_TYPE=Release -DwxBUILD_SHARED=OFF -DwxBUILD_USE_STATIC_RUNTIME=ON
 
-The executable should be found in build/app/Release/
+The executable should be found in build/app/Release/ on Windows and in build/app on MacOS
 
 ### Linux
 
@@ -34,8 +31,7 @@ The executable should be found in build/app/Release/
 
 -   git clone --recurse-submodules https://github.com/marco-calautti/DeltaPatcher.git
 -   cd DeltaPatcher
--   mkdir build && cd build
--   cmake -DwxBUILD_SHARED=OFF -DCMAKE_BUILD_TYPE=Release ..
--   make -j$(nproc)
+-   cmake -B build -DCMAKE_BUILD_TYPE=Release -DwxBUILD_SHARED=OFF
+-   cmake --build build --config Release --parallel
 
 The final binary should be found in build/app/
