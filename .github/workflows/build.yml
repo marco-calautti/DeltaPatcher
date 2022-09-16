@@ -58,7 +58,7 @@ jobs:
         name: linux_bin_gtk3_x86_64
         path: ${{github.workspace}}/build/app/DeltaPatcher
 
-  build-macos1015:
+  build-macos1015-universal:
     
     runs-on: macos-10.15
 
@@ -68,19 +68,19 @@ jobs:
         submodules: recursive
 
     - name: Configure CMake
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DwxBUILD_SHARED=${{env.wxBUILD_SHARED}} -DwxBUILD_USE_STATIC_RUNTIME=${{env.wxBUILD_USE_STATIC_RUNTIME}}
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DwxBUILD_SHARED=${{env.wxBUILD_SHARED}} -DwxBUILD_USE_STATIC_RUNTIME=${{env.wxBUILD_USE_STATIC_RUNTIME}}
 
     - name: Build
       run: |
         cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --parallel 2
         cd ${{github.workspace}}/build/app
-        zip -r macos10.15_bin_x86_64.zip DeltaPatcher.app/
+        zip -r macos10.15_bin_universal.zip DeltaPatcher.app/
       
       
     - uses: actions/upload-artifact@v3
       with:
-        name: macos10.15_bin_x86_64
-        path: ${{github.workspace}}/build/app/macos10.15_bin_x86_64.zip
+        name: macos10.15_bin_universal
+        path: ${{github.workspace}}/build/app/macos10.15_bin_universal.zip
   
   build-macos11-universal:
 
