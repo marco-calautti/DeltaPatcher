@@ -1,6 +1,9 @@
 # DeltaPatcher [![Build](https://github.com/marco-calautti/DeltaPatcher/actions/workflows/build.yml/badge.svg)](https://github.com/marco-calautti/DeltaPatcher/actions/workflows/build.yml) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/bdfed52f118c4199ad0d828520f29b61)](https://www.codacy.com/gh/marco-calautti/DeltaPatcher/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=marco-calautti/DeltaPatcher&amp;utm_campaign=Badge_Grade)
 
+![ScreenShot](https://i.imgur.com/sxDcra6.png)
+
 Delta Patcher is a GUI software that is able to create and apply xdelta patches as the ones supported by the xdelta tool developed by Joshua McDonald. 
+
 
 Delta patcher is fully self-contained and does not depend on the xdelta3 tool at all. This sets Delta Patcher apart from all other tools out there that are just frontends to the xdelta3 binary. Moreover, such frontends do not support some options of the encoder/decoder at all, like main and secondary compression level for encoding and checksum checking for decoding/encoding. Also, they are all written in .NET (0_0).
 
