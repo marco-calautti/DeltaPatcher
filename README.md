@@ -19,7 +19,7 @@ Delta Patcher has been successfully built on Windows 10, Ubuntu 22.04, Fedora 36
 -   git clone --recurse-submodules https://github.com/marco-calautti/DeltaPatcher.git
 -   cd DeltaPatcher
 -   cmake -B build -DCMAKE_BUILD_TYPE=Release -DwxBUILD_SHARED=OFF -DwxBUILD_USE_STATIC_RUNTIME=ON
--   cmake --build build --config Release --parallel
+-   cmake --build build --config Release 
 
 For an x86 (32bit) build on Windows supporting also Windows XP, then you need Visual Studio 2019 and the v141_xp tool set. Then do:
 - cmake -B build -G "Visual Studio 16 2019" -A Win32 -T v141_xp -DCMAKE_BUILD_TYPE=Release -DwxBUILD_SHARED=OFF -DwxBUILD_USE_STATIC_RUNTIME=ON
@@ -35,6 +35,6 @@ The executable should be found in build/app/Release/ on Windows and in build/app
 -   git clone --recurse-submodules https://github.com/marco-calautti/DeltaPatcher.git
 -   cd DeltaPatcher
 -   cmake -B build -DCMAKE_BUILD_TYPE=Release -DwxBUILD_SHARED=OFF
--   cmake --build build --config Release --parallel
+-   cmake --build build --config Release
 
 The final binary should be found in build/app/
