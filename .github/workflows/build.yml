@@ -6,15 +6,17 @@ on:
   pull_request:
     branches: [ "master" ]
 
+  workflow_dispatch:
+
 env:
   BUILD_TYPE: Release
   wxBUILD_SHARED: OFF
   wxBUILD_USE_STATIC_RUNTIME: ON 
 
 jobs:
-  build-win32-msvc2019:
+  build-win-msvc2022:
     
-    runs-on: windows-2019
+    runs-on: windows-2022
 
     steps:
     - uses: actions/checkout@v3
@@ -22,14 +24,14 @@ jobs:
         submodules: recursive
   
     - name: Configure CMake
-      run: cmake -B ${{github.workspace}}/build -G "Visual Studio 16 2019" -A Win32 -T v141_xp -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DwxBUILD_SHARED=${{env.wxBUILD_SHARED}} -DwxBUILD_USE_STATIC_RUNTIME=${{env.wxBUILD_USE_STATIC_RUNTIME}} 
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DwxBUILD_SHARED=${{env.wxBUILD_SHARED}} -DwxBUILD_USE_STATIC_RUNTIME=${{env.wxBUILD_USE_STATIC_RUNTIME}} 
 
     - name: Build
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --parallel 2
       
     - uses: actions/upload-artifact@v3
       with:
-        name: windows_bin_x86
+        name: windows_bin_x64
         path: ${{github.workspace}}/build/app/Release/DeltaPatcher.exe
       
   build-linux:
@@ -58,9 +60,9 @@ jobs:
         name: linux_bin_gtk3_x86_64
         path: ${{github.workspace}}/build/app/DeltaPatcher
 
-  build-macos1015-universal:
+  build-macos11-universal:
     
-    runs-on: macos-10.15
+    runs-on: macos-11
 
     steps:
     - uses: actions/checkout@v3
@@ -79,5 +81,5 @@ jobs:
       
     - uses: actions/upload-artifact@v3
       with:
-        name: macos10.15_bin_universal
-        path: ${{github.workspace}}/build/app/macos10.15_bin_universal.zip
+        name: macos11_bin_universal
+        path: ${{github.workspace}}/build/app/macos11_bin_universal.zip

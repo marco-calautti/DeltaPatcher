@@ -2,6 +2,7 @@
 #include <wx/filename.h>
 #include <gui/DeltaPatcherDecodePanel.h>
 #include <wx/filedlg.h>
+#include <wx/generic/msgdlgg.h>
 
 #include <gui/icons/open.xpm>
 #include <gui/icons/save.xpm>
@@ -69,7 +70,7 @@ void DeltaPatcherDecodePanel::OnOpenPatch( wxCommandEvent& event )
 void DeltaPatcherDecodePanel::OnApplyPatch( wxCommandEvent& event )
 {
 	if(patchField->IsEmpty()||originalField->IsEmpty()){
-		wxMessageBox(_("Fill all the textboxes first!"),_("Warning"),wxICON_EXCLAMATION,this);
+		wxGenericMessageDialog(this, _("Fill all the textboxes first!"),_("Warning"),wxICON_EXCLAMATION).ShowModal();
 		return;
 	}
 	
@@ -182,14 +183,14 @@ void DeltaPatcherDecodePanel::OnThreadUpdate(wxThreadEvent& evt)
 
 	if(code!=0){
 		logger->Log(Logger::LOG_ERROR,message);
-		wxMessageBox(_("An error has occurred!\nSee log for more information."),_("Warning"),wxICON_EXCLAMATION,this);
+		wxGenericMessageDialog(this,_("An error has occurred!\nSee log for more information."),_("Warning"),wxICON_EXCLAMATION).ShowModal();
 	}else{
 		if(!keepOriginalCheck->IsChecked()){ //we must not keep the original file
 			wxRemoveFile(threadOriginal);
 			wxRenameFile(threadModified,threadOriginal);
 		}
 		logger->Log(Logger::LOG_MESSAGE,_("Patch successfully applied!"));
-		wxMessageBox(_("Patch successfully applied!"),_("Notice"),wxICON_INFORMATION,this);
+		wxGenericMessageDialog(this,_("Patch successfully applied!"),_("Notice"),wxICON_INFORMATION).ShowModal();
 	}
 }
 

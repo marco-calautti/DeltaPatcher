@@ -1,5 +1,6 @@
 #include <wx/filename.h>
 #include <wx/filedlg.h>
+
 #include <gui/DeltaPatcherEncodePanel.h>
 #include <gui/DeltaPatcherDropHandler.h>
 #include <gui/DeltaPatcherDropTarget.h>
@@ -147,7 +148,7 @@ void DeltaPatcherEncodePanel::OnSavePatch( wxCommandEvent& event )
 void DeltaPatcherEncodePanel::OnCreatePatch( wxCommandEvent& event )
 {
 	if(patchField->IsEmpty()||originalField->IsEmpty()||modifiedField->IsEmpty()){
-		wxMessageBox(_("Fill all the textboxes first!"),_("Warning"),wxICON_EXCLAMATION,this);
+		wxGenericMessageDialog(this,_("Fill all the textboxes first!"),_("Warning"),wxICON_EXCLAMATION);
 		return;
 	}
 	
@@ -279,10 +280,10 @@ void DeltaPatcherEncodePanel::OnThreadUpdate(wxThreadEvent& evt)
 
 	if(code!=0){
 		logger->Log(Logger::LOG_ERROR,message);
-		wxMessageBox(_("An error has occurred!\nSee log for more information."),_("Warning"),wxICON_EXCLAMATION,this);
+		wxGenericMessageDialog(this,_("An error has occurred!\nSee log for more information."),_("Warning"),wxICON_EXCLAMATION);
 	}else{
 		logger->Log(Logger::LOG_MESSAGE,_("Patch successfully created!"));
-		wxMessageBox(_("Patch successfully created!"),_("Notice"),wxICON_INFORMATION,this);
+		wxGenericMessageDialog(this,_("Patch successfully created!"),_("Notice"),wxICON_INFORMATION);
 	}
 }
 
