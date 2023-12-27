@@ -69,8 +69,9 @@ jobs:
       - if: startsWith(matrix.os, 'windows')
         name: Package Windows
         run: |
-          cp ${{github.workspace}}/CHANGELOG.txt ${{github.workspace}}/build/app/Release/
-          cd ${{github.workspace}}/build/app/Release
+          cp ${{github.workspace}}/CHANGELOG.txt ${{github.workspace}}/build/app/
+          cp ${{github.workspace}}/build/app/Release/DeltaPatcher.exe ${{github.workspace}}/build/app/
+          cd ${{github.workspace}}/build/app/
           Compress-Archive -Path DeltaPatcher.exe,CHANGELOG.txt -Destination ${{ matrix.release_package }}.zip
 
       - if: startsWith(matrix.os, 'ubuntu')
