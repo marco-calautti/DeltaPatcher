@@ -19,15 +19,21 @@ jobs:
   create_release:
     name: Create Release if Needed
     runs-on: ubuntu-latest
+    
+    #if: contains(github.ref, 'refs/tags/') #Create release only on tag
     steps:
-      - name: Prepare Release if Needed
-        if: contains(github.ref, 'refs/tags/') #Create release only on tag
-        uses: softprops/action-gh-release@v1
-        with:
-          name: Delta Patcher ${{ github.ref_name }}
-          draft: false
-          prerelease: false
-          generate_release_notes: false
+        - name: Get Tag Message
+          id: tag_message
+          run: echo "TAG_MESSAGE=$(git for-each-ref refs/tags/${{github.ref_name}} --format='%(contents)')" >> $GITHUB_OUTPUT
+
+        - name: Prepare Release if Needed
+          uses: softprops/action-gh-release@v1
+          with:
+            name: Delta Patcher ${{ github.ref_name }}
+            body: ${{ steps.tag_message.outputs.TAG_MESSAGE }}
+            draft: false
+            prerelease: false
+            generate_release_notes: false
 
   build_release:
     name: Build
@@ -97,7 +103,6 @@ jobs:
         name: Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ needs.create_release.outputs.tag-name }}
-          files: ${{ matrix.release_package }}.zip
+          files: ${{github.workspace}}/build/app/${{ matrix.release_package }}.zip
 
 
