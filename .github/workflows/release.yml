@@ -1,0 +1,96 @@
+name: Create Release
+
+on:
+  push:
+    branches: [ "master" ]
+    tags:
+      - 'v*'
+  pull_request:
+    branches: [ "master" ]
+
+  workflow_dispatch:
+    
+env:
+  BUILD_TYPE: Release
+  wxBUILD_SHARED: OFF
+  wxBUILD_USE_STATIC_RUNTIME: ON 
+
+jobs:
+  create_release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Release
+        id: create_release
+        if: contains(github.ref, 'refs/tags/') #Create release only on tag
+        uses: softprops/action-gh-release@v1
+        with:
+          name: Delta Patcher ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+          generate_release_notes: false
+
+  build:
+    name: Build
+    needs: create_release
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-11, windows-2022]
+        include:
+          - os: ubuntu-latest
+            relase_package: linux_bin_gtk3_x86_64
+          - os: macos-latest
+            relase_package: macos_bin_universal
+          - os: windows-latest
+            relase_package: windows_bin_x86_64
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+  
+    - name: Pull dependencies
+      if: startsWith(matrix.os, 'ubuntu')
+      run: sudo apt install -y build-essential cmake git libgtk-3-dev
+
+    - name: Configure CMake
+      if: startsWith(matrix.os, 'windows')
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DwxBUILD_SHARED=${{env.wxBUILD_SHARED}} -DwxBUILD_USE_STATIC_RUNTIME=${{env.wxBUILD_USE_STATIC_RUNTIME}} 
+      if: startsWith(matrix.os, 'ubuntu')
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DwxBUILD_SHARED=${{env.wxBUILD_SHARED}}
+      if: startsWith(matrix.os, 'macOS')
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DwxBUILD_SHARED=${{env.wxBUILD_SHARED}} -DwxBUILD_USE_STATIC_RUNTIME=${{env.wxBUILD_USE_STATIC_RUNTIME}}
+
+    - name: Build
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --parallel 2
+    
+    - name: Package
+      if: startsWith(matrix.os, 'macOS')
+      run: |
+        cp ${{github.workspace}}/CHANGELOG.txt ${{github.workspace}}/build/app
+        cd ${{github.workspace}}/build/app
+        zip -r ${{ matrix.release_package }}.zip DeltaPatcher.app/ CHANGELOG.txt
+      if: startsWith(matrix.os, 'windows')
+      run: |
+        cp ${{github.workspace}}/CHANGELOG.txt ${{github.workspace}}/build/app/Release/
+        cd ${{github.workspace}}/build/app/Release
+        zip ${{ matrix.release_package }}.zip DeltaPatcher.exe CHANGELOG.txt
+      if: startsWith(matrix.os, 'ubuntu')
+      run: |
+        cp ${{github.workspace}}/CHANGELOG.txt ${{github.workspace}}/build/app/
+        cd ${{github.workspace}}/build/app/
+        zip ${{ matrix.release_package }}.zip DeltaPatcher CHANGELOG.txt
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: ${{ matrix.release_package }}
+        path: ${{github.workspace}}/build/app/${{ matrix.release_package }}.zip
+
+    if: contains(github.ref, 'refs/tags/')
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ needs.create_release.outputs.tag-name }}
+        files: ${{ matrix.release_package }}.zip
+
+
