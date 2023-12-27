@@ -3,7 +3,9 @@ name: Build
 on:
   push:
     branches: [ "master" ]
-
+    tags:
+      - 'v*'
+    
   pull_request:
     branches: [ "master" ]
 
@@ -19,17 +21,18 @@ jobs:
     name: Create Release if Needed
     runs-on: ubuntu-latest
     
-    if: contains(github.ref, 'refs/tags/') #Create release only on tag
     steps:
         - uses: actions/checkout@v3
 
-        - name: Get Tag Message
+        - if: contains(github.ref, 'refs/tags/')
+          name: Get Tag Message
           id: tag_message
           run: |
             cd ${{github.workspace}}
             echo "TAG_MESSAGE=$(git for-each-ref refs/tags/${{github.ref_name}} --format='%(contents)')" >> $GITHUB_OUTPUT
-            
-        - name: Prepare Release
+
+        - if: contains(github.ref, 'refs/tags/')
+          name: Prepare Release
           uses: softprops/action-gh-release@v1
           with:
             name: Delta Patcher ${{ github.ref_name }}
