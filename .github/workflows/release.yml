@@ -1,4 +1,4 @@
-name: Create Release
+name: Build and Create Release on tag
 
 on:
   push:
@@ -34,14 +34,13 @@ jobs:
     needs: create_release
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-11, windows-2022]
         include:
           - os: ubuntu-latest
-            relase_package: linux_bin_gtk3_x86_64
+            release_package: linux_bin_gtk3_x86_64
           - os: macos-11
-            relase_package: macos_bin_universal
+            release_package: macos_bin_universal
           - os: windows-2022
-            relase_package: windows_bin_x86_64
+            release_package: windows_bin_x86_64
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
