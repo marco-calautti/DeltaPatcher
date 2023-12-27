@@ -17,11 +17,10 @@ env:
 
 jobs:
   create_release:
-    name: Create Release
+    name: Create Release if Needed
     runs-on: ubuntu-latest
     steps:
-      - name: Create Release
-        id: create_release
+      - name: Prepare Release if Needed
         if: contains(github.ref, 'refs/tags/') #Create release only on tag
         uses: softprops/action-gh-release@v1
         with:
@@ -48,38 +47,42 @@ jobs:
       - uses: actions/checkout@v3
         with:
           submodules: recursive
-  
-      - name: Pull dependencies
-        if: startsWith(matrix.os, 'ubuntu')
+
+      - if: startsWith(matrix.os, 'ubuntu')
+        name: Pull dependencies
         run: sudo apt install -y build-essential cmake git libgtk-3-dev
 
-      - name: Configure CMake Windows
-        if: startsWith(matrix.os, 'windows')
+      - if: startsWith(matrix.os, 'windows')
+        name: Configure CMake Windows
         run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DwxBUILD_SHARED=${{env.wxBUILD_SHARED}} -DwxBUILD_USE_STATIC_RUNTIME=${{env.wxBUILD_USE_STATIC_RUNTIME}} 
-      - name: Configure CMake Linux
-        if: startsWith(matrix.os, 'ubuntu')
+      
+      - if: startsWith(matrix.os, 'ubuntu')
+        name: Configure CMake Linux
         run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DwxBUILD_SHARED=${{env.wxBUILD_SHARED}}
-      - name: Configure CMake MacOS
-        if: startsWith(matrix.os, 'macOS')
+      
+      - if: startsWith(matrix.os, 'macOS')
+        name: Configure CMake MacOS
         run: cmake -B ${{github.workspace}}/build -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DwxBUILD_SHARED=${{env.wxBUILD_SHARED}} -DwxBUILD_USE_STATIC_RUNTIME=${{env.wxBUILD_USE_STATIC_RUNTIME}}
 
       - name: Build
         run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --parallel 2
 
-      - name: Package Windows
-        if: startsWith(matrix.os, 'windows')
+      - if: startsWith(matrix.os, 'windows')
+        name: Package Windows
         run: |
           cp ${{github.workspace}}/CHANGELOG.txt ${{github.workspace}}/build/app/Release/
           cd ${{github.workspace}}/build/app/Release
           zip ${{ matrix.release_package }}.zip DeltaPatcher.exe CHANGELOG.txt
-      - name: Package Linux
-        if: startsWith(matrix.os, 'ubuntu')
+
+      - if: startsWith(matrix.os, 'ubuntu')
+        name: Package Linux
         run: |
           cp ${{github.workspace}}/CHANGELOG.txt ${{github.workspace}}/build/app/
           cd ${{github.workspace}}/build/app/
           zip ${{ matrix.release_package }}.zip DeltaPatcher CHANGELOG.txt
-      - name: Package MacOS
-        if: startsWith(matrix.os, 'macOS')
+
+      - if: startsWith(matrix.os, 'macOS')
+        name: Package MacOS
         run: |
           cp ${{github.workspace}}/CHANGELOG.txt ${{github.workspace}}/build/app
           cd ${{github.workspace}}/build/app
@@ -90,8 +93,8 @@ jobs:
           name: ${{ matrix.release_package }}
           path: ${{github.workspace}}/build/app/${{ matrix.release_package }}.zip
 
-        if: contains(github.ref, 'refs/tags/')
-      - name: Release
+      - if: contains(github.ref, 'refs/tags/')
+        name: Release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ needs.create_release.outputs.tag-name }}
