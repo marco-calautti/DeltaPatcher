@@ -29,7 +29,9 @@ jobs:
           id: tag_message
           run: |
             cd ${{github.workspace}}
-            echo "TAG_MESSAGE=$(git for-each-ref refs/tags/${{github.ref_name}} --format='%(contents)')" >> $GITHUB_OUTPUT
+            echo 'TAG_MESSAGE<<EOF' >> $GITHUB_OUTPUT
+            echo "$(git for-each-ref refs/tags/${{github.ref_name}} --format='%(contents)')" >> $GITHUB_OUTPUT
+            echo 'EOF' >> $GITHUB_OUTPUT
 
         - if: contains(github.ref, 'refs/tags/')
           name: Prepare Release
@@ -105,7 +107,20 @@ jobs:
           name: ${{ matrix.release_package }}
           path: ${{github.workspace}}/build/app/${{ matrix.release_package }}.zip
 
-      - if: contains(github.ref, 'refs/tags/')
+      - if: contains(github.ref, 'refs/tags/') && startsWith(matrix.os, 'windows')
+        name: Define Asset Path Windows
+        id: asset_path_win
+        run: |
+          $ass_path = "${{github.workspace}}/build/app/${{ matrix.release_package }}.zip" -replace '\\','/'
+          echo "ASSET_PATH=$ass_path" >> $env:GITHUB_OUTPUT
+
+      - if: contains(github.ref, 'refs/tags/') && startsWith(matrix.os, 'windows')
+        name: Upload Release Assets Windows
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ${{ steps.asset_path_win.outputs.ASSET_PATH }}
+          
+      - if: contains(github.ref, 'refs/tags/') && !startsWith(matrix.os, 'windows')
         name: Upload Release Assets
         uses: softprops/action-gh-release@v1
         with:
