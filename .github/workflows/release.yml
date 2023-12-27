@@ -62,7 +62,7 @@ jobs:
         run: |
            cd ${{github.workspace}}
            echo "$(git for-each-ref refs/tags/${{github.ref_name}} --format='%(contents)')" >> "${{github.workspace}}/release_notes.txt"
-           echo "${{github.workspace}}/release_notes.txt"
+           cat "${{github.workspace}}/release_notes.txt"
         
       - if: startsWith(matrix.os, 'ubuntu')
         name: Pull dependencies
