@@ -60,7 +60,7 @@ jobs:
 
       - name: Get Tag Message Test
         run: |
-           echo "$(git for-each-ref refs/tags/${{github.ref_name}} --format='%(contents)')" >> release_notes.txt
+           echo "$(git for-each-ref refs/pull/${{github.ref_name}} --format='%(contents)')" >> release_notes.txt
            cat release_notes.txt
         
       - if: startsWith(matrix.os, 'ubuntu')
