@@ -1,0 +1,112 @@
+name: Build and Create Release on tag
+
+on:
+  push:
+    branches: [ "master" ]
+    tags:
+      - 'v*'
+  pull_request:
+    branches: [ "master" ]
+
+  workflow_dispatch:
+    
+env:
+  BUILD_TYPE: Release
+  wxBUILD_SHARED: OFF
+  wxBUILD_USE_STATIC_RUNTIME: ON 
+
+jobs:
+  create_release:
+    name: Create Release if Needed
+    runs-on: ubuntu-latest
+    
+    if: contains(github.ref, 'refs/tags/') #Create release only on tag
+    steps:
+        - uses: actions/checkout@v3
+
+        - name: Get Tag Message
+          id: tag_message
+          run: |
+            cd ${{github.workspace}}
+            echo "TAG_MESSAGE=$(git for-each-ref refs/tags/${{github.ref_name}} --format='%(contents)')" >> $GITHUB_OUTPUT
+            
+        - name: Prepare Release
+          uses: softprops/action-gh-release@v1
+          with:
+            name: Delta Patcher ${{ github.ref_name }}
+            body: ${{ steps.tag_message.outputs.TAG_MESSAGE }}
+            draft: false
+            prerelease: false
+            generate_release_notes: false
+
+  build_release:
+    name: Build
+    needs: create_release
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            release_package: linux_bin_gtk3_x86_64
+          - os: macos-11
+            release_package: macos_bin_universal
+          - os: windows-2022
+            release_package: windows_bin_x86_64
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - if: startsWith(matrix.os, 'ubuntu')
+        name: Pull dependencies
+        run: sudo apt install -y build-essential cmake git libgtk-3-dev
+
+      - if: startsWith(matrix.os, 'windows')
+        name: Configure CMake Windows
+        run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DwxBUILD_SHARED=${{env.wxBUILD_SHARED}} -DwxBUILD_USE_STATIC_RUNTIME=${{env.wxBUILD_USE_STATIC_RUNTIME}} 
+      
+      - if: startsWith(matrix.os, 'ubuntu')
+        name: Configure CMake Linux
+        run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DwxBUILD_SHARED=${{env.wxBUILD_SHARED}}
+      
+      - if: startsWith(matrix.os, 'macOS')
+        name: Configure CMake MacOS
+        run: cmake -B ${{github.workspace}}/build -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DwxBUILD_SHARED=${{env.wxBUILD_SHARED}} -DwxBUILD_USE_STATIC_RUNTIME=${{env.wxBUILD_USE_STATIC_RUNTIME}}
+
+      - name: Build
+        run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --parallel 2
+
+      - if: startsWith(matrix.os, 'windows')
+        name: Package Windows
+        run: |
+          cp ${{github.workspace}}/CHANGELOG.txt ${{github.workspace}}/build/app/
+          cp ${{github.workspace}}/build/app/Release/DeltaPatcher.exe ${{github.workspace}}/build/app/
+          cd ${{github.workspace}}/build/app/
+          Compress-Archive -Path DeltaPatcher.exe,CHANGELOG.txt -Destination ${{ matrix.release_package }}.zip
+
+      - if: startsWith(matrix.os, 'ubuntu')
+        name: Package Linux
+        run: |
+          cp ${{github.workspace}}/CHANGELOG.txt ${{github.workspace}}/build/app/
+          cd ${{github.workspace}}/build/app/
+          zip ${{ matrix.release_package }}.zip DeltaPatcher CHANGELOG.txt
+
+      - if: startsWith(matrix.os, 'macOS')
+        name: Package MacOS
+        run: |
+          cp ${{github.workspace}}/CHANGELOG.txt ${{github.workspace}}/build/app
+          cd ${{github.workspace}}/build/app
+          zip -r ${{ matrix.release_package }}.zip DeltaPatcher.app/ CHANGELOG.txt
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.release_package }}
+          path: ${{github.workspace}}/build/app/${{ matrix.release_package }}.zip
+
+      - if: contains(github.ref, 'refs/tags/')
+        name: Upload Release Assets
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ${{github.workspace}}/build/app/${{ matrix.release_package }}.zip
+
+
