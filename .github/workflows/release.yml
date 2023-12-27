@@ -22,9 +22,15 @@ jobs:
     
     #if: contains(github.ref, 'refs/tags/') #Create release only on tag
     steps:
+        - uses: actions/checkout@v3
+          with:
+            submodules: recursive
+
         - name: Get Tag Message
           id: tag_message
-          run: echo "TAG_MESSAGE=$(git for-each-ref refs/tags/${{github.ref_name}} --format='%(contents)')" >> $GITHUB_OUTPUT
+          run: |
+            cd ${{github.workspace}}
+            echo "TAG_MESSAGE=$(git for-each-ref refs/tags/${{github.ref_name}} --format='%(contents)')" >> $GITHUB_OUTPUT
 
         - name: Prepare Release if Needed
           uses: softprops/action-gh-release@v1
