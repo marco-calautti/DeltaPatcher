@@ -38,9 +38,9 @@ jobs:
         include:
           - os: ubuntu-latest
             relase_package: linux_bin_gtk3_x86_64
-          - os: macos-latest
+          - os: macos-11
             relase_package: macos_bin_universal
-          - os: windows-latest
+          - os: windows-2022
             relase_package: windows_bin_x86_64
     runs-on: ${{ matrix.os }}
     steps:
