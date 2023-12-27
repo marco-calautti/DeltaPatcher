@@ -20,7 +20,7 @@ jobs:
     name: Create Release if Needed
     runs-on: ubuntu-latest
     
-    #if: contains(github.ref, 'refs/tags/') #Create release only on tag
+    if: contains(github.ref, 'refs/tags/') #Create release only on tag
     steps:
         - uses: actions/checkout@v3
 
@@ -29,9 +29,8 @@ jobs:
           run: |
             cd ${{github.workspace}}
             echo "TAG_MESSAGE=$(git for-each-ref refs/tags/${{github.ref_name}} --format='%(contents)')" >> $GITHUB_OUTPUT
-            echo $GITHUB_OUTPUT
             
-        - name: Prepare Release if Needed
+        - name: Prepare Release
           uses: softprops/action-gh-release@v1
           with:
             name: Delta Patcher ${{ github.ref_name }}
@@ -105,7 +104,7 @@ jobs:
           path: ${{github.workspace}}/build/app/${{ matrix.release_package }}.zip
 
       - if: contains(github.ref, 'refs/tags/')
-        name: Release
+        name: Upload Release Assets
         uses: softprops/action-gh-release@v1
         with:
           files: ${{github.workspace}}/build/app/${{ matrix.release_package }}.zip
