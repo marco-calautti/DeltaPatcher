@@ -26,19 +26,14 @@ jobs:
 
         - if: contains(github.ref, 'refs/tags/')
           name: Get Tag Message
-          id: tag_message
-          run: |
-            cd ${{github.workspace}}
-            echo 'TAG_MESSAGE<<EOF' >> $GITHUB_OUTPUT
-            echo "$(git for-each-ref refs/tags/${{github.ref_name}} --format='%(contents)')" >> $GITHUB_OUTPUT
-            echo 'EOF' >> $GITHUB_OUTPUT
-
+          run: echo "$(git for-each-ref refs/tags/${{github.ref_name}} --format='%(contents)')" >> release_notes.txt
+        
         - if: contains(github.ref, 'refs/tags/')
           name: Prepare Release
           uses: softprops/action-gh-release@v1
           with:
             name: Delta Patcher ${{ github.ref_name }}
-            body: ${{ steps.tag_message.outputs.TAG_MESSAGE }}
+            body_path: release_notes.txt
             draft: false
             prerelease: false
             generate_release_notes: false
