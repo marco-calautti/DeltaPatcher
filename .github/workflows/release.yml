@@ -71,7 +71,7 @@ jobs:
         run: |
           cp ${{github.workspace}}/CHANGELOG.txt ${{github.workspace}}/build/app/Release/
           cd ${{github.workspace}}/build/app/Release
-          Compress-Archive -Path DeltaPatcher.exe CHANGELOG.txt -Destination ${{ matrix.release_package }}.zip
+          Compress-Archive -Path DeltaPatcher.exe,CHANGELOG.txt -Destination ${{ matrix.release_package }}.zip
 
       - if: startsWith(matrix.os, 'ubuntu')
         name: Package Linux
