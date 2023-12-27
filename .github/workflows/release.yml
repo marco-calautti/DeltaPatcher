@@ -30,7 +30,7 @@ jobs:
           prerelease: false
           generate_release_notes: false
 
-  build:
+  build_release:
     name: Build
     needs: create_release
     strategy:
