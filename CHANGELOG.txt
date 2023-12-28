@@ -13,6 +13,9 @@ Delta Patcher is a GUI software that is able to create and apply xdelta patches.
 2. Changelog
 -------------------------
 
+v3.1.1:
+- Fixed message dialogs not showing in patch creation mode.
+
 v3.1:
 - Added support for dark mode on Windows 10 or higher. On older versions of Windows, this feature is just disabled.
 - Delta Patcher no longer supports Windows XP, and now requires Windows 7 or higher to run.
