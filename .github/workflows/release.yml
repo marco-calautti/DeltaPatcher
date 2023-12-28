@@ -23,19 +23,25 @@ jobs:
     
     steps:
         - uses: actions/checkout@v3
+          with:
+            fetch-depth: 0
 
         - if: contains(github.ref, 'refs/tags/')
           name: Get Tag Message
+          id: get_tag_message
           run: |
             cd ${{github.workspace}}
-            echo "$(git for-each-ref refs/tags/${{github.ref_name}} --format='%(contents)')" >> "${{github.workspace}}/release_notes.txt"
+            git fetch --tags --force
+            echo "TAG_MESSAGE<<EOF" >> "$GITHUB_OUTPUT"
+            echo "$(git for-each-ref ${{github.ref}} --format='%(contents)')" >> "$GITHUB_OUTPUT"
+            echo "EOF" >> "$GITHUB_OUTPUT"
         
         - if: contains(github.ref, 'refs/tags/')
           name: Prepare Release
           uses: softprops/action-gh-release@v1
           with:
             name: Delta Patcher ${{ github.ref_name }}
-            body_path: ${{github.workspace}}/release_notes.txt
+            body: ${{ steps.get_tag_message.outputs.TAG_MESSAGE }}
             draft: false
             prerelease: false
             generate_release_notes: false
@@ -57,11 +63,6 @@ jobs:
       - uses: actions/checkout@v3
         with:
           submodules: recursive
-
-      - name: Get Tag Message Test
-        run: |
-           echo "$(git for-each-ref refs/pull/${{github.ref_name}} --format='%(contents)')" >> release_notes.txt
-           cat release_notes.txt
         
       - if: startsWith(matrix.os, 'ubuntu')
         name: Pull dependencies
