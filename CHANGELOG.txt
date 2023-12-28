@@ -1,8 +1,7 @@
----------------------------------------------
-	     Delta Patcher 3.0.2
----------------------------------------------
- (C) 2010+ Phoenix <phoenix_87_c@hotmail.com>
-
+-----------------------------------------------
+                Delta Patcher
+-----------------------------------------------
+<https:/github.com/marco-calautti/DeltaPatcher>
 
 -------------------------
 1. What is this?
@@ -14,15 +13,15 @@ Delta Patcher is a GUI software that is able to create and apply xdelta patches.
 2. Changelog
 -------------------------
 
-3.0.2:
+v3.1:
 - Added support for dark mode on Windows 10 or higher. On older versions of Windows, this feature is just disabled.
 - Delta Patcher no longer supports Windows XP, and now requires Windows 7 or higher to run.
 - The Windows binary is now 64 bits only.
 
-3.0.1:
+v3.0.1:
 - Fixed memory leak when applying patches without a description
 
-3.0.0:
+v3.0.0:
 - Modernized the build system using cmake.
 - xdelta has now finally been embedded as a library rather than an exe that needs to be extracted on the fly.
   This should finally avoid false positives from some antiviruses. In this process, xdelta has then also been updated to the latest stable version (3.0.11) which now supports secondary compressions.
@@ -32,10 +31,10 @@ Delta Patcher is a GUI software that is able to create and apply xdelta patches.
 - The Windows exe is still fully self-contained and compatible with Windows XP or above.
 - To avoid further false positive from anti virus software, the windows exe is not compressed anymore, so it is a bit larger than version 2.
 
-2.0.1:
+v2.0.1:
 -Added drag and drop functionality in patch creation mode.
 
-2.0:
+v2.0:
 -No xdelta.exe is needed. Starting from version 2.0, it has been embedded in the delta patcher executable;
 
 -More intuitive GUI design;
@@ -48,7 +47,7 @@ Delta Patcher is a GUI software that is able to create and apply xdelta patches.
 			source window size
 			checksum
 			*custom UTF8 description for patches* -> patches created with delta patcher will show this
-			description if opened with delta patcher (a là PPF-O-MATIC3);
+			description if opened with delta patcher (a lï¿½ PPF-O-MATIC3);
 
 -Associate xdelta patch files to be opened with delta patcher;
 
@@ -64,16 +63,6 @@ Delta Patcher is a GUI software that is able to create and apply xdelta patches.
  to place the "resource" directory along with
  this tool (see source code for the pot file).
 
+v1.0:
+- Initial release
 
------------------------
-3. Contacts and sources
------------------------
-
-You can contact me by email at
-phoenix_87_c@hotmail.com, at the SadNES cITy
-board at http://lnx.sadnescity.it/forum/ or on github.
-The full source code can be found at
-github.com/marco-calautti/DeltaPatcher.
-
-
-Phoenix

@@ -96,6 +96,7 @@ jobs:
         run: |
           cp ${{github.workspace}}/CHANGELOG.txt ${{github.workspace}}/build/app/
           cd ${{github.workspace}}/build/app/
+          strip -s DeltaPatcher
           zip ${{ matrix.release_package }}.zip DeltaPatcher CHANGELOG.txt
 
       - if: startsWith(matrix.os, 'macOS')
