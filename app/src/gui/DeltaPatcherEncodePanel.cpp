@@ -148,7 +148,7 @@ void DeltaPatcherEncodePanel::OnSavePatch( wxCommandEvent& event )
 void DeltaPatcherEncodePanel::OnCreatePatch( wxCommandEvent& event )
 {
 	if(patchField->IsEmpty()||originalField->IsEmpty()||modifiedField->IsEmpty()){
-		wxGenericMessageDialog(this,_("Fill all the textboxes first!"),_("Warning"),wxICON_EXCLAMATION);
+		wxGenericMessageDialog(this,_("Fill all the textboxes first!"),_("Warning"),wxICON_EXCLAMATION).ShowModal();
 		return;
 	}
 	
@@ -280,10 +280,10 @@ void DeltaPatcherEncodePanel::OnThreadUpdate(wxThreadEvent& evt)
 
 	if(code!=0){
 		logger->Log(Logger::LOG_ERROR,message);
-		wxGenericMessageDialog(this,_("An error has occurred!\nSee log for more information."),_("Warning"),wxICON_EXCLAMATION);
+		wxGenericMessageDialog(this,_("An error has occurred!\nSee log for more information."),_("Warning"),wxICON_EXCLAMATION).ShowModal();
 	}else{
 		logger->Log(Logger::LOG_MESSAGE,_("Patch successfully created!"));
-		wxGenericMessageDialog(this,_("Patch successfully created!"),_("Notice"),wxICON_INFORMATION);
+		wxGenericMessageDialog(this,_("Patch successfully created!"),_("Notice"),wxICON_INFORMATION).ShowModal();
 	}
 }
 
