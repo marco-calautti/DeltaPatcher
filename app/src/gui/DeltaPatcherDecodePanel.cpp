@@ -217,6 +217,7 @@ void DeltaPatcherDecodePanel::ShowPatchDescriptionToolTip(const wxString& patchD
 {
 	wxRichToolTip tip(_("Patch info"),patchDesc);
 	tip.SetIcon(wxICON_INFORMATION);
+	tip.SetTimeout(0);
 	tip.ShowFor(patchButton);
 }
 
