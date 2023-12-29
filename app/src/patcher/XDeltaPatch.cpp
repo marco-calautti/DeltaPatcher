@@ -142,7 +142,15 @@ void XDeltaPatch::DecodeDescription()
 	std::string buf=base64_decode(strPart);
 	
 	description=wxString::FromUTF8(buf.c_str(),buf.length());
-	
+
+	//Uniform new lines to \n
+	description.Replace("\r\n","\n");
+	description.Replace("\r","\n");
+
+	//On Windows, use \r\n
+#if defined(__WXMSW__)
+	description.Replace("\n","\r\n");
+#endif
 }
 
 wxString XDeltaPatch::EncodeDescription()

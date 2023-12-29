@@ -65,6 +65,7 @@ MainDialog( parent ), decodeMode(true)
 #endif
 
 	decodePanel->SwitchTo();
+	ShowHideLog();
 	this->Update();
 	this->Fit();
 

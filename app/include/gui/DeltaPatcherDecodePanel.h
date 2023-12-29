@@ -44,6 +44,7 @@ protected:
 	void OnDecodeOptionsClicked(wxCommandEvent& event);
 
 	virtual wxThread::ExitCode Entry();
+	void ShowPatchDescriptionToolTip(const wxString& patchDesc);
 public:
 	/** Constructor */
 	DeltaPatcherDecodePanel( wxWindow* parent,Logger* logger );
@@ -60,7 +61,7 @@ private:
 	wxMenu* applyOptionsMenu;
 	wxMenuItem* keepOriginalCheck;
 	wxMenuItem* checksumCheck;
-	
+
 	wxString threadOriginal;
 	wxString threadModified;
 	XDeltaPatch threadXDP;
