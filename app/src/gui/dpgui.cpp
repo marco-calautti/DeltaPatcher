@@ -42,7 +42,7 @@ MainDialog::MainDialog( wxWindow* parent, wxWindowID id, const wxString& title, 
 	aboutButton = new wxBitmapButton( this, wxID_ABOUT, wxNullBitmap, wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW );
 	aboutButton->SetToolTip( _("Shows information about this program.") );
 	
-	bSizer22->Add( aboutButton, 0, wxALIGN_LEFT|wxBOTTOM|wxLEFT|wxRIGHT, 0 );
+	bSizer22->Add( aboutButton, 0, wxALIGN_LEFT|wxBOTTOM|wxLEFT|wxRIGHT|wxEXPAND, 0 );
 	
 	
 	bSizer20->Add( bSizer22, 1, wxEXPAND|wxLEFT, 5 );
@@ -53,13 +53,13 @@ MainDialog::MainDialog( wxWindow* parent, wxWindowID id, const wxString& title, 
 	operationButton = new wxBitmapButton( this, wxID_OPERATION_BUTTON, wxNullBitmap, wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW );
 	operationButton->SetToolTip( _("Switches between patch creation and patch application modes.") );
 	
-	bSizer21->Add( operationButton, 0, wxALIGN_RIGHT|wxBOTTOM, 0 );
+	bSizer21->Add( operationButton, 0, wxALIGN_RIGHT|wxBOTTOM|wxEXPAND, 0 );
 	bSizer21->AddSpacer(7);
 
 	showHideLog = new wxBitmapButton( this, wxID_SHOW_IDE_LOG, wxNullBitmap, wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW );
 	showHideLog->SetToolTip( _("Hides/Shows the log window.") );
 	
-	bSizer21->Add( showHideLog, 0, wxALIGN_RIGHT|wxBOTTOM, 0 );
+	bSizer21->Add( showHideLog, 0, wxALIGN_RIGHT|wxBOTTOM|wxEXPAND, 0 );
 	
 	bSizer20->Add( bSizer21, 0, wxALIGN_RIGHT|wxEXPAND|wxRIGHT, 5 );
 	
@@ -142,7 +142,7 @@ DecodePanel::DecodePanel( wxWindow* parent, wxWindowID id, const wxPoint& pos, c
 	decodeOptionsButton = new wxBitmapButton( this, wxID_DECODE_OPTIONS_BUTTON, wxNullBitmap, wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW );
 	decodeOptionsButton->SetToolTip( _("Changes settings for patch application.") );
 	
-	decodeBottomSizer->Add( decodeOptionsButton, 0, wxALIGN_CENTER_VERTICAL|wxBOTTOM|wxTOP, 0 );
+	decodeBottomSizer->Add( decodeOptionsButton, 0, wxALIGN_CENTER_VERTICAL|wxBOTTOM|wxTOP|wxEXPAND, 0 );
 	
 	
 	decodeMainSizer->Add( decodeBottomSizer, 0, wxEXPAND|wxTOP, 4 );
@@ -236,7 +236,7 @@ EncodePanel::EncodePanel( wxWindow* parent, wxWindowID id, const wxPoint& pos, c
 	encodeOptionsButton = new wxBitmapButton( this, wxID_ENCODE_OPTIONS_BUTTON, wxNullBitmap, wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW );
 	encodeOptionsButton->SetToolTip( _("Changes settings for patch creation.") );
 	
-	bSizer4->Add( encodeOptionsButton, 0, wxALIGN_CENTER_VERTICAL|wxBOTTOM|wxTOP, 0 );
+	bSizer4->Add( encodeOptionsButton, 0, wxALIGN_CENTER_VERTICAL|wxBOTTOM|wxTOP|wxEXPAND, 0 );
 	
 	
 	bSizer1->Add( bSizer4, 0, wxEXPAND|wxTOP, 4 );
