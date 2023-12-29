@@ -42,10 +42,10 @@ MainDialog::MainDialog( wxWindow* parent, wxWindowID id, const wxString& title, 
 	aboutButton = new wxBitmapButton( this, wxID_ABOUT, wxNullBitmap, wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW );
 	aboutButton->SetToolTip( _("Shows information about this program.") );
 	
-	bSizer22->Add( aboutButton, 0, wxALIGN_LEFT|wxBOTTOM|wxLEFT|wxRIGHT, 5 );
+	bSizer22->Add( aboutButton, 0, wxALIGN_LEFT|wxBOTTOM|wxLEFT|wxRIGHT|wxEXPAND, 0 );
 	
 	
-	bSizer20->Add( bSizer22, 1, wxEXPAND, 5 );
+	bSizer20->Add( bSizer22, 1, wxEXPAND|wxLEFT, 5 );
 	
 	wxBoxSizer* bSizer21;
 	bSizer21 = new wxBoxSizer( wxHORIZONTAL );
@@ -53,13 +53,13 @@ MainDialog::MainDialog( wxWindow* parent, wxWindowID id, const wxString& title, 
 	operationButton = new wxBitmapButton( this, wxID_OPERATION_BUTTON, wxNullBitmap, wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW );
 	operationButton->SetToolTip( _("Switches between patch creation and patch application modes.") );
 	
-	bSizer21->Add( operationButton, 0, wxALIGN_RIGHT|wxBOTTOM|wxLEFT|wxRIGHT, 5 );
-	
+	bSizer21->Add( operationButton, 0, wxALIGN_RIGHT|wxBOTTOM|wxEXPAND, 0 );
+	bSizer21->AddSpacer(7);
+
 	showHideLog = new wxBitmapButton( this, wxID_SHOW_IDE_LOG, wxNullBitmap, wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW );
 	showHideLog->SetToolTip( _("Hides/Shows the log window.") );
 	
-	bSizer21->Add( showHideLog, 0, wxALIGN_RIGHT|wxBOTTOM|wxLEFT|wxRIGHT, 5 );
-	
+	bSizer21->Add( showHideLog, 0, wxALIGN_RIGHT|wxBOTTOM|wxEXPAND, 0 );
 	
 	bSizer20->Add( bSizer21, 0, wxALIGN_RIGHT|wxEXPAND|wxRIGHT, 5 );
 	
@@ -67,7 +67,7 @@ MainDialog::MainDialog( wxWindow* parent, wxWindowID id, const wxString& title, 
 	leftSizer->Add( bSizer20, 0, wxEXPAND, 5 );
 	
 	
-	mainSizer->Add( leftSizer, 0, wxBOTTOM|wxEXPAND|wxRIGHT, 5 );
+	mainSizer->Add( leftSizer, 0, wxBOTTOM|wxEXPAND, 5 );
 	
 	logBox = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Log:") ), wxVERTICAL );
 	
@@ -107,7 +107,7 @@ DecodePanel::DecodePanel( wxWindow* parent, wxWindowID id, const wxPoint& pos, c
 	sbSizer1->Add( originalField, 1, wxALIGN_CENTER_VERTICAL|wxALL|wxEXPAND, 7 );
 	
 	originalButton = new wxBitmapButton( this, wxID_DECODE_ORIGINAL_OPEN, wxNullBitmap, wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW );
-	originalButton->SetToolTip( _("Choose the file to patched.") );
+	originalButton->SetToolTip( _("Choose the file to patch.") );
 	
 	sbSizer1->Add( originalButton, 0, wxALL, 5 );
 	
@@ -136,15 +136,16 @@ DecodePanel::DecodePanel( wxWindow* parent, wxWindowID id, const wxPoint& pos, c
 	applyButton->SetDefault(); 
 	applyButton->SetToolTip( _("Applies the selected patch to the given file.") );
 	
-	decodeBottomSizer->Add( applyButton, 1, wxALIGN_CENTER|wxALL|wxEXPAND, 6 );
-	
+	decodeBottomSizer->Add( applyButton, 1, wxALIGN_CENTER|wxTOP|wxBOTTOM|wxEXPAND, 0 );
+	decodeBottomSizer->AddSpacer(7);
+
 	decodeOptionsButton = new wxBitmapButton( this, wxID_DECODE_OPTIONS_BUTTON, wxNullBitmap, wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW );
 	decodeOptionsButton->SetToolTip( _("Changes settings for patch application.") );
 	
-	decodeBottomSizer->Add( decodeOptionsButton, 0, wxALIGN_CENTER_VERTICAL|wxBOTTOM|wxRIGHT|wxTOP, 5 );
+	decodeBottomSizer->Add( decodeOptionsButton, 0, wxALIGN_CENTER_VERTICAL|wxBOTTOM|wxTOP|wxEXPAND, 0 );
 	
 	
-	decodeMainSizer->Add( decodeBottomSizer, 0, wxEXPAND|wxTOP, 2 );
+	decodeMainSizer->Add( decodeBottomSizer, 0, wxEXPAND|wxTOP, 4 );
 	
 	
 	this->SetSizer( decodeMainSizer );
@@ -229,15 +230,16 @@ EncodePanel::EncodePanel( wxWindow* parent, wxWindowID id, const wxPoint& pos, c
 	createButton->SetDefault(); 
 	createButton->SetToolTip( _("Creates a patch containing the differences between the original and the modified file.") );
 	
-	bSizer4->Add( createButton, 1, wxALIGN_CENTER|wxALL|wxEXPAND, 6 );
+	bSizer4->Add( createButton, 1, wxALIGN_CENTER|wxTOP|wxBOTTOM|wxEXPAND, 0 );
+	bSizer4->AddSpacer(7);
 	
 	encodeOptionsButton = new wxBitmapButton( this, wxID_ENCODE_OPTIONS_BUTTON, wxNullBitmap, wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW );
 	encodeOptionsButton->SetToolTip( _("Changes settings for patch creation.") );
 	
-	bSizer4->Add( encodeOptionsButton, 0, wxALIGN_CENTER_VERTICAL|wxBOTTOM|wxRIGHT|wxTOP, 5 );
+	bSizer4->Add( encodeOptionsButton, 0, wxALIGN_CENTER_VERTICAL|wxBOTTOM|wxTOP|wxEXPAND, 0 );
 	
 	
-	bSizer1->Add( bSizer4, 0, wxEXPAND|wxTOP, 2 );
+	bSizer1->Add( bSizer4, 0, wxEXPAND|wxTOP, 4 );
 	
 	
 	this->SetSizer( bSizer1 );

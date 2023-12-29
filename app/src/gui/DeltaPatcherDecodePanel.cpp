@@ -1,12 +1,13 @@
 #include <gui/DeltaPatcherDropTarget.h>
+#include <gui/icons/open.xpm>
+#include <gui/icons/save.xpm>
+#include <gui/icons/config.xpm>
+
 #include <wx/filename.h>
 #include <gui/DeltaPatcherDecodePanel.h>
 #include <wx/filedlg.h>
 #include <wx/generic/msgdlgg.h>
-
-#include <gui/icons/open.xpm>
-#include <gui/icons/save.xpm>
-#include <gui/icons/config.xpm>
+#include <wx/richtooltip.h>
 
 DeltaPatcherDecodePanel::DeltaPatcherDecodePanel( wxWindow* parent,Logger* l )
 :
@@ -126,6 +127,7 @@ void DeltaPatcherDecodePanel::SetPatchFile(const wxChar* patchPath)
 	}else
 	{
 		message<<wxString::Format(_(", description found:\n\n%s\n"),xdp.GetDescription());
+		ShowPatchDescriptionToolTip(xdp.GetDescription());
 	}
 	
 	logger->Log(Logger::LOG_MESSAGE,message);
@@ -181,9 +183,26 @@ void DeltaPatcherDecodePanel::OnThreadUpdate(wxThreadEvent& evt)
 	int code = evt.GetInt();
 	wxString message = evt.GetString();
 
-	if(code!=0){
+	if(code!=0)
+	{
 		logger->Log(Logger::LOG_ERROR,message);
-		wxGenericMessageDialog(this,_("An error has occurred!\nSee log for more information."),_("Warning"),wxICON_EXCLAMATION).ShowModal();
+
+		if(message.Find("source file too short") != wxNOT_FOUND ||
+		   message.Find("target window checksum mismatch") != wxNOT_FOUND)
+		{
+			wxGenericMessageDialog(
+				this,
+				_("The patch could not be applied:\n"
+				"The file you are trying to patch is not the right one."),
+				_("Error"),wxICON_ERROR).ShowModal();
+		}else
+		{
+			wxGenericMessageDialog(
+				this,
+				_("The patch could not be applied:\n"
+				"See log for more information."),
+				_("Error"),wxICON_ERROR).ShowModal();
+		}
 	}else{
 		if(!keepOriginalCheck->IsChecked()){ //we must not keep the original file
 			wxRemoveFile(threadOriginal);
@@ -192,6 +211,13 @@ void DeltaPatcherDecodePanel::OnThreadUpdate(wxThreadEvent& evt)
 		logger->Log(Logger::LOG_MESSAGE,_("Patch successfully applied!"));
 		wxGenericMessageDialog(this,_("Patch successfully applied!"),_("Notice"),wxICON_INFORMATION).ShowModal();
 	}
+}
+
+void DeltaPatcherDecodePanel::ShowPatchDescriptionToolTip(const wxString& patchDesc)
+{
+	wxRichToolTip tip(_("Patch info"),patchDesc);
+	tip.SetIcon(wxICON_INFORMATION);
+	tip.ShowFor(patchButton);
 }
 
 wxThread::ExitCode DeltaPatcherDecodePanel::Entry()

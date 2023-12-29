@@ -65,6 +65,7 @@ MainDialog( parent ), decodeMode(true)
 #endif
 
 	decodePanel->SwitchTo();
+	ShowHideLog();
 	this->Update();
 	this->Fit();
 
@@ -133,6 +134,7 @@ void DeltaPatcherMainDialog::Log(int type,const wxChar* msg)
 		message=wxString::Format(_("[%s] An error has occurred: %s\n"),strTime.GetData(),msg);
 	
 	logCtrl->AppendText(message);
+	logCtrl->ShowPosition(logCtrl->GetLastPosition());
 }
 
 

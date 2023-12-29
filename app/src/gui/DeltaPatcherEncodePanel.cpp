@@ -280,7 +280,7 @@ void DeltaPatcherEncodePanel::OnThreadUpdate(wxThreadEvent& evt)
 
 	if(code!=0){
 		logger->Log(Logger::LOG_ERROR,message);
-		wxGenericMessageDialog(this,_("An error has occurred!\nSee log for more information."),_("Warning"),wxICON_EXCLAMATION).ShowModal();
+		wxGenericMessageDialog(this,_("An error has occurred!\nSee log for more information."),_("Warning"),wxICON_ERROR).ShowModal();
 	}else{
 		logger->Log(Logger::LOG_MESSAGE,_("Patch successfully created!"));
 		wxGenericMessageDialog(this,_("Patch successfully created!"),_("Notice"),wxICON_INFORMATION).ShowModal();
