@@ -15,7 +15,7 @@ Delta Patcher is a GUI software that is able to create and apply xdelta patches.
 
 v3.1.2:
 - Log is now hidden by default: patch descriptions are shown in a tooltip when a patch is loaded.
-- For common patching errors (most notably checksum mismatch), a more user friendly messages is shown to the user.
+- For common patching errors (most notably checksum mismatch), a more user friendly message is shown to the user.
 
 v3.1.1:
 - Fixed message dialogs not showing in patch creation mode.
