@@ -55,7 +55,7 @@ jobs:
           - os: ubuntu-latest
             release_package: linux_bin_gtk3_x86_64
           - os: macos-11
-            release_package: macos11_bin_universal
+            release_package: macos11+_bin_universal
           - os: windows-2022
             release_package: windows_bin_x86_64
     runs-on: ${{ matrix.os }}
