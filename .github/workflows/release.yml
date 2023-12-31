@@ -13,6 +13,7 @@ on:
     
 env:
   BUILD_TYPE: Release
+  BUILD_TYPE_MIN_SIZE: MinSizeRel
   wxBUILD_SHARED: OFF
   wxBUILD_USE_STATIC_RUNTIME: ON 
 
@@ -70,7 +71,7 @@ jobs:
 
       - if: startsWith(matrix.os, 'windows')
         name: Configure CMake Windows
-        run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DwxBUILD_SHARED=${{env.wxBUILD_SHARED}} -DwxBUILD_USE_STATIC_RUNTIME=${{env.wxBUILD_USE_STATIC_RUNTIME}} 
+        run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE_MIN_SIZE}} -DwxBUILD_SHARED=${{env.wxBUILD_SHARED}} -DwxBUILD_USE_STATIC_RUNTIME=${{env.wxBUILD_USE_STATIC_RUNTIME}} 
       
       - if: startsWith(matrix.os, 'ubuntu')
         name: Configure CMake Linux
