@@ -53,7 +53,7 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            release_package: linux_bin_gtk3_x86_64
+            release_package: linuxGTK3_bin_x86_64
           - os: macos-11
             release_package: macos11+_bin_universal
           - os: windows-2022
