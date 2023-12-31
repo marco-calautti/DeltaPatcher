@@ -52,7 +52,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - os: ubuntu-latest
+          - os: ubuntu-20.04
             release_package: linuxGTK3_bin_x86_64
           - os: macos-11
             release_package: macos11+_bin_universal
