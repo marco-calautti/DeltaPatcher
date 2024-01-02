@@ -57,7 +57,8 @@ jobs:
           - os: macos-11
             release_package: macos11+_bin_universal
           - os: windows-2022
-            release_package: windows_bin_x86_64
+            release_package_64: windows_bin_x86_64
+            release_package_32: windows_bin_x86
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
@@ -71,6 +72,10 @@ jobs:
       - if: startsWith(matrix.os, 'windows')
         name: Configure CMake Windows
         run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DwxBUILD_SHARED=${{env.wxBUILD_SHARED}} -DwxBUILD_USE_STATIC_RUNTIME=${{env.wxBUILD_USE_STATIC_RUNTIME}} 
+
+      - if: startsWith(matrix.os, 'windows')
+        name: Configure CMake Windows 32 bit
+        run: cmake -B ${{github.workspace}}/build32 -A Win32 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DwxBUILD_SHARED=${{env.wxBUILD_SHARED}} -DwxBUILD_USE_STATIC_RUNTIME=${{env.wxBUILD_USE_STATIC_RUNTIME}}
       
       - if: startsWith(matrix.os, 'ubuntu')
         name: Configure CMake Linux
@@ -82,15 +87,26 @@ jobs:
 
       - name: Build
         run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --parallel 2
+        
+      - if: startsWith(matrix.os, 'windows')
+        name: Build Windows 32
+        run: cmake --build ${{github.workspace}}/build32 --config ${{env.BUILD_TYPE}} --parallel 2
 
       - if: startsWith(matrix.os, 'windows')
         name: Package Windows
         run: |
           cp ${{github.workspace}}/CHANGELOG.txt ${{github.workspace}}/build/app/
-          cp ${{github.workspace}}/build/app/Release/DeltaPatcher.exe ${{github.workspace}}/build/app/
-          cd ${{github.workspace}}/build/app/
-          Compress-Archive -Path DeltaPatcher.exe,CHANGELOG.txt -Destination ${{ matrix.release_package }}.zip
+          cp ${{github.workspace}}/CHANGELOG.txt ${{github.workspace}}/build32/app/
 
+          cp ${{github.workspace}}/build/app/Release/DeltaPatcher.exe ${{github.workspace}}/build/app/
+          cp ${{github.workspace}}/build32/app/Release/DeltaPatcher.exe ${{github.workspace}}/build32/app/
+
+          cd ${{github.workspace}}/build/app/
+          Compress-Archive -Path DeltaPatcher.exe,CHANGELOG.txt -Destination ${{ matrix.release_package_64 }}.zip
+
+          cd ${{github.workspace}}/build32/app/
+          Compress-Archive -Path DeltaPatcher.exe,CHANGELOG.txt -Destination ${{ matrix.release_package_32 }}.zip
+      
       - if: startsWith(matrix.os, 'ubuntu')
         name: Package Linux
         run: |
@@ -106,23 +122,38 @@ jobs:
           cd ${{github.workspace}}/build/app
           zip -r ${{ matrix.release_package }}.zip DeltaPatcher.app/ CHANGELOG.txt
 
-      - uses: actions/upload-artifact@v3
+      - if: startsWith(matrix.os, 'windows')
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.release_package }}
+          path: |
+            ${{github.workspace}}/build/app/${{ matrix.release_package_64 }}.zip
+            ${{github.workspace}}/build32/app/${{ matrix.release_package_32 }}.zip
+
+      - if: startsWith(matrix.os, 'ubuntu') || startsWith(matrix.os, 'macOS')
+        uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.release_package }}
           path: ${{github.workspace}}/build/app/${{ matrix.release_package }}.zip
-
+        
       - if: contains(github.ref, 'refs/tags/') && startsWith(matrix.os, 'windows')
         name: Define Asset Path Windows
         id: asset_path_win
         run: |
-          $ass_path = "${{github.workspace}}/build/app/${{ matrix.release_package }}.zip" -replace '\\','/'
-          echo "ASSET_PATH=$ass_path" >> $env:GITHUB_OUTPUT
+          $ass_path_64 = "${{github.workspace}}/build/app/${{ matrix.release_package_64 }}.zip" -replace '\\','/'
+          echo "ASSET_PATH_64=$ass_path_64" >> $env:GITHUB_OUTPUT
+          $ass_path_32 = "${{github.workspace}}/build32/app/${{ matrix.release_package_32 }}.zip" -replace '\\','/'
+          echo "ASSET_PATH_32=$ass_path_32" >> $env:GITHUB_OUTPUT
+
 
       - if: contains(github.ref, 'refs/tags/') && startsWith(matrix.os, 'windows')
         name: Upload Release Assets Windows
         uses: softprops/action-gh-release@v1
         with:
-          files: ${{ steps.asset_path_win.outputs.ASSET_PATH }}
+          files: |
+            ${{ steps.asset_path_win.outputs.ASSET_PATH_64 }}
+            ${{ steps.asset_path_win.outputs.ASSET_PATH_32 }}
+
           
       - if: contains(github.ref, 'refs/tags/') && !startsWith(matrix.os, 'windows')
         name: Upload Release Assets
