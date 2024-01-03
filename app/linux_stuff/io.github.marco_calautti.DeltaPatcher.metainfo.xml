@@ -10,9 +10,6 @@
   <project_license>GPL-2.0</project_license>
   <description>
     <p>Delta Patcher is a GUI software that is able to create and apply xdelta patches as the ones supported by the xdelta tool developed by Joshua McDonald.</p>
-    <p>Delta patcher is fully self-contained and does not depend on the xdelta3 tool at all. This sets Delta Patcher apart from all other tools out there that are just frontends to the xdelta3 binary. Moreover, such frontends do not support some options of the encoder/decoder at all, like main and secondary compression level for encoding and checksum checking for decoding/encoding. Also, they are all written in .NET (0_0).</p>
-    <p>So, this tool was designed to be self-contained (for Windows, MacOS and GTK-based Linux systems). It's written in C++ using wxWidgets for the GUI components and all the needed libraries are statically linked to the executable (except for GTK for linux builds). Last, but not the least, Delta Patcher is GPL2'd and cross-platform: it runs fine on Windows, Linux and MacOS.</p>
-  </description>
   <screenshots>
     <screenshot type="default">
       <image type="source">https://camo.githubusercontent.com/1ae80fce5add0b471914e86302cf9cfd2c27475870cc77f0094fe27e2a281860/68747470733a2f2f692e696d6775722e636f6d2f64516d547573782e706e67</image>
