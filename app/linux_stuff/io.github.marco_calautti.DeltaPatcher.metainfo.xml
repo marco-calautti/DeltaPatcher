@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='utf-8'?>
+<component type="desktop">
+  <!--Created with jdAppStreamEdit 8.0-->
+  <id>io.github.marco_calautti.DeltaPatcher</id>
+  <name>Delta Patcher</name>
+  <summary>Applies and creates patches in xdelta format</summary>
+  <developer_name>Marco Calautti</developer_name>
+  <launchable type="desktop-id">io.github.marco_calautti.DeltaPatcher.desktop</launchable>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-2.0</project_license>
+  <description>
+    <p>Delta Patcher is a GUI software that is able to create and apply xdelta patches as the ones supported by the xdelta tool developed by Joshua McDonald.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source">https://camo.githubusercontent.com/1ae80fce5add0b471914e86302cf9cfd2c27475870cc77f0094fe27e2a281860/68747470733a2f2f692e696d6775722e636f6d2f64516d547573782e706e67</image>
+    </screenshot>
+  </screenshots>
+  <releases>
+    <release version="3.1.2" date="2023-12-30" type="stable">
+      <url>https://github.com/marco-calautti/DeltaPatcher/releases/tag/v3.1.2</url>
+      <description>
+        <ul>
+          <li>Log is now hidden by default: patch descriptions are shown in a tooltip when a patch is loaded.</li>
+          <li>For common patching errors (most notably checksum mismatch), a more user friendly message is shown to the user.</li>
+        </ul>
+      </description>
+    </release>
+    <release version="3.1.1" date="2023-12-28" type="stable">
+      <url>https://github.com/marco-calautti/DeltaPatcher/releases/tag/v3.1.1</url>
+    </release>
+    <release version="3.1" date="2023-12-28" type="stable">
+      <url>https://github.com/marco-calautti/DeltaPatcher/releases/tag/v3.1</url>
+    </release>
+    <release version="3.0.1" date="2022-09-10" type="stable">
+      <url>https://github.com/marco-calautti/DeltaPatcher/releases/tag/v3.0.1</url>
+    </release>
+    <release version="3.0.0" date="2022-08-27" type="stable">
+      <url>https://github.com/marco-calautti/DeltaPatcher/releases/tag/v3.0.0</url>
+    </release>
+    <release version="2.0.1" date="2017-07-19" type="stable">
+      <url>https://github.com/marco-calautti/DeltaPatcher/releases/tag/2.0.1</url>
+    </release>
+    <release version="2.0b" date="2015-06-12" type="stable">
+      <url>https://github.com/marco-calautti/DeltaPatcher/releases/tag/2.0b</url>
+    </release>
+    <release version="1.0" date="2014-11-06" type="stable">
+      <url>https://github.com/marco-calautti/DeltaPatcher/releases/tag/1.0</url>
+    </release>
+  </releases>
+  <url type="homepage">https://github.com/marco-calautti/DeltaPatcher</url>
+  <url type="bugtracker">https://github.com/marco-calautti/DeltaPatcher/issues</url>
+  <categories>
+    <category>Utility</category>
+  </categories>
+  <recommends>
+    <control>pointing</control>
+    <control>keyboard</control>
+  </recommends>
+  <content_rating type="oars-1.1"/>
+  <provides>
+    <binary>DeltaPatcher</binary>
+  </provides>
+</component>

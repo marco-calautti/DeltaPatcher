@@ -9,5 +9,5 @@ if(MINGW)
 endif()
 
 # Subprojects
-add_subdirectory (libs)
+add_subdirectory (libs EXCLUDE_FROM_ALL)
 add_subdirectory (app)
