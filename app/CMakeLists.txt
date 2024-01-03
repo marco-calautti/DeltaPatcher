@@ -16,3 +16,11 @@ if (APPLE)
     set_source_files_properties(${bundle_icon} PROPERTIES MACOSX_PACKAGE_LOCATION Resources/)
     set_target_properties(DeltaPatcher PROPERTIES MACOSX_BUNDLE TRUE MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/mac_stuff/Info.plist)
 endif()
+
+install(TARGETS DeltaPatcher DESTINATION bin)
+install(FILES linux_stuff/io.github.marco_calautti.DeltaPatcher.desktop DESTINATION share/applications)
+install(FILES linux_stuff/io.github.marco_calautti.DeltaPatcher.metainfo.xml DESTINATION share/metainfo)
+
+foreach(SIZE "16" "24" "32" "48" "64" "128" "256")
+    install(FILES ../graphics/icon${SIZE}.png DESTINATION share/icons/hicolor/${SIZE}x${SIZE}/apps RENAME  io.github.marco_calautti.DeltaPatcher.png)
+endforeach()

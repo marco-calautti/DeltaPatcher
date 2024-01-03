@@ -1,0 +1,10 @@
+# Created with jdDesktopEntryEdit 1.3
+[Desktop Entry]
+Type=Application
+Name=Delta Patcher
+GenericName=XDelta Patching Utility
+Comment=Applies and creates patches in xdelta format
+Icon=io.github.marco_calautti.DeltaPatcher
+TryExec=DeltaPatcher
+Exec=DeltaPatcher %f
+Categories=Utility;
