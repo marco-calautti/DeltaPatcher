@@ -15,9 +15,9 @@
 #include <wx/stdpaths.h>
 #endif
 
-DeltaPatcherMainDialog::DeltaPatcherMainDialog( wxWindow* parent, const wxChar* patchName )
+DeltaPatcherMainDialog::DeltaPatcherMainDialog( wxWindow* parent, const wxString& patchName )
 :
-MainDialog( parent ), decodeMode(true)
+MainDialog( parent ), decodeMode(true), pendingPatchPath(patchName)
 {
 	wxIcon icon(icon_xpm);
 	SetIcon(icon);
@@ -45,8 +45,6 @@ MainDialog( parent ), decodeMode(true)
 	
 	//preparing default panel
 	decodePanel=new DeltaPatcherDecodePanel(this,this);
-	if(!wxIsEmpty(patchName))
-		decodePanel->SetPatchFile(patchName);
 		
 	panelSizer->Add( decodePanel, 1, wxEXPAND | wxALL, 5 );
 	decodePanel->GetSizer()->Fit(decodePanel);
@@ -69,6 +67,18 @@ MainDialog( parent ), decodeMode(true)
 	this->Update();
 	this->Fit();
 
+}
+
+void DeltaPatcherMainDialog::OnMainDialogShow( wxShowEvent& event )
+{
+	if(event.IsShown())
+	{
+		if(!wxIsEmpty(pendingPatchPath))
+		{
+			decodePanel->SetPatchFile(pendingPatchPath);
+			pendingPatchPath.Clear();
+		}
+	}
 }
 
 void DeltaPatcherMainDialog::OnShowHideLog( wxCommandEvent& event )

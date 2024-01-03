@@ -48,7 +48,7 @@ class MainDialog : public wxDialog
 		void _wxFB_OnClickAbout( wxCommandEvent& event ){ OnClickAbout( event ); }
 		void _wxFB_OnOperationSelected( wxCommandEvent& event ){ OnOperationSelected( event ); }
 		void _wxFB_OnShowHideLog( wxCommandEvent& event ){ OnShowHideLog( event ); }
-		
+		void _wxFB_OnMainDialogShow( wxShowEvent& event ){ OnMainDialogShow( event ); }
 	
 	protected:
 		enum
@@ -73,7 +73,7 @@ class MainDialog : public wxDialog
 		virtual void OnClickAbout( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnOperationSelected( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnShowHideLog( wxCommandEvent& event ) { event.Skip(); }
-		
+		virtual void OnMainDialogShow( wxShowEvent& event ) { event.Skip(); }
 	
 	public:
 		

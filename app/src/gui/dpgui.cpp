@@ -12,6 +12,7 @@
 BEGIN_EVENT_TABLE( MainDialog, wxDialog )
 	EVT_ACTIVATE( MainDialog::_wxFB_OnActivate )
 	EVT_CLOSE( MainDialog::_wxFB_OnMainDialogClose )
+	EVT_SHOW( MainDialog::_wxFB_OnMainDialogShow )
 	EVT_BUTTON( wxID_ABOUT, MainDialog::_wxFB_OnClickAbout )
 	EVT_BUTTON( wxID_OPERATION_BUTTON, MainDialog::_wxFB_OnOperationSelected )
 	EVT_BUTTON( wxID_SHOW_IDE_LOG, MainDialog::_wxFB_OnShowHideLog )

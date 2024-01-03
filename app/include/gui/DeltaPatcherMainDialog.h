@@ -39,11 +39,13 @@ protected:
 	void OnMainDialogClose( wxCloseEvent& event );
 	void OnClickAbout( wxCommandEvent& event );
 	void OnOperationSelected( wxCommandEvent& event );
+	void OnMainDialogShow( wxShowEvent& event );
+
 	//Workaround for stupid sizing bug in wxGTK
 	void OnActivate( wxActivateEvent& event ) { static bool first=true; if(first){Update(); Fit(); first=false;} event.Skip(); }
 public:
 	/** Constructor */
-	DeltaPatcherMainDialog( wxWindow* parent, const wxChar* patchName=wxEmptyString);
+	DeltaPatcherMainDialog( wxWindow* parent, const wxString& patchName=wxEmptyString);
 	
 	virtual void Log(int type,const wxChar* msg);
 	void ShowHideLog();
@@ -52,6 +54,8 @@ private:
 	DeltaPatcherEncodePanel* encodePanel;
 	
 	bool decodeMode;
+
+	wxString pendingPatchPath;
 };
 
 #endif // __DeltaPatcherMainDialog__
