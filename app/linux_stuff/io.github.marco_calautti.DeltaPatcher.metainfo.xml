@@ -10,6 +10,7 @@
   <project_license>GPL-2.0</project_license>
   <description>
     <p>Delta Patcher is a GUI software that is able to create and apply xdelta patches as the ones supported by the xdelta tool developed by Joshua McDonald.</p>
+  </description>
   <screenshots>
     <screenshot type="default">
       <image type="source">https://camo.githubusercontent.com/1ae80fce5add0b471914e86302cf9cfd2c27475870cc77f0094fe27e2a281860/68747470733a2f2f692e696d6775722e636f6d2f64516d547573782e706e67</image>
