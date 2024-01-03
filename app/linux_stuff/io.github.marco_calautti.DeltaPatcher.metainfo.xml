@@ -19,7 +19,7 @@
     </screenshot>
   </screenshots>
   <releases>
-    <release version="v3.1.2" date="2023-12-30" type="stable">
+    <release version="3.1.2" date="2023-12-30" type="stable">
       <url>https://github.com/marco-calautti/DeltaPatcher/releases/tag/v3.1.2</url>
       <description>
         <ul>
@@ -28,16 +28,16 @@
         </ul>
       </description>
     </release>
-    <release version="v3.1.1" date="2023-12-28" type="stable">
+    <release version="3.1.1" date="2023-12-28" type="stable">
       <url>https://github.com/marco-calautti/DeltaPatcher/releases/tag/v3.1.1</url>
     </release>
-    <release version="v3.1" date="2023-12-28" type="stable">
+    <release version="3.1" date="2023-12-28" type="stable">
       <url>https://github.com/marco-calautti/DeltaPatcher/releases/tag/v3.1</url>
     </release>
-    <release version="v3.0.1" date="2022-09-10" type="stable">
+    <release version="3.0.1" date="2022-09-10" type="stable">
       <url>https://github.com/marco-calautti/DeltaPatcher/releases/tag/v3.0.1</url>
     </release>
-    <release version="v3.0.0" date="2022-08-27" type="stable">
+    <release version="3.0.0" date="2022-08-27" type="stable">
       <url>https://github.com/marco-calautti/DeltaPatcher/releases/tag/v3.0.0</url>
     </release>
     <release version="2.0.1" date="2017-07-19" type="stable">
