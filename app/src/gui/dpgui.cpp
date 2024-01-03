@@ -53,15 +53,15 @@ MainDialog::MainDialog( wxWindow* parent, wxWindowID id, const wxString& title, 
 	operationButton = new wxBitmapButton( this, wxID_OPERATION_BUTTON, wxNullBitmap, wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW );
 	operationButton->SetToolTip( _("Switches between patch creation and patch application modes.") );
 	
-	bSizer21->Add( operationButton, 0, wxALIGN_RIGHT|wxBOTTOM|wxEXPAND, 0 );
+	bSizer21->Add( operationButton, 0, wxBOTTOM|wxEXPAND, 0 );
 	bSizer21->AddSpacer(7);
 
 	showHideLog = new wxBitmapButton( this, wxID_SHOW_IDE_LOG, wxNullBitmap, wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW );
 	showHideLog->SetToolTip( _("Hides/Shows the log window.") );
 	
-	bSizer21->Add( showHideLog, 0, wxALIGN_RIGHT|wxBOTTOM|wxEXPAND, 0 );
+	bSizer21->Add( showHideLog, 0, wxBOTTOM|wxEXPAND, 0 );
 	
-	bSizer20->Add( bSizer21, 0, wxALIGN_RIGHT|wxEXPAND|wxRIGHT, 5 );
+	bSizer20->Add( bSizer21, 0, wxEXPAND|wxRIGHT, 5 );
 	
 	
 	leftSizer->Add( bSizer20, 0, wxEXPAND, 5 );
@@ -104,7 +104,7 @@ DecodePanel::DecodePanel( wxWindow* parent, wxWindowID id, const wxPoint& pos, c
 	
 	originalField = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	originalField->SetMaxLength( 0 ); 
-	sbSizer1->Add( originalField, 1, wxALIGN_CENTER_VERTICAL|wxALL|wxEXPAND, 7 );
+	sbSizer1->Add( originalField, 1, wxALL|wxEXPAND, 7 );
 	
 	originalButton = new wxBitmapButton( this, wxID_DECODE_ORIGINAL_OPEN, wxNullBitmap, wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW );
 	originalButton->SetToolTip( _("Choose the file to patch.") );
@@ -119,7 +119,7 @@ DecodePanel::DecodePanel( wxWindow* parent, wxWindowID id, const wxPoint& pos, c
 	
 	patchField = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	patchField->SetMaxLength( 0 ); 
-	sbSizer3->Add( patchField, 1, wxALIGN_CENTER_VERTICAL|wxALL|wxEXPAND, 7 );
+	sbSizer3->Add( patchField, 1, wxALL|wxEXPAND, 7 );
 	
 	patchButton = new wxBitmapButton( this, wxID_DECODE_PATCH_OPEN, wxNullBitmap, wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW );
 	patchButton->SetToolTip( _("Choose the patch to be applied to the selected file.") );
@@ -136,13 +136,13 @@ DecodePanel::DecodePanel( wxWindow* parent, wxWindowID id, const wxPoint& pos, c
 	applyButton->SetDefault(); 
 	applyButton->SetToolTip( _("Applies the selected patch to the given file.") );
 	
-	decodeBottomSizer->Add( applyButton, 1, wxALIGN_CENTER|wxTOP|wxBOTTOM|wxEXPAND, 0 );
+	decodeBottomSizer->Add( applyButton, 1, wxTOP|wxBOTTOM|wxEXPAND, 0 );
 	decodeBottomSizer->AddSpacer(7);
 
 	decodeOptionsButton = new wxBitmapButton( this, wxID_DECODE_OPTIONS_BUTTON, wxNullBitmap, wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW );
 	decodeOptionsButton->SetToolTip( _("Changes settings for patch application.") );
 	
-	decodeBottomSizer->Add( decodeOptionsButton, 0, wxALIGN_CENTER_VERTICAL|wxBOTTOM|wxTOP|wxEXPAND, 0 );
+	decodeBottomSizer->Add( decodeOptionsButton, 0, wxBOTTOM|wxTOP|wxEXPAND, 0 );
 	
 	
 	decodeMainSizer->Add( decodeBottomSizer, 0, wxEXPAND|wxTOP, 4 );
@@ -174,7 +174,7 @@ EncodePanel::EncodePanel( wxWindow* parent, wxWindowID id, const wxPoint& pos, c
 	
 	originalField = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	originalField->SetMaxLength( 0 ); 
-	sbSizer1->Add( originalField, 1, wxALIGN_CENTER_VERTICAL|wxALL|wxEXPAND, 7 );
+	sbSizer1->Add( originalField, 1, wxALL|wxEXPAND, 7 );
 	
 	originalButton = new wxBitmapButton( this, wxID_ENCODE_ORIGINAL_OPEN, wxNullBitmap, wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW );
 	originalButton->SetToolTip( _("Choose the original (untouched) file.") );
@@ -189,7 +189,7 @@ EncodePanel::EncodePanel( wxWindow* parent, wxWindowID id, const wxPoint& pos, c
 	
 	modifiedField = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	modifiedField->SetMaxLength( 0 ); 
-	sbSizer3->Add( modifiedField, 1, wxALIGN_CENTER_VERTICAL|wxALL|wxEXPAND, 7 );
+	sbSizer3->Add( modifiedField, 1, wxALL|wxEXPAND, 7 );
 	
 	modifiedButton = new wxBitmapButton( this, wxID_ENCODE_MODIFIED_OPEN, wxNullBitmap, wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW );
 	modifiedButton->SetToolTip( _("Choose the modified file.") );
@@ -204,7 +204,7 @@ EncodePanel::EncodePanel( wxWindow* parent, wxWindowID id, const wxPoint& pos, c
 	
 	patchField = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	patchField->SetMaxLength( 0 ); 
-	sbSizer31->Add( patchField, 1, wxALIGN_CENTER_VERTICAL|wxALL|wxEXPAND, 7 );
+	sbSizer31->Add( patchField, 1, wxALL|wxEXPAND, 7 );
 	
 	patchButton = new wxBitmapButton( this, wxID_ENCODE_PATCH_SAVE, wxNullBitmap, wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW );
 	patchButton->SetToolTip( _("Choose where to save the patch containing the differences between the original and the modified file.") );
@@ -218,7 +218,7 @@ EncodePanel::EncodePanel( wxWindow* parent, wxWindowID id, const wxPoint& pos, c
 	sbSizer311 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Description (optional):") ), wxHORIZONTAL );
 	
 	descriptionField = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE );
-	sbSizer311->Add( descriptionField, 1, wxALIGN_CENTER_VERTICAL|wxALL|wxEXPAND, 6 );
+	sbSizer311->Add( descriptionField, 1, wxALL|wxEXPAND, 6 );
 	
 	
 	bSizer1->Add( sbSizer311, 1, wxEXPAND, 5 );
@@ -230,13 +230,13 @@ EncodePanel::EncodePanel( wxWindow* parent, wxWindowID id, const wxPoint& pos, c
 	createButton->SetDefault(); 
 	createButton->SetToolTip( _("Creates a patch containing the differences between the original and the modified file.") );
 	
-	bSizer4->Add( createButton, 1, wxALIGN_CENTER|wxTOP|wxBOTTOM|wxEXPAND, 0 );
+	bSizer4->Add( createButton, 1, wxTOP|wxBOTTOM|wxEXPAND, 0 );
 	bSizer4->AddSpacer(7);
 	
 	encodeOptionsButton = new wxBitmapButton( this, wxID_ENCODE_OPTIONS_BUTTON, wxNullBitmap, wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW );
 	encodeOptionsButton->SetToolTip( _("Changes settings for patch creation.") );
 	
-	bSizer4->Add( encodeOptionsButton, 0, wxALIGN_CENTER_VERTICAL|wxBOTTOM|wxTOP|wxEXPAND, 0 );
+	bSizer4->Add( encodeOptionsButton, 0, wxBOTTOM|wxTOP|wxEXPAND, 0 );
 	
 	
 	bSizer1->Add( bSizer4, 0, wxEXPAND|wxTOP, 4 );
@@ -283,7 +283,7 @@ AboutDialog::AboutDialog( wxWindow* parent, wxWindowID id, const wxString& title
 	nameAndVerText->Wrap( -1 );
 	nameAndVerText->SetFont( wxFont( wxNORMAL_FONT->GetPointSize(), 70, 90, 92, false, wxEmptyString ) );
 	
-	bSizer19->Add( nameAndVerText, 0, wxALIGN_CENTER|wxEXPAND|wxTOP, 5 );
+	bSizer19->Add( nameAndVerText, 0, wxEXPAND|wxTOP, 5 );
 	
 	
 	bSizer17->Add( bSizer19, 0, wxALIGN_CENTER, 5 );
@@ -302,7 +302,7 @@ AboutDialog::AboutDialog( wxWindow* parent, wxWindowID id, const wxString& title
 	bSizer171 = new wxBoxSizer( wxHORIZONTAL );
 	
 	siteText = new wxHyperlinkCtrl( aboutPage, wxID_ANY, _("http://github.com/marco-calautti"), wxEmptyString, wxDefaultPosition, wxDefaultSize, wxHL_ALIGN_CENTRE );
-	bSizer171->Add( siteText, 0, wxALIGN_CENTER|wxALL|wxEXPAND, 2 );
+	bSizer171->Add( siteText, 0, wxALL|wxEXPAND, 2 );
 	
 	
 	bSizer17->Add( bSizer171, 1, wxALIGN_CENTER, 5 );
@@ -315,7 +315,7 @@ AboutDialog::AboutDialog( wxWindow* parent, wxWindowID id, const wxString& title
 	
 	disclaimerText = new wxStaticText( aboutPage, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE );
 	disclaimerText->Wrap( -1 );
-	bSizer14->Add( disclaimerText, 0, wxALIGN_CENTER|wxALL|wxEXPAND, 3 );
+	bSizer14->Add( disclaimerText, 0, wxALL|wxEXPAND, 3 );
 	
 	
 	aboutPage->SetSizer( bSizer14 );
