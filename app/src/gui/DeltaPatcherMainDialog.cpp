@@ -93,12 +93,10 @@ void DeltaPatcherMainDialog::ShowHideLog()
 	if(mainSizer->Detach(logBox)){ //hide log
 		logBox->GetStaticBox()->Show(false);
 		logCtrl->Show(false);
-		showHideLog->SetLabel(_("Show log >>"));
 	}else{ //show log
 		mainSizer->Add( logBox, 1, wxEXPAND|wxALL, 5 );
 		logBox->GetStaticBox()->Show();
 		logCtrl->Show();
-		showHideLog->SetLabel(_("<< Hide log"));
 	}
 	
 	Update();
