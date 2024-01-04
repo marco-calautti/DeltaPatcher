@@ -17,14 +17,18 @@
     </screenshot>
   </screenshots>
   <releases>
-    <release version="3.1.2" date="2023-12-30" type="stable">
-      <url>https://github.com/marco-calautti/DeltaPatcher/releases/tag/v3.1.2</url>
+    <release version="3.1.3" date="2024-01-04" type="stable">
+      <url>https://github.com/marco-calautti/DeltaPatcher/releases/tag/v3.1.3</url>
       <description>
         <ul>
-          <li>Log is now hidden by default: patch descriptions are shown in a tooltip when a patch is loaded.</li>
-          <li>For common patching errors (most notably checksum mismatch), a more user friendly message is shown to the user.</li>
+          <li>Added support for high DPI displays</li>
+          <li>Added support for Flatpak</li>
+          <li>Windows 32 bit is supported again</li>
         </ul>
       </description>
+    </release>
+    <release version="3.1.2" date="2023-12-30" type="stable">
+      <url>https://github.com/marco-calautti/DeltaPatcher/releases/tag/v3.1.2</url>
     </release>
     <release version="3.1.1" date="2023-12-28" type="stable">
       <url>https://github.com/marco-calautti/DeltaPatcher/releases/tag/v3.1.1</url>

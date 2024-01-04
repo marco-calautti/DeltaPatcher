@@ -13,6 +13,11 @@ Delta Patcher is a GUI software that is able to create and apply xdelta patches.
 2. Changelog
 -------------------------
 
+v3.1.3:
+- Added support for high DPI displays
+- Added support for Flatpak
+- Windows 32 bit is supported again
+
 v3.1.2:
 - Log is now hidden by default: patch descriptions are shown in a tooltip when a patch is loaded.
 - For common patching errors (most notably checksum mismatch), a more user friendly message is shown to the user.
