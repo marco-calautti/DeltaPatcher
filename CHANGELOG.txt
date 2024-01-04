@@ -13,6 +13,9 @@ Delta Patcher is a GUI software that is able to create and apply xdelta patches.
 2. Changelog
 -------------------------
 
+v3.1.4:
+- Fixed button image alignment in modern versions of macOS
+
 v3.1.3:
 - Added support for high DPI displays
 - Added support for Flatpak

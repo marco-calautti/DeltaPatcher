@@ -17,15 +17,16 @@
     </screenshot>
   </screenshots>
   <releases>
-    <release version="3.1.3" date="2024-01-04" type="stable">
-      <url>https://github.com/marco-calautti/DeltaPatcher/releases/tag/v3.1.3</url>
+    <release version="3.1.4" date="2024-01-05" type="stable">
+      <url>https://github.com/marco-calautti/DeltaPatcher/releases/tag/v3.1.4</url>
       <description>
         <ul>
-          <li>Added support for high DPI displays</li>
-          <li>Added support for Flatpak</li>
-          <li>Windows 32 bit is supported again</li>
+          <li>Fixed button image alignment in modern versions of macOS</li>
         </ul>
       </description>
+    </release>
+    <release version="3.1.3" date="2023-01-04" type="stable">
+      <url>https://github.com/marco-calautti/DeltaPatcher/releases/tag/v3.1.3</url>
     </release>
     <release version="3.1.2" date="2023-12-30" type="stable">
       <url>https://github.com/marco-calautti/DeltaPatcher/releases/tag/v3.1.2</url>
