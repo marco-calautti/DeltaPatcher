@@ -54,9 +54,9 @@ class MainDialog : public wxDialog
 		wxBoxSizer* leftSizer;
 		wxBoxSizer* panelSizer;
 		wxPanel* nullPanel;
-		wxBitmapButton* aboutButton;
-		wxBitmapButton* operationButton;
-		wxBitmapButton* showHideLog;
+		wxButton* aboutButton;
+		wxButton* operationButton;
+		wxButton* showHideLog;
 		wxStaticBoxSizer* logBox;
 		wxTextCtrl* logCtrl;
 		
@@ -100,11 +100,11 @@ class DecodePanel : public wxPanel
 		};
 		
 		wxTextCtrl* originalField;
-		wxBitmapButton* originalButton;
+		wxButton* originalButton;
 		wxTextCtrl* patchField;
-		wxBitmapButton* patchButton;
+		wxButton* patchButton;
 		wxButton* applyButton;
-		wxBitmapButton* decodeOptionsButton;
+		wxButton* decodeOptionsButton;
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnOpenOriginal( wxCommandEvent& event ) { event.Skip(); }
@@ -148,14 +148,14 @@ class EncodePanel : public wxPanel
 		};
 		
 		wxTextCtrl* originalField;
-		wxBitmapButton* originalButton;
+		wxButton* originalButton;
 		wxTextCtrl* modifiedField;
-		wxBitmapButton* modifiedButton;
+		wxButton* modifiedButton;
 		wxTextCtrl* patchField;
-		wxBitmapButton* patchButton;
+		wxButton* patchButton;
 		wxTextCtrl* descriptionField;
 		wxButton* createButton;
-		wxBitmapButton* encodeOptionsButton;
+		wxButton* encodeOptionsButton;
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnOpenOriginal( wxCommandEvent& event ) { event.Skip(); }
