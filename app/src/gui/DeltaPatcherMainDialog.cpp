@@ -15,9 +15,6 @@
 #include <wx/stdpaths.h>
 #endif
 
-#define DECODE_PANEL_WIDTH 20
-#define ENCODE_PANEL_WIDTH 30
-#define ENCODE_PANEL_HEIGHT 25
 #define LOG_CTRL_WIDTH 30
 
 DeltaPatcherMainDialog::DeltaPatcherMainDialog( wxWindow* parent, const wxString& patchName )
@@ -49,20 +46,16 @@ MainDialog( parent ), decodeMode(true), pendingPatchPath(patchName)
 	nullPanel->Show(false);
 	
 	wxSize sizeM = GetTextExtent("M");
-	wxSize minDecodePanelSize(DECODE_PANEL_WIDTH*sizeM.x,-1);
-	wxSize minEncodePanelSize(ENCODE_PANEL_WIDTH*sizeM.x,ENCODE_PANEL_HEIGHT*sizeM.y);
 	wxSize minLogCtrlSize(LOG_CTRL_WIDTH*sizeM.x,-1);
 
 	//preparing default panel
 	decodePanel=new DeltaPatcherDecodePanel(this,this);
-	decodePanel->SetSizeHints(minDecodePanelSize);
 
 	panelSizer->Add( decodePanel, 1, wxEXPAND | wxALL, 5 );
 	decodePanel->GetSizer()->Fit(decodePanel);
 	
 	//preparing encode panel
 	encodePanel=new DeltaPatcherEncodePanel(this,this);
-	encodePanel->SetSizeHints(minEncodePanelSize);
 	
 	encodePanel->Show(false);
 	panelSizer->Add( encodePanel, 1, wxEXPAND | wxALL, 5 );
