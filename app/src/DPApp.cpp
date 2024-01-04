@@ -4,10 +4,6 @@
 #include <DPApp.h>
 #include <gui/DeltaPatcherMainDialog.h>
 
-#ifdef __WXMSW__
-#include <windows.h>
-#endif
-
 IMPLEMENT_APP(DPApp)
 
 bool DPApp::OnInit(){
