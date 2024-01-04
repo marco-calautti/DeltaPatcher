@@ -1,10 +1,3 @@
-///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Jun 12 2015)
-// http://www.wxformbuilder.org/
-//
-// PLEASE DO "NOT" EDIT THIS FILE!
-///////////////////////////////////////////////////////////////////////////
-
 #ifndef __DPGUI_H__
 #define __DPGUI_H__
 
@@ -77,7 +70,7 @@ class MainDialog : public wxDialog
 	
 	public:
 		
-		MainDialog( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Delta Patcher"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 504,-1 ), long style = wxCAPTION|wxCLOSE_BOX|wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER ); 
+		MainDialog( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Delta Patcher"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxCAPTION|wxCLOSE_BOX|wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER ); 
 		~MainDialog();
 	
 };
@@ -123,7 +116,7 @@ class DecodePanel : public wxPanel
 	public:
 		wxBoxSizer* decodeMainSizer;
 		
-		DecodePanel( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 260,184 ), long style = wxTAB_TRAVERSAL ); 
+		DecodePanel( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxTAB_TRAVERSAL ); 
 		~DecodePanel();
 	
 };
@@ -174,7 +167,7 @@ class EncodePanel : public wxPanel
 	
 	public:
 		
-		EncodePanel( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 320,407 ), long style = wxTAB_TRAVERSAL ); 
+		EncodePanel( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxTAB_TRAVERSAL ); 
 		~EncodePanel();
 	
 };
@@ -212,7 +205,7 @@ class AboutDialog : public wxDialog
 	
 	public:
 		
-		AboutDialog( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("About Delta Patcher"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 354,308 ), long style = wxDEFAULT_DIALOG_STYLE ); 
+		AboutDialog( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("About Delta Patcher"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE ); 
 		~AboutDialog();
 	
 };

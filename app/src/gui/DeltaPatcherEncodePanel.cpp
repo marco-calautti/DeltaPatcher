@@ -9,6 +9,9 @@
 #include <gui/icons/save.xpm>
 #include <gui/icons/config.xpm>
 
+#define ENCODE_TEXTCTRL_WIDTH 25
+#define ENCODE_DESCRIPTION_TEXTCTRL_HEIGHT 10
+
 class EncodePanelDropHandler : public DeltaPatcherDropHandler
 {
 private:
@@ -94,6 +97,12 @@ EncodePanel( parent ), logger( l )
 	checksumCheck = new wxMenuItem( createOptionsMenu, wxID_ANY, wxString( _("Add Checksum to patch") ) , wxEmptyString, wxITEM_CHECK );
 	createOptionsMenu->Append( checksumCheck );
 	checksumCheck->Check( true );
+
+	wxSize sizeM = GetTextExtent("M");
+	originalField->SetSizeHints(ENCODE_TEXTCTRL_WIDTH*sizeM.x,-1);
+	modifiedField->SetSizeHints(ENCODE_TEXTCTRL_WIDTH*sizeM.x,-1);
+	descriptionField->SetSizeHints(ENCODE_TEXTCTRL_WIDTH*sizeM.x,ENCODE_DESCRIPTION_TEXTCTRL_HEIGHT*sizeM.y);
+	patchField->SetSizeHints(ENCODE_TEXTCTRL_WIDTH*sizeM.x,-1);
 }
 
 void DeltaPatcherEncodePanel::OnEncodeOptionsClicked(wxCommandEvent& event)

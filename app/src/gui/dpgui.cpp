@@ -1,13 +1,4 @@
-///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Jun 12 2015)
-// http://www.wxformbuilder.org/
-//
-// PLEASE DO "NOT" EDIT THIS FILE!
-///////////////////////////////////////////////////////////////////////////
-
 #include <gui/dpgui.h>
-
-///////////////////////////////////////////////////////////////////////////
 
 BEGIN_EVENT_TABLE( MainDialog, wxDialog )
 	EVT_ACTIVATE( MainDialog::_wxFB_OnActivate )
@@ -28,7 +19,7 @@ MainDialog::MainDialog( wxWindow* parent, wxWindowID id, const wxString& title, 
 	
 	panelSizer = new wxBoxSizer( wxVERTICAL );
 	
-	nullPanel = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxSize( 260,184 ), wxTAB_TRAVERSAL );
+	nullPanel = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	panelSizer->Add( nullPanel, 1, wxEXPAND | wxALL, 5 );
 	
 	
@@ -72,7 +63,7 @@ MainDialog::MainDialog( wxWindow* parent, wxWindowID id, const wxString& title, 
 	
 	logBox = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Log:") ), wxVERTICAL );
 	
-	logCtrl = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 350,-1 ), wxHSCROLL|wxTE_MULTILINE|wxTE_WORDWRAP );
+	logCtrl = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxHSCROLL|wxTE_MULTILINE|wxTE_WORDWRAP );
 	logBox->Add( logCtrl, 1, wxALL|wxEXPAND, 5 );
 	
 	

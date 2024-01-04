@@ -10,6 +10,8 @@
 #include <gui/icons/switch.xpm>
 #include <gui/icons/log.xpm>
 
+#define LOG_CTRL_WIDTH 30
+
 DeltaPatcherMainDialog::DeltaPatcherMainDialog( wxWindow* parent, const wxString& patchName )
 :
 MainDialog( parent ), decodeMode(true), pendingPatchPath(patchName)
@@ -38,20 +40,25 @@ MainDialog( parent ), decodeMode(true), pendingPatchPath(patchName)
 	
 	nullPanel->Show(false);
 	
+	wxSize sizeM = GetTextExtent("M");
+	wxSize minLogCtrlSize(LOG_CTRL_WIDTH*sizeM.x,-1);
+
 	//preparing default panel
 	decodePanel=new DeltaPatcherDecodePanel(this,this);
-		
+
 	panelSizer->Add( decodePanel, 1, wxEXPAND | wxALL, 5 );
 	decodePanel->GetSizer()->Fit(decodePanel);
 	
 	//preparing encode panel
 	encodePanel=new DeltaPatcherEncodePanel(this,this);
+	
 	encodePanel->Show(false);
 	panelSizer->Add( encodePanel, 1, wxEXPAND | wxALL, 5 );
 	
 	//preparing log area
 	logCtrl->SetEditable(false);
-	
+	logCtrl->SetSizeHints(minLogCtrlSize);
+
 	//checking release type
 #ifdef __DP_DECODE_ONLY__
 	operationButton->Show(false);

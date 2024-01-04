@@ -9,6 +9,8 @@
 #include <wx/generic/msgdlgg.h>
 #include <wx/richtooltip.h>
 
+#define DECODE_TEXTCTRL_WIDTH 17
+
 DeltaPatcherDecodePanel::DeltaPatcherDecodePanel( wxWindow* parent,Logger* l )
 :
 DecodePanel( parent ), logger( l )
@@ -33,6 +35,10 @@ DecodePanel( parent ), logger( l )
 	checksumCheck = new wxMenuItem( applyOptionsMenu, wxID_ANY, wxString( _("Checksum validation") ) , wxEmptyString, wxITEM_CHECK );
 	applyOptionsMenu->Append( checksumCheck );
 	checksumCheck->Check( true );
+
+	wxSize sizeM = GetTextExtent("M");
+	originalField->SetSizeHints(DECODE_TEXTCTRL_WIDTH*sizeM.x,-1);
+	patchField->SetSizeHints(DECODE_TEXTCTRL_WIDTH*sizeM.x,-1);
 }
 
 void DeltaPatcherDecodePanel::OnDecodeOptionsClicked(wxCommandEvent& event)
