@@ -10,11 +10,6 @@
 #include <gui/icons/switch.xpm>
 #include <gui/icons/log.xpm>
 
-#ifdef __WXMSW__
-#include <wx/msw/registry.h>
-#include <wx/stdpaths.h>
-#endif
-
 DeltaPatcherMainDialog::DeltaPatcherMainDialog( wxWindow* parent, const wxString& patchName )
 :
 MainDialog( parent ), decodeMode(true), pendingPatchPath(patchName)
