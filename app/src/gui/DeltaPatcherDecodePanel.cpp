@@ -9,7 +9,7 @@
 #include <wx/generic/msgdlgg.h>
 #include <wx/richtooltip.h>
 
-#define DECODE_TEXTCTRL_WIDTH 17
+#define DECODE_TEXTCTRL_WIDTH 18
 
 DeltaPatcherDecodePanel::DeltaPatcherDecodePanel( wxWindow* parent,Logger* l )
 :
