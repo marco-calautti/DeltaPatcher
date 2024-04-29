@@ -17,6 +17,15 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="3.1.5" date="2024-04-29" type="stable">
+      <url>https://github.com/marco-calautti/DeltaPatcher/releases/tag/v3.1.5</url>
+      <description>
+        <ul>
+          <li>Updated xdelta3 library to v3.1.0</li>
+          <li>Added support for large files (more than 4GB)</li>
+        </ul>
+      </description>
+    </release>
     <release version="3.1.4" date="2024-01-05" type="stable">
       <url>https://github.com/marco-calautti/DeltaPatcher/releases/tag/v3.1.4</url>
       <description>
