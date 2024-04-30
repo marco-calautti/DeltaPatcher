@@ -83,12 +83,16 @@ EncodePanel( parent ), logger( l )
 	createOptionsMenu->Append(-1, _("Secondary compression"), secondaryCompressionMenu);
 
 	windowSizeMenu = new wxMenu();
-	wxMenuItem* windowItem=new wxMenuItem(windowSizeMenu,wxID_ANY,_T("Auto"),wxEmptyString,wxITEM_RADIO);
+
+	wxMenuItem* windowItem=new wxMenuItem(windowSizeMenu,wxID_ANY,_T("Default (64 MB)"),wxEmptyString,wxITEM_RADIO);
 	windowSizeMenu->Append(windowItem);
 	windowItem->Check();
+
+	windowItem=new wxMenuItem(windowSizeMenu,wxID_ANY,_T("Max (same as original file size)"),wxEmptyString,wxITEM_RADIO);
+	windowSizeMenu->Append(windowItem);
 	
 	for(int i=0;i<XDeltaConfig::SRC_WINDOW_SIZE_LENGTH;i++){
-		windowItem=new wxMenuItem(windowSizeMenu,wxID_ANY,wxString::Format("%d MB",XDeltaConfig::SrcWindowSizes[i]>>20),wxEmptyString,wxITEM_RADIO);
+		windowItem=new wxMenuItem(windowSizeMenu,wxID_ANY,wxString::Format("%llu MB",XDeltaConfig::SrcWindowSizes[i]>>20),wxEmptyString,wxITEM_RADIO);
 		windowSizeMenu->Append(windowItem);
 	}
 	
@@ -248,20 +252,21 @@ int DeltaPatcherEncodePanel::GetSecondaryCompression()
 	return XDeltaConfig::DEFAULT_SECONDARY_COMPRESSION;
 }
 
-int DeltaPatcherEncodePanel::GetWindowSize()
+wxInt64 DeltaPatcherEncodePanel::GetWindowSize()
 {
 	for(size_t i=0;i<windowSizeMenu->GetMenuItemCount();i++){
 		wxMenuItem* item=windowSizeMenu->FindItemByPosition(i);
 		if(item->IsChecked())
 		{
 			if(i==0)
-				return XDeltaConfig::SRC_WINDOW_SIZE_AUTO;
+				return XDeltaConfig::SRC_WINDOW_SIZE_DEFAULT;
+			else if(i==1)
+				return XDeltaConfig::SRC_WINDOW_SIZE_SAME_AS_FILE;
 			else
-				return XDeltaConfig::SrcWindowSizes[i-1];
-		}
-			
+				return XDeltaConfig::SrcWindowSizes[i-2];
+		}	
 	}
-	return XDeltaConfig::SRC_WINDOW_SIZE_AUTO;
+	return XDeltaConfig::SRC_WINDOW_SIZE_DEFAULT;
 }
 
 void DeltaPatcherEncodePanel::StartCreatePatch()
