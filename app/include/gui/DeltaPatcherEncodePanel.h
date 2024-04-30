@@ -58,7 +58,7 @@ public:
 private:
 	int GetCompressionLevel();
 	int GetSecondaryCompression();
-	int GetWindowSize();
+	wxInt64 GetWindowSize();
 private:
 	Logger* logger;
 	
