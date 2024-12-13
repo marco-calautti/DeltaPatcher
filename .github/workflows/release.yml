@@ -54,8 +54,8 @@ jobs:
         include:
           - os: ubuntu-20.04
             release_package: linuxGTK3_bin_x86_64
-          - os: macos-12
-            release_package: macos12+_bin_universal
+          - os: macos-13
+            release_package: macos13+_bin_universal
           - os: windows-2022
             release_package_64: windows_bin_x86_64
             release_package_32: windows_bin_x86
