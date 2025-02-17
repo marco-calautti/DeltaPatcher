@@ -124,21 +124,21 @@ jobs:
 
       - if: startsWith(matrix.os, 'windows')
         name: Upload artifacts Windows x86_64
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.release_package_64 }}
           path: ${{github.workspace}}/build/app/${{ matrix.release_package_64 }}.zip
 
       - if: startsWith(matrix.os, 'windows')
         name: Upload artifacts Windows x86
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.release_package_32 }}
           path: ${{github.workspace}}/build32/app/${{ matrix.release_package_32 }}.zip
           
       - if: startsWith(matrix.os, 'ubuntu') || startsWith(matrix.os, 'macOS')
         name: Upload artifacts Linux and MacOS
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.release_package }}
           path: ${{github.workspace}}/build/app/${{ matrix.release_package }}.zip
