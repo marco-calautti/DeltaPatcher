@@ -33,9 +33,7 @@ bool DPApp::OnInit(){
 		locale.AddCatalog(wxT("deltapatcher"));
 	}
 */
-#ifdef __WXMSW__
-	wxApp::MSWEnableDarkMode();
-#endif
+	SetAppearance(Appearance::System);
 	DeltaPatcherMainDialog* dialog=new DeltaPatcherMainDialog(NULL,patchName);
 	
 	SetTopWindow(dialog);
