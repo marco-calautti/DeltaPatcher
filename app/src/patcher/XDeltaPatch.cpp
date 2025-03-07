@@ -2,6 +2,7 @@
 #include <wx/utils.h>
 #include <wx/arrstr.h>
 #include <wx/file.h>
+#include <wx/filename.h>
 
 #include <vector>
 #include <sstream>
@@ -37,14 +38,18 @@ static std::vector<std::string> SplitMessageByLine(const std::string& str)
     return tokens;
 }
 
-const int XDeltaConfig::SrcWindowSizes[]={8<<20,	//8 MB, etc...
-											16<<20,
-											32<<20,
-											64<<20,
-											128<<20,
-											256<<20,
-											512<<20,
-											1024<<20};
+const wxInt64 XDeltaConfig::SrcWindowSizes[]={
+											8LL<<20,	//8 MB, etc...
+											16LL<<20,
+											32LL<<20,
+											64LL<<20,
+											128LL<<20,
+											256LL<<20,
+											512LL<<20,
+											1024LL<<20,
+											2048LL<<20,
+											4096LL<<20,
+											8192LL<<20};
 											
 const char* XDeltaConfig::SecondaryCompressions[] = {
 														"lzma",
@@ -231,9 +236,17 @@ std::vector<std::string> XDeltaPatch::MakeCommand(const wxString& original,const
 		params.push_back("-S");
 		params.push_back(XDeltaConfig::SecondaryCompressions[config.secondaryCompression]);
 		
-		if(config.srcWindowSize!=XDeltaConfig::SRC_WINDOW_SIZE_AUTO){
-			params.push_back("-B");
-			params.push_back(std::to_string(config.srcWindowSize));
+		if(config.srcWindowSize != XDeltaConfig::SRC_WINDOW_SIZE_DEFAULT){
+			if(config.srcWindowSize == XDeltaConfig::SRC_WINDOW_SIZE_SAME_AS_FILE){
+				auto fileSize = wxFileName::GetSize(original);
+				if(fileSize != wxInvalidSize){
+					params.push_back("-B");
+					params.push_back(fileSize.ToString().ToStdString());
+				}
+			}else{
+				params.push_back("-B");
+				params.push_back(std::to_string(config.srcWindowSize));
+			}
 		}
 
 		wxString base64=EncodeDescription();
