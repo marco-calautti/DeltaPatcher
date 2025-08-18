@@ -245,14 +245,14 @@ std::vector<std::string> XDeltaPatch::MakeCommand(const wxString& original,const
 	//end of configuration flags
 
 	params.push_back("-s");
-	params.push_back(original.ToStdString());
+	params.push_back(original.utf8_string());
 	
 	if(encode){
-		params.push_back(out.ToStdString());
-		params.push_back(patch.ToStdString());
+		params.push_back(out.utf8_string());
+		params.push_back(patch.utf8_string());
 	}else{
-		params.push_back(patch.ToStdString());
-		params.push_back(out.ToStdString());
+		params.push_back(patch.utf8_string());
+		params.push_back(out.utf8_string());
 	}
 
 	return params;
