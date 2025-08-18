@@ -36,7 +36,8 @@ bool DPApp::OnInit(){
 */
 
 	// https://stackoverflow.com/a/67725216
-	setlocale(LC_ALL, "");
+	// https://stackoverflow.com/a/68515686
+	setlocale(LC_ALL, ".UTF8");
 
 	SetAppearance(Appearance::System);
 	DeltaPatcherMainDialog* dialog=new DeltaPatcherMainDialog(NULL,patchName);
