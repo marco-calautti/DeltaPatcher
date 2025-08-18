@@ -1,3 +1,4 @@
+#include <locale.h>
 #include <wx/stdpaths.h>
 #include <patcher/XDeltaPatch.h>
 #include <wx/filename.h>
@@ -33,6 +34,11 @@ bool DPApp::OnInit(){
 		locale.AddCatalog(wxT("deltapatcher"));
 	}
 */
+
+	// https://stackoverflow.com/a/67725216
+	// https://stackoverflow.com/a/68515686
+	setlocale(LC_ALL, ".UTF8");
+
 	SetAppearance(Appearance::System);
 	DeltaPatcherMainDialog* dialog=new DeltaPatcherMainDialog(NULL,patchName);
 	
