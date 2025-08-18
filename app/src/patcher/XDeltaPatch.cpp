@@ -24,6 +24,13 @@ static size_t DecodeVarLength(wxFile& file)
 	return length;
 }
 
+static std::string native_path(const wxString& path){
+	#ifdef __WXMSW__
+		return path.ToStdString();
+	#else
+		return path.utf8_string();
+	#endif 
+}
 static std::vector<std::string> SplitMessageByLine(const std::string& str)
 {
     std::vector<std::string> tokens;
@@ -245,14 +252,14 @@ std::vector<std::string> XDeltaPatch::MakeCommand(const wxString& original,const
 	//end of configuration flags
 
 	params.push_back("-s");
-	params.push_back(original.utf8_string());
+	params.push_back(native_path(original));
 	
 	if(encode){
-		params.push_back(out.utf8_string());
-		params.push_back(patch.utf8_string());
+		params.push_back(native_path(out));
+		params.push_back(native_path(patch));
 	}else{
-		params.push_back(patch.utf8_string());
-		params.push_back(out.utf8_string());
+		params.push_back(native_path(patch));
+		params.push_back(native_path(out));
 	}
 
 	return params;
