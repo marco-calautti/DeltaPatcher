@@ -22,9 +22,9 @@
 #include <common/COPYING.h>
 
 #ifdef 	__DP_DECODE_ONLY__
-	#define __DP_VERSION__ wxT("3.1.5 Lite")
+	#define __DP_VERSION__ wxT("3.1.6 Lite")
 #else 	
-	#define __DP_VERSION__ wxT("3.1.5")
+	#define __DP_VERSION__ wxT("3.1.6")
 #endif
 
 #define __DP_DISCLAIMER__ _("This program is free software: you can redistribute it\nand/or modify it under the terms of the GNU General\nPublic License as published by the Free Software Foundation,\nversion 2.0.")

@@ -31,6 +31,7 @@ static std::string native_path(const wxString& path){
 		return path.utf8_string();
 	#endif 
 }
+
 static std::vector<std::string> SplitMessageByLine(const std::string& str)
 {
     std::vector<std::string> tokens;

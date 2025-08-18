@@ -3,8 +3,8 @@ mondrian ICON "icon.ico" //exe icon (Windows only)
 #include <wx/msw/wx.rc> //Enables Windows Styles
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 3,1,5,0
- PRODUCTVERSION 3,1,5,0
+ FILEVERSION 3,1,6,0
+ PRODUCTVERSION 3,1,6,0
  FILEFLAGSMASK 0x17L
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -20,12 +20,12 @@ BEGIN
         BLOCK "000004b0"
         BEGIN
             VALUE "FileDescription", "XDelta patching Utility"
-            VALUE "FileVersion", "3, 1, 5, 0"
+            VALUE "FileVersion", "3, 1, 6, 0"
             VALUE "InternalName", "DeltaPatcher"
             VALUE "LegalCopyright", "Copyright (C) 2010+ Phoenix"
             VALUE "OriginalFilename", "DeltaPatcher.exe"
             VALUE "ProductName", "Delta Patcher"
-            VALUE "ProductVersion", "3, 1, 5, 0"
+            VALUE "ProductVersion", "3, 1, 6, 0"
         END
     END
     BLOCK "VarFileInfo"

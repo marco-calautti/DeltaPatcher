@@ -13,6 +13,11 @@ Delta Patcher is a GUI software that is able to create and apply xdelta patches.
 2. Changelog
 -------------------------
 
+v3.1.6:
+- Fixed bug with paths containing non-ASCII characters on Linux
+- Updated wxWidgets to official v3.3.1
+- Updated liblzma to stable v5.8.1
+
 v3.1.5:
 - Updated xdelta3 library to v3.1.0
 - Added support for large files (>4GB)

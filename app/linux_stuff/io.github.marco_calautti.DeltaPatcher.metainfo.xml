@@ -17,6 +17,16 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="3.1.6" date="2025-08-18" type="stable">
+      <url>https://github.com/marco-calautti/DeltaPatcher/releases/tag/v3.1.6</url>
+      <description>
+        <ul>
+          <li>Fixed bug with paths containing non-ASCII characters on Linux</li>
+          <li>Updated wxWidgets to official v3.3.1</li>
+          <li>Updated liblzma to stable v5.8.1</li>
+        </ul>
+      </description>
+    </release>
     <release version="3.1.5" date="2024-04-29" type="stable">
       <url>https://github.com/marco-calautti/DeltaPatcher/releases/tag/v3.1.5</url>
       <description>
