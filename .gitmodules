@@ -7,4 +7,4 @@
 	branch = release3_0_apl
 [submodule "libs/xz"]
 	path = libs/xz
-	url = https://github.com/xz-mirror/xz.git
+	url = https://github.com/tukaani-project/xz.git
