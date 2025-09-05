@@ -1,6 +1,6 @@
 # Delta Patcher [![Build](https://github.com/marco-calautti/DeltaPatcher/actions/workflows/release.yml/badge.svg)](https://github.com/marco-calautti/DeltaPatcher/actions/workflows/release.yml) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/bdfed52f118c4199ad0d828520f29b61)](https://www.codacy.com/gh/marco-calautti/DeltaPatcher/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=marco-calautti/DeltaPatcher&amp;utm_campaign=Badge_Grade) 
 
-![ScreenShot](https://i.imgur.com/dQmTusx.png)
+![ScreenShot](https://i.imgur.com/qRM3PB8.png)
 
 <p align='center'>
 <a href='https://github.com/marco-calautti/DeltaPatcher/releases'><img height='40' src='https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white'/></a>
