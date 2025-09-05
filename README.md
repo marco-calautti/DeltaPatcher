@@ -5,7 +5,7 @@
 <p align='center'>
 <a href='https://github.com/marco-calautti/DeltaPatcher/releases'><img height='40' src='https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white'/></a>
 <a href='https://github.com/marco-calautti/DeltaPatcher/releases'><img height='40' src='https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=macos&logoColor=F0F0F0'/></a>
-<a href='https://flathub.org/it/apps/io.github.marco_calautti.DeltaPatcher'><img height='40' alt='Download on Flathub' src='https://flathub.org/api/badge?locale=en'/></a>
+<a href='https://flathub.org/apps/io.github.marco_calautti.DeltaPatcher'><img height='40' alt='Download on Flathub' src='https://flathub.org/api/badge?locale=en'/></a>
 </p>
 
 Delta Patcher is a GUI software that is able to create and apply xdelta patches as the ones supported by the xdelta tool developed by Joshua McDonald. 
