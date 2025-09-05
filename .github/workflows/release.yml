@@ -67,7 +67,7 @@ jobs:
         
       - if: startsWith(matrix.os, 'ubuntu')
         name: Pull dependencies
-        run: sudo apt install -y build-essential cmake git libgtk-3-dev
+        run: sudo apt-get update && sudo apt install -y build-essential cmake git libgtk-3-dev
 
       - if: startsWith(matrix.os, 'windows')
         name: Configure CMake Windows
