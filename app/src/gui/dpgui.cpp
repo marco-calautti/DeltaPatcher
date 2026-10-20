@@ -58,15 +58,13 @@ MainDialog::MainDialog( wxWindow* parent, wxWindowID id, const wxString& title, 
 	
 	leftSizer->Add( bSizer20, 0, wxEXPAND, 5 );
 	
-	
-	mainSizer->Add( leftSizer, 0, wxBOTTOM|wxEXPAND, 5 );
-	
 	logBox = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Log:") ), wxVERTICAL );
 	
 	logCtrl = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxHSCROLL|wxTE_MULTILINE|wxTE_WORDWRAP );
 	logBox->Add( logCtrl, 1, wxALL|wxEXPAND, 5 );
 	
 	
+	mainSizer->Add( leftSizer, 1, wxBOTTOM|wxEXPAND, 5 );
 	mainSizer->Add( logBox, 1, wxALL|wxEXPAND, 5 );
 	
 	
